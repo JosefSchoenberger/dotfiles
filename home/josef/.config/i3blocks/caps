@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Dependencies: awk, xset
+
+caps=$(xset -q | grep Caps | awk '{print $4}')
+num=$(xset -q | grep Num | awk '{print $8}')
+scroll=$(xset -q | grep Scroll | awk '{print $12}')
+
+out=""
+
+if  [ "$caps" = "on" ] 
+then
+	out="$out<span fallback='true' color='#FF0000'>CAPS</span>"
+fi
+if [ "$num" = "on" ]
+then
+	out="$out <span fallback='true' color='#00FF00'>NUM</span>"
+fi
+if [ "$scroll" = "on" ]
+then
+	out="$out <span fallback='true' color='#0000FF'>SCROLL</span>"
+fi
+if [ "$out" = "  " ]
+then
+	exit 0;
+else
+	echo $out
+fi
+exit 0;

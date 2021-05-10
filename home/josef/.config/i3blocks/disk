@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Dependencies: awk, df, numfmt
+
+PARTITION="/"
+free=$(df -P -l $PARTITION | tail -1 | awk '{printf "%.0f", $4*1024}')
+
+if [ "$BLOCK_BUTTON" = "1" ]
+then
+	echo "🖴  "$(df -P -l $PARTITION | tail -1 | awk '{print $5}')
+else
+	echo "🖴  "$(echo $free | LANG=C numfmt --to=iec --format="%5.1fB")
+fi
+
+if [ $free -le "10737418240" ] # 10 GiB
+then
+	echo "🖴 !"
+else
+	echo ""
+fi
+
+
+
+if [ $free -le "104867600" ] # 100 MiB
+then
+	echo "#FFFFFF" # urgency in i3bar will fill with red background
+	exit 33
+fi 
+
+
+if [ $free -le "1073741824" ] # 1 GiB
+then
+	echo "#FF0000"
+elif [ $free -le "5368709120" ] # 5 GiB
+then
+	echo "#FF4000"
+elif [ $free -le "10737418240" ] # 10 GiB
+then
+	echo "#FF8000"
+elif [ $free -le "16106127360" ] # 15 GiB
+then
+	echo "#FFC000"
+elif [ $free -le "21474836480" ] # 20 GiB
+then
+	echo "#FFFF00"
+elif [ $free -le "32212254720" ] # 30 GiB
+then
+	echo "#FFFF40"
+elif [ $free -le "53687091200" ] # 50 GiB
+then
+	echo "#FFFF90"
+elif [ $free -le "107374182400" ] # 100 GiB
+then
+	echo "#FFFFD0"
+fi
+exit 0

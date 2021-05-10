@@ -1,0 +1,173 @@
+#!/bin/sh
+
+# Displays the current media playing by mpv, if present
+# Dependencies: socat, date (mpv)
+
+# Detect if socket is open (mpv is open)
+if [ ! -S "/tmp/mpvsocket" ]; then
+	sleep 5;
+	exit 0;
+fi
+
+$(echo "" | socat - ${SOCKET:="/tmp/mpvsocket"} 2>/dev/null)
+if [ "$?" != "0" ]
+then
+	sleep 5
+	exit 0;
+fi
+
+pause=$(echo '{ "command": ["get_property", "pause"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data)
+if [ "$pause" != "true" ] && [ "$pause" != "false" ]
+then
+	exit 0
+fi
+
+
+# Handle button presses
+loop=$(echo '{ "command": ["get_property", "loop"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data)
+
+case $BLOCK_BUTTON in
+	1) 	if [ "$pause" = "true" ]	# Left mouse button 
+		then
+			pause="false"
+		else
+			pause="true"
+		fi
+		echo "{ \"command\": [\"set_property\", \"pause\", $pause] }" | socat - ${SOCKET:="/tmp/mpvsocket"} > /dev/null;
+		;;
+	2)	echo "{ \"command\": [\"quit\"] }" | socat - ${SOCKET:="/tmp/mpvsocket"} > /dev/null;
+
+		exit 0;				# Middle mouse button (aka. mouse wheel)
+		;;
+	3)	if [ "$loop" = "true" ] 	# Right mouse button
+		then
+			loop="false"
+		else
+			loop="true"
+		fi
+		echo "{ \"command\": [\"set_property\", \"loop\", $loop] }" | socat - ${SOCKET:="/tmp/mpvsocket"} > /dev/null;
+
+		;;
+	4)	echo "{ \"command\": [\"playlist-prev\"] }" | socat - ${SOCKET:="/tmp/mpvsocket"} > /dev/null;
+
+		;;				# Mouse wheel up
+	5)	echo "{ \"command\": [\"playlist-next\"] }" | socat - ${SOCKET:="/tmp/mpvsocket"} > /dev/null;
+
+		;;				# Mouse wheel down
+esac
+
+
+# ICONS
+if [ "$pause" = "false" ]
+then
+	icon="▶"
+else
+	icon="⏸"
+fi
+
+if [ "$loop" = "true" ]
+then
+	icon="$icon 🔁"
+fi
+
+
+# NAME
+metadata=$(echo '{ "command": ["get_property", "metadata"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data) # | sed -E -e "s/\",/\",\n"/g)
+
+title=$(echo "$metadata" | grep -e '\"title\":' | cut -d'"' -f 4-)
+title=${title%\"*}
+title=$(echo $title | sed -E -e "s/\\\"/\"/g")
+
+if [ "$title" != "" ]
+then
+	artist=$(echo "$metadata" | grep -e '\"artist\":' | cut -d'"' -f 4-)
+	artist=${artist%\"*}
+	artist=$(echo "$artist" | sed -E -e 's/\\\"/\"/g')
+	if [ "$artist" = "" ]
+	then
+		if [ "${#title}" -ge 46 ]
+		then
+			id="$(echo "$title" | cut -c -42)..."
+		else
+			id="$title"
+		fi
+		if [ "${#title}" -ge 25 ]
+		then
+			id_short="$(echo "$title" | cut -c 23)…"
+		else
+			id_short="$title"
+		fi
+	else
+		if [ "${#title}" -ge 27 ]
+		then
+			title="$(echo "$title" | cut -c -23)..."
+		fi
+		if [ "${#title}" -ge 15 ]
+		then
+			title_short="$(echo "$title" | cut -c 17)…"
+		else
+			title_short="$title"
+		fi
+
+		if [ "${#artist}" -ge 20 ]
+		then
+			artist="$(echo "$artist" | cut -c -24)..."
+		fi
+		if [ "${#artist}" -ge 13 ]
+		then
+			artist_short="$(echo "$artist" | cut -c 11)…"
+		else
+			artist_short="$artist"
+		fi
+
+		id="$title - $artist"
+		id_short="$title_short - $artist_short"
+	fi
+else
+	file=$(echo '{ "command": ["get_property", "media-title"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data | cut -c 2-)
+	file=${file%\"*}
+	file=$(echo "$file" | sed -E -e 's/\\\"/\"/g')
+	if [ "${#file}" -ge 46 ]
+	then
+		id="$(echo "$file" | cut -c -42)..."
+	else
+		id="$file"
+	fi
+	if [ "${#file}" -ge 30 ]
+	then
+		id_short="$(echo "$file" | cut -c -26)…"
+	else
+		id_short="$file"
+	fi
+fi
+
+
+
+# TIMESTAMP
+position=$(echo '{ "command": ["get_property", "time-pos"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data)
+if [ "${position}" = "null" ]
+then
+	exit 1;
+fi
+timestamp_pos=$(echo "@$position" | cut -d'.' -f 1 | date -uf - +"%M:%S")
+if [ "${position%\.*}" -ge "3600" ]
+then
+	timestamp_pos="$(echo "$position" | awk '{printf "%02d:", $1/3600;}')$timestamp_pos"
+fi
+
+# $timestamp_pos may be empty
+if [ "$timestamp_pos" != "" ]
+then
+	timestamp_pos=" ($timestamp_pos)"
+fi
+
+
+# PRINT
+echo "$icon ${id}$timestamp_pos"
+echo "$icon ${id_short}$timestamp_pos"
+#echo $(echo "$icon ${title}" | cut -c -20)
+
+if [ "$pause" = "true" ]
+then
+	echo "#A0A0A0"
+fi

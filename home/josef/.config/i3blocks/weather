@@ -1,0 +1,131 @@
+#!/bin/sh
+
+# Dependencies: curl, internet connection
+
+# Debugging:
+# BLOCK_BUTTON=2
+
+case $BLOCK_BUTTON in
+	2) # mouse wheel press -> wind
+		wind=$(curl -s wttr.in/?format=%w)
+		speed=$(echo $wind | grep -E -o '[0-9]*' )
+		
+		# Debugging:
+		# speed=0
+		
+		if [ 0$speed -ge 100 ]
+		then
+			color="#FF0000"
+			icon="🌀"
+		elif [ 0$speed -ge 75 ]
+		then
+			color="#FF0000"
+			icon="🌪"
+		elif [ 0$speed -ge 50 ]
+		then
+			color="#FF8020"
+			icon="🌬"
+		elif [ 0$speed -ge 30 ]
+		then
+			color="#FFE060"
+			icon="🌬"
+		elif [ 0$speed -ge 15 ]
+		then
+			color="#FFFFC0"
+			icon="🌬"
+		else
+			color="#FFFFFF"
+			icon=""
+		fi
+
+		echo $icon $wind
+		echo $icon $wind
+		echo $color
+		;;
+	3) # right button -> rain amount
+		mm=$(curl -s wttr.in/?format="%p")
+
+		# Debugging:
+		# mm=0.0mm
+		
+		if [ 0${mm%.${mm#*.}} -ge "30" ]
+		then
+			icon="🌊"
+			color="#2020FF"
+		elif [ 0${mm%.${mm#*.}} -ge "15" ]
+		then
+			icon="🌧 "
+			color="#5050FF"
+		elif [ 0${mm%.${mm#*.}} -ge "1" ]
+		then
+			icon="🌧 "
+			color="#A0B0FF"
+		else
+			icon=$(curl -s wttr.in/?format="%c")" "
+			color="#FFFFFF"
+		fi
+
+		
+		prop=$(curl -s wttr.in/?format="%o")
+
+		# Debugging:
+		# prop=90.4%
+		
+		if [ "${prop}" = "" ] # sometimes no value is returned. Show in mm
+		then
+			echo $icon $mm
+			echo $icon	
+			echo $color
+			exit 0;
+		fi
+
+		if [ 0${prop%.${prop#*.}} -ge "65" ]
+		then
+			icon_prop="☔"
+		elif [ 0${prop%.${prop#*.}} -ge "20" ]
+		then
+			icon_prop="☂"
+		else
+			icon_prop="🌂"
+		fi
+		
+		echo "$icon $mm ($icon_prop $prop)"
+		echo "$icon $mm ($icon_prop $prop)"
+		echo $color
+		;;
+	4) # mouse wheel up -> humidity
+		hum=$(curl -s wttr.in/?format="%h")
+		
+		# Debugging
+		# hum=100%
+			
+		color=$(echo ${hum%?} | awk '{
+			if($1>=45) {
+				var=int((100-$1)*205/55)+50;
+				printf "#%02X%02XFF", var, var;
+			} else {
+				var=int($1*205/44)+50;
+				printf "#FF%02X%02X", var, var;
+			}
+		}')
+
+		echo 💧 $hum
+		echo $hum	
+		echo $color
+		;;
+	5) # mouse wheel down -> air pressure
+		press=$(curl -s wttr.in/?format=%P)
+		echo $press
+		echo $press
+		echo "#FFFFFF"
+		;;
+	*) # no button / left button -> temp
+		sym=$(curl -s wttr.in/?format="%c")
+		temp=$(curl -s wttr.in/?format="%t" | tr -d '+')
+
+		echo "$sym $temp"
+		echo $sym
+		echo "#FFFFFF"
+		;;
+esac
+exit 0

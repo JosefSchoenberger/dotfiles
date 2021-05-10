@@ -1,0 +1,43 @@
+#!/bin/bash
+# Credits to: https://stackoverflow.com/a/13695061
+
+_vim() {
+  local cur prev idx ext
+
+  COMPREPLY=()
+  _get_comp_words_by_ref cur prev
+
+  case $prev in
+    -h|--help|-v|--version)
+      return 0
+      ;;
+  esac
+
+  if [[ "$cur" == -* ]] ; then
+    local _vopts='-v -e -E -s -d -y -R -Z -m -M -b -l -C'
+    _vopts="${_vopts} -N -V -D -n -r -r -L -A -H -F -T -u"
+    _vopts="${_vopts} --noplugin -p -o -O --cmd -c -S -s -w -W"
+    _vopts="${_vopts} -x -X --remote --remote-silent --remote-wait"
+    _vopts="${_vopts} --remote-wait-silent --remote-tab --remote-send"
+    _vopts="${_vopts} --remote-expr --serverlist --servername"
+    _vopts="${_vopts} --startuptime -i -h --help --version --clean"
+    COMPREPLY=( $( compgen -W "${_vopts}" \
+      -- "$cur" ) )
+    return 0
+  fi
+
+  local _VIM_IGNORE=(pdf xdvi jpg pyc exe tar zip ps out)
+  _filedir
+  for idx in ${!COMPREPLY[@]}; do
+    ext=${COMPREPLY[$idx]}
+    ext=${ext##*.}
+    for iext in ${_VIM_IGNORE[@]}; do
+      if test "$ext" = "$iext"; then
+        unset -v COMPREPLY[$idx]
+        break
+      fi
+    done
+  done
+  return 0
+} &&
+complete -F _vim vim vi

@@ -1,0 +1,85 @@
+#!/bin/sh
+
+# Dependencies: acpi, lm-sensors
+
+bat=$(acpi -b | grep -E '[1-9][0-9]?[0]?%' | cut -c 9-9)
+
+percent=$(acpi -b | grep -E -o '[1-9][0-9]?[0]?%')
+state=$(acpi -b | sed -n "${bat},${bat}p" | grep -E -o "Unknown|Charging|Discharging|Full")
+addInfo=""
+
+wattage() {
+	sensors=$(sensors)
+	voltage="$(echo "$sensors" | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?V")"
+	if [ -z "${voltage##*"m"*}"]
+	then
+		voltage=$(echo "$voltage" | sed 's/\ mV//')
+		voltage=$(echo "$voltage" | LANG=C awk '{print $1/1000}')
+	else
+		voltage=$(echo "$voltage" | sed 's/\ V//');
+	fi
+	
+	amps="$(echo "$sensors" | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?A")"
+	if [ -z "${amps##*"m"*}"]
+	then
+		amps=$(echo "$amps" | sed 's/\ mA//')
+		amps=$(echo "$amps" | LANG=C awk '{print $1/1000}')
+	else
+		amps=$(echo "$amps" | sed 's/\ A//');
+	fi
+	addInfo=$(echo "$voltage $amps" | LANG=C awk '{printf "%5.2f W", $1*$2}')
+}
+
+voltage() {
+	addInfo="$(sensors | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?V")" 
+}
+
+amps() {
+	addInfo="$(sensors | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?A")" 
+}
+
+time() {
+	addInfo=$(acpi -b | sed -n "${bat},${bat}p" | grep -E -o '([0-9]?[0-9]:)?[0-9]?[0-9]:[0-9][0-9]') 
+}
+
+# Adjust these lines to fulfill all needs and all possibilities
+case $BLOCK_BUTTON in
+	1)	time ;;
+	3)	voltage ;;
+	4)  wattage ;;
+	5)  amps ;;
+	*)	addInfo="" ;;
+esac
+
+case $state in
+	Unknown) icon="🔌🔋" ;;
+	Charging) icon="🔌🗲🔋" ;;
+	Discharging) icon="🔋" ;;
+	Full) icon="🔌🔋" ;;
+esac
+
+if [ "$addInfo" != "" ]
+then
+	echo "${icon} ${addInfo}"
+	echo "${icon}${addInfo}"
+else
+	echo "${icon} ${percent}"
+	echo "${icon}${percent}"
+fi
+
+if [ ${percent%?} -le "8" ]
+then
+	exit 33;
+elif [ ${percent%?} -le "15" ]
+then
+	echo "#FF8000"
+elif [ ${percent%?} -le "20" ]
+then
+	echo "#FFFF00"
+elif [ ${percent%?} -le "30" ]
+then
+	echo "#FFFFB0"
+else
+	echo "#FFFFFF"
+fi
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#TODO
+
+curl -s "wttr.in/?lang=de&0" | ansi2html -n | tail -n +2 | head -n -1 | sed 's/style=\"color:/color=\"/g' | sed 's/style=\"font.weight:bold\"//g' | rofi -dmenu -markup-rows -width -31 -bw 2 -m -3 -eh 1 -no-fullscreen -p "$(curl -s wttr.in/?format=%l&lang=de)" -hide-scrollbar -no-custom -lines 6 -theme-str '#window {anchor:south; location: north;}' -format "i"

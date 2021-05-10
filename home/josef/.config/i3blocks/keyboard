@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Dependencies: XServer
+
+lang=$(cat /etc/default/keyboard | grep "XKBLAYOUT" | cut -c 11-12)
+echo "⌨ ${lang}"
+echo ""

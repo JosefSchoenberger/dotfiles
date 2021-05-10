@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# Dependencies: -
+
+# Variable:
+# IFACE - name of the adapter as mentioned by ip a, e.g. enp0s3
+# LABEL - label
+# LABEL_DOWN - label shown when device is down
+# SHOW_IF_DOWN - 0 if it should be hidden
+# SHOW_IN_SHORT - 0 if device should be hidden in short_text
+# COLOR_1000 - Color to use when at 1 Gb/s
+# COLOR_100 - Color to use when at 100 Mb/s
+# COLOR_10 - Color to use when at 10 Mb/s
+# COLOR_DOWN - Color to use when down
+
+path="/sys/class/net/${IFACE}"
+
+up=$(cat $path/operstate)
+
+# Debugging:
+# up="down"
+
+if [ "$up" = "up" ]
+then
+	speed=$(cat $path/speed)
+
+	# Debugging:
+	# speed="1000"
+
+	echo "${LABEL:=$IFACE} $speed Mb/s"
+	if [ ${SHOW_IN_SHORT:="1"} = "1" ]
+	then
+		echo "$LABEL $speed Mb/s"
+	else
+		echo ""
+	fi
+
+	if [ "$speed" -ge "1000" ]
+	then
+		echo "${COLOR_1000:=#50FF50}"
+	elif [ "$speed" -ge "100" ]
+	then
+		echo "${COLOR_100:=#C0FF20}"
+	else
+		echo "${COLOR_10:=#FFFF00}"
+	fi
+elif [ "$up" = "down" ]
+then
+	if [ ${SHOW_IF_DOWN:="1"} = "1" ]
+	then
+		echo "${LABEL_DOWN:=$LABEL} down"
+		if [ $SHOW_IN_SHORT = "1" ]
+		then
+			echo "$LABEL_DOWN down"
+		else
+			echo ""
+		fi
+		echo "${COLOR_DOWN:=#FF0000}"
+	fi
+fi

@@ -1,0 +1,123 @@
+# Signals: 
+# 	10 - CAPS
+# 	11 - All for Volume (Function Keys)
+
+# Dependencies:
+# acpi, amixer, awk, bc, curl, date, df, free, numfmt, pacmd, socat (Xserver, xset)
+
+command=$HOME/.config/i3blocks/$BLOCK_NAME
+separator_block_width=20
+
+[caps]
+# command=sh ~/.config/i3blocks/caps
+interval=once
+markup=pango
+signal=10
+
+[media]
+interval=1
+
+# [weather]
+# command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
+# interval=3600
+# color=#A4C2F4
+
+[wlan-dbm]
+command=./i3blocks-contrib/wlan-dbm/wlan-dbm
+IFACE=wlp2s0 # change for every sytem
+USE_PERCENT=0
+
+#[net-connections]
+#interval=60
+#IFACE=enp0s3
+#LABEL=E
+#SHOW_IF_DOWN=0
+#SHOW_IN_SHORT=0
+
+#[ip-address]
+#command=i3blocks-contrib/iface/iface
+#LABEL=IP: 
+##IFACE=enp0s3
+#ADDRESS_FAMILY=inet
+##color=#00FF00
+#interval=10
+
+# [wlan-address]
+# command=i3blocks-contrib/iface/iface
+# LABEL=Wlan:
+# IFACE=wlan0
+# ADDRESS_FAMILY=inet
+# color=#00FF00
+# interval=10
+
+[bandwidth]
+command=./i3blocks-contrib/bandwidth2/bandwidth2 
+interval=persist
+markup=pango
+label=⥯
+#INTERFACE=(checks all interfaces)
+##USE_BITS=0
+use_bytes=1
+WARN_RX=4400000
+WARN_TX=1000000
+CRIT_RX=6600000
+CRIT_TX=1800000
+USE_SI=0
+
+# [disk]
+# command=i3blocks-contrib/disk/disk
+# LABEL=sdb
+# DIR=/
+# ALERT_LOW=10
+# interval=30
+
+[disk]
+interval=30
+PARTITION=/
+
+[ramusage]
+interval=10
+
+[cpu_usage]
+command=./cpu_usage
+format=json
+interval=2
+
+#[cpu_usage2]
+#command=i3blocks-contrib/cpu_usage2/cpu_usage2 
+#markup=pango
+#interval=persist
+#min_width=CPU:100.0%
+#REFRESH_TIME=1
+#LABEL=CPU:
+#WARN_PERCENT=80
+#CRIT_PERCENT=90
+#DECIMALS=1
+
+#[cpu_usage]
+#command=i3blocks-contrib/cpu_usage/cpu_usage
+#interval=1
+#LABEL=CPU:
+#min_width=CPU:100.0%
+#T_WARN=60
+#T_CRIT=85
+#DECIMALS=1
+
+[bat]
+interval=10
+
+[volume]
+interval=5
+signal=11
+
+#[weather]
+#command=curl -s wttr.in/?format="%c%t" | sed -r -e 's/^.{2}/& /' | tr -d '+'
+#interval=600
+
+# Currently disabled, as wttr.in currently is broken at the momenbroken at the momentt
+# [weather]
+# command=weather
+# interval=600
+
+[times]
+interval=1

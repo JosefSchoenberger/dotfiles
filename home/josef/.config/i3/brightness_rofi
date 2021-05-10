@@ -1,0 +1,6 @@
+#!/bin/sh
+
+brightness_sh="/home/josef/.config/i3/brightness"
+current=$($brightness_sh --get | tr -d '%' | awk '{printf "%.1f%%", $1}')
+
+$brightness_sh --set $(echo "currently: $current\noff\n0%\n2%\n5%\n10%\n20%\n40%\n60%\n80%\n100%" | rofi -dmenu -p "backlight" -l 11 -width 16 | tr -d 'currnetly: ' | tr ',' '.')

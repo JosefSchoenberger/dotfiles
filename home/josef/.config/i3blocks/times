@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Dependencies: date
+
+# provides the date in two formats for the i3bar
+
+echo $(date +"%a, %d. %B %Y %T") # full_text
+echo $(date +"%a, %d.%m.%y %T") # short_text

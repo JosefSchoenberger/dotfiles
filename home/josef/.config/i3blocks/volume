@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Dependencies: amixer, pacmd
+
+volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
+muted=$(pacmd list-sinks | grep "muted" | cut -c 9-)
+port=$(pacmd list-sinks | grep "active port: " | cut -c 15-)
+
+if [ "$BLOCK_BUTTON" != "" ]
+then
+	if [ $BLOCK_BUTTON = "1" ]
+	then
+		if [ $muted = "yes" ]
+		then
+			pacmd set-sink-mute 0 0 > /dev/null
+			muted="no"
+		else
+			pacmd set-sink-mute 0 1 > /dev/null
+			muted="yes"
+		fi
+	elif [ $BLOCK_BUTTON = "4" ] # scroll up
+	then
+		amixer sset "Master" 3%+ > /dev/null
+		volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
+	elif [ $BLOCK_BUTTON = "5" ] # scroll down
+	then
+		amixer sset "Master" 3%- > /dev/null
+		volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
+	fi
+fi
+
+if [ $muted = "yes" ]
+then
+	icon="🔇"
+elif [ $port = "<analog-output-headphones>" ]
+then
+	icon="🎧"
+elif [ ${volume%?} -le 30 ]
+then
+	icon="🔈"
+elif [ ${volume%?} -le 60 ]
+then
+	icon="🔉"
+else
+	icon="🔊"
+fi
+
+printf "%s %3d%%\n" $icon ${volume%?}
+printf "%s %d%%\n" $icon ${volume%?}
+exit 0

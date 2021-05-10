@@ -1,0 +1,87 @@
+#!/bin/sh
+
+if [ -d "/sys/class/backlight/nvidia_0" ]
+then
+	path="/sys/class/backlight/nvidia_0"
+elif [ -d "/sys/class/backlight/radeon_bl0" ]
+then
+	path="/sys/class/backlight/radeon_bl0"
+elif [ -d "/sys/class/backlight/acpi_video0" ]
+then
+	path="/sys/class/backlight/acpi_video0"
+else
+	path="/sys/class/backlight/intel_backlight"
+fi
+
+current_brightness=$(cat $path/brightness)
+max_brightness=$(cat $path/max_brightness)
+current_percent=$(echo "$current_brightness $max_brightness" | awk '{print $1*100/$2}')
+
+case "$1" in
+	"--set")
+		if [ "$#" != "2" ]
+		then
+			echo "error: expected one argument after --set!"
+			exit 1
+		fi
+		if [ "$2" = "off" ]
+		then
+			current_percent=1 # may, on some systems, actually be 0
+			$(echo $current_percent > $path/brightness)
+			exit 0
+		fi
+		current_percent="${2%\%*}"
+		;;
+	"--inc")
+		if [ "$#" != "2" ]
+		then
+			echo "error: expected one argument after --inc!"
+			exit 2
+		fi
+		current_percent=$(echo "$current_percent ${2%\%*}" | awk '{print $1 + $2}')
+		;;
+	"--dec")
+		if [ "$#" != "2" ]
+		then
+			echo "error: expected one argument after --dec!"
+			exit 3
+		fi
+		current_percent=$(echo "$current_percent ${2%\%*}" | awk '{print $1 - $2}')
+		;;
+	"--mul")
+		if [ "$#" != "2" ]
+		then
+			echo "error: expected one argument after --mul!"
+			exit 4;
+		fi
+		current_percent=$(echo "$current_percent ${2}" | LANG=C awk '{print $1 * $2}')
+		;;
+	"--get")
+		if [ "$#" != "2" ] || [ "$2" = "%" ] || [ "$2" = "percent" ];
+		then
+			echo "$current_percent%"
+		elif [ "$2" = "absolute" ]
+		then
+			echo "$current_brightness"
+		elif [ "$2" = "abs/max" ]
+		then
+			echo "$current_brightness / $max_brightness"
+		else
+			echo "only 'percent', '%', 'absolute' and 'abs/max' are permitted!"
+			exit 5;
+		fi
+		;;
+	*)
+		echo "Usage: \n\
+	--set:       Sets the screen brightness at an absolute value in percent \n\
+	--inc:       Increments screen brightness by a given value \n\
+	--dec:       Decrements screen brightness by a given value \n\
+	--get [arg]: Get current brightness. Possible arguments are: 'percent', '%', 'absolute' and 'abs/max'
+	--mul:		Multiplies the current brightness by a given value"
+		exit 0
+		;;
+esac
+
+current_brightness=$(echo "$current_percent $max_brightness" | LANG=C awk '{val = $1*$2/100; printf "%d", (val > $2 ? $2 : (val < 1 ? 1 : val))}')
+
+$(echo "$current_brightness" > $path/brightness)

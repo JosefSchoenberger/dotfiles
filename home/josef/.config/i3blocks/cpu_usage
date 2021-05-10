@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# Dependencies: awk, lm-sensors
+
+#_PREV_IDLE=24063460
+#_PREV_TOTAL=25433764
+# BLOCK_BUTTON=1
+cpu=$(cat /proc/stat | head -1)
+idle=$(echo $cpu | awk '{print $5}')
+total=$(echo $cpu | awk '{print $2+$3+$4+$5+$6+$7+$8+$9+$10}')
+if [ "$_PREV_TOTAL" = "" ]
+then
+	usage=0.0
+else
+	usage=$(echo $idle ${_PREV_IDLE} $total ${_PREV_TOTAL} | LANG=C awk '{print (1-($1-$2)/($3-$4))*100;}')
+fi
+
+if [ "$BLOCK_BUTTON" = "2" ]
+then
+	_COUNTDOWN="0"
+fi
+
+if [ "$BLOCK_BUTTON" != "1" ] && [ "$BLOCK_BUTTON" != "3" ] && [ "${_COUNTDOWN:=0}" = "0" ]
+then
+	color=$(echo $usage ${COLOR_CRIT:="#FF4040"} ${COLOR_ALRT:="#FF8000"} ${COLOR_WARN:="#FFFF90"} ${COLOR_NORM:="#FFFFFF"} | LANG=C awk '{
+		if ($1 >= 95) 
+			print $2; 
+		else if ($1 >= 90)
+			print $3;
+		else if ($1 >= 80)
+			print $4;
+		else
+			print $5;
+		}')
+	printf "{\"name\":\"CPU\",\"full_text\":\"CPU:%5.1f%%\",\"short_text\":\"CPU%3.0f%%\",\"color\":\"%s\",\"_PREV_IDLE\":\"%s\",\"_PREV_TOTAL\":\"%s\"}\n" $usage $usage $color $idle $total
+else
+	if [ "$BLOCK_BUTTON" = "1" ]
+	then
+		_COUNTDOWN="7"
+		_TYPE="1"
+	elif [ "$BLOCK_BUTTON" = "3" ]
+	then
+		_COUNTDOWN="7"
+		_TYPE="3"
+	fi
+
+	_TYPE=${_TYPE:=1}
+
+	if [ "$_TYPE" = "1" ]
+	then
+		# temperature was determined by the average of all cores. Now it's only the hottest core
+		# temp="$(sensors | grep "Core" | cut -c 15-19 | tr -d '+' | awk '{sum+=$1} END{printf "%3.0f\n", sum/NR}')"
+		temp="$(sensors | grep "Core" | cut -c 15-19 | tr -d '+' | awk 'BEGIN {max=-300} {max = (max > $1 ? max : $1)} END{printf "%3.0f\n", max}')"
+		
+		color=$(echo $temp ${COLOR_CRIT:="#FF4040"} ${COLOR_ALRT:="#FF8000"} ${COLOR_WARN:="#FFFF90"} ${COLOR_NORM:="#FFFFFF"} | awk '{
+			if ($1 >= 90) #85
+				print $2; 
+			else if ($1 >= 80)
+				print $3;
+			else if ($1 >= 70)
+				print $4;
+			else
+				print $5;
+			}')
+		
+		printf "{\"name\":\"CPU\",\"full_text\":\"CPU%5.1f°C\",\"short_text\":\"CPU%5.1f°C\",\"color\":\"%s\",\"_PREV_IDLE\":\"%s\",\"_PREV_TOTAL\":\"%s\",\"_COUNTDOWN\":\"%s\",\"_TYPE\":\"%s\"}\n" $temp $temp $color $idle $total $(($_COUNTDOWN-1)) $_TYPE
+	else
+		speed="$(cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq | LANG=C awk 'BEGIN{max=0;} {if(max<$1)max=$1;} END{print max/1000000}')"
+		color=$(echo $speed | LANG=C awk '{
+			if($1 > 2.3) #2.3
+				print "#FF3030";
+			else if ($1 > 1.8) #1.8
+				print "#FFFF80";
+			else if ($1 > 1.45) #1.45
+				print "#FFFFFF";
+			else if ($1 > 1.35) #1.35
+				print "#70FF70";
+			else
+				print "#7070FF";
+			}')
+		printf "{\"name\":\"CPU\",\"full_text\":\" %.2f GHz \",\"short_text\":\"%.2f GHz\",\"color\":\"%s\",\"_PREV_IDLE\":\"%s\",\"_PREV_TOTAL\":\"%s\",\"_COUNTDOWN\":\"%s\",\"_TYPE\":\"%s\"}\n" "$speed" "$speed" "$color" "$idle" "$total" "$(($_COUNTDOWN-1))" "$_TYPE"
+	fi
+fi

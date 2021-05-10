@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Dependencies: awk, bc, free
+
+if [ "$BLOCK_BUTTON" = "1" ]
+then
+	location="Swap: "
+	txt="SWP:"
+	short_txt="SWP"
+else
+	location="Mem:"
+	txt="RAM:"
+	short_txt="RAM"
+fi
+
+string=$(LANG=C free | grep $location | LANG=C awk '{printf "%5.1f", $3/$2*100}')
+
+if [ "$string" = " -nan" ]
+then
+	echo "no $short_txt"
+	echo "no $short_txt"
+	echo "#FF4000"
+	exit 0
+fi
+
+if [ 1 -eq $(echo "$string >= 95" | bc -l) ]
+then
+	color="#ff0000"
+elif [ 1 -eq $(echo "$string >= 90" | bc -l) ]
+then
+	color="#ff5000"
+elif [ 1 -eq $(echo "$string >= 85" | bc -l) ]
+then
+	color="#ff9000"
+elif [ 1 -eq $(echo "$string >= 80" | bc -l) ]
+then
+	color="#ffff40"
+elif [ 1 -eq $(echo "$string >= 75" | bc -l) ]
+then
+	color="#ffff90"
+else
+	color="#ffffff"
+fi
+
+echo "$txt$string%"
+echo "$short_txt$string%"
+echo $color
