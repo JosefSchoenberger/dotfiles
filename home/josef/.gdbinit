@@ -2266,7 +2266,8 @@ end
 
 set history save
 set history filename ~/.gdb_history
-set verbose off
+set history remove-duplicates unlimited
+# set verbose off
 set print pretty on
 set print array off
 set print array-indexes on
