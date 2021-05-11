@@ -1,4 +1,4 @@
-function fish_prompt --description 'Prompt ausgeben'
+function fish_prompt --description 'Write out the prompt'
     set -l last_pipestatus $pipestatus
     set -l normal (set_color normal)
 
@@ -25,5 +25,5 @@ function fish_prompt --description 'Prompt ausgeben'
     # Write pipestatus
     set -l prompt_status (__fish_print_pipestatus " [" "]" "|" (set_color $fish_color_status) (set_color --bold $fish_color_status) $last_pipestatus)
 
-	echo -n -s (set_color $fish_color_user) "$USER" (set_color $color_separator) @ (set_color $color_host) (prompt_hostname) (set_color $color_separator) ':' (set_color $color_cwd) (prompt_pwd) (set_color $color_vcs) (fish_vcs_prompt) $normal $prompt_status $suffix " "
+	echo -n -s (set_color $fish_color_user) "$USER" $normal @ (set_color $color_host) (prompt_hostname) $normal ':' (set_color $color_cwd) (prompt_pwd) (set_color $color_vcs) (fish_vcs_prompt) $normal $prompt_status $suffix " "
 end
