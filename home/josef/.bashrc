@@ -156,6 +156,6 @@ stty quit 
 # use color in manpages
 export LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul)
 
-if [ -d "$HOME/.cargo/env" ]; then
+if [ -e "$HOME/.cargo/env" ]; then
 	. "$HOME/.cargo/env"
 fi
