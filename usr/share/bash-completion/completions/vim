@@ -26,7 +26,7 @@ _vim() {
     return 0
   fi
 
-  local _VIM_IGNORE=(pdf xdvi jpg pyc exe tar zip ps out)
+  local _VIM_IGNORE=(pdf xdvi jpg pyc exe tar zip ps out o)
   _filedir
   for idx in ${!COMPREPLY[@]}; do
     ext=${COMPREPLY[$idx]}
