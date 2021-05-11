@@ -220,7 +220,7 @@ bar {
 	font pango:monospace 9
 	output primary
 	strip_workspace_numbers yes
-	mode hide
+	#mode hide
 }
 
 # Map backlight keys
