@@ -18,7 +18,7 @@ flags = [
 '-Wsuggest-attribute=pure',
 '-Wsuggest-attribute=const',
 '-Wsuggest-attribute=malloc',
-'-Wsuggest-attrubute=cold',
+'-Wsuggest-attribute=cold',
 '-Walloc-zero',
 
 # Likely to be changed on a per-project basis
