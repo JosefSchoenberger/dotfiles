@@ -67,7 +67,7 @@ if [ "$color_prompt" = yes ]; then
 	else
 		HOST_COLOR="\033[01;32m"
 	fi
-	PS1='${debian_chroot:+($debian_chroot)}\['$USER_COLOR'\]\u\[\033[m\]@\['$HOST_COLOR'\]\h\[\033[m\]:\[\033[01;34m\]\w\[$(retval=$?; [ $retval -ne 0 ] && printf " \033[31m(%d)" $retval)\]\[\033[0m\]\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\['$USER_COLOR'\]\u\[\033[m\]@\['$HOST_COLOR'\]\h\[\033[m\]:\[\033[01;34m\]\w\[\033[m\]\[$(retval=$?; [ $retval -ne 0 ] && printf "\033[31m" $retval)\]\$\[\033[m\] '
     # for root:
 	# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[01;32m\]@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
