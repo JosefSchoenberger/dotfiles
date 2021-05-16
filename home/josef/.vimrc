@@ -106,6 +106,7 @@ set number
 " Break a line with a hook right arrow
 set linebreak
 set showbreak=↪
+set colorcolumn=121
 
 set fillchars+=vert:┃
 

@@ -28,6 +28,8 @@ if &t_Co == 256 || has("gui_running")
 
 	hi VertSplit cterm=NONE ctermbg=NONE ctermfg=white
 	hi FoldColumn ctermbg=235 ctermfg=117
+
+	hi ColorColumn ctermbg=234
 	
 	let s:ycm_color_enabled=1
 	function UpdateYCM() 
