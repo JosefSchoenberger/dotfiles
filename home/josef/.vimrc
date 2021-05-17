@@ -192,3 +192,12 @@ set foldlevel=10
 set tags=./tags,tags;
 map <C-M-RightMouse> :tn<CR>
 map <C-M-LeftMouse> :tp<CR>
+
+function Noarrow()
+	noremap <Up> <nop>
+	noremap <Down> <nop>
+	noremap <Left> <nop>
+	noremap <Right> <nop>
+	noremap <PageUp> <nop>
+	noremap <PageDown> <nop>
+endfunction
