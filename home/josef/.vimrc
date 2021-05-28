@@ -138,7 +138,8 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
-tnoremap <esc><esc> <C-w>N
+" tnoremap <esc><esc> <C-w>N
+tnoremap <C-q> <C-w>N
 
 " Enable spellcheck in demand. Use `:set nospell' to disable again
 " requires German language pack to be downloaded manually:
