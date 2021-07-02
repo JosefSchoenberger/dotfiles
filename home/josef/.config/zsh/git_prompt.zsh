@@ -23,10 +23,10 @@ function git_prompt_info() {
 }
 
 function git_status_to_color() {
-	local git_out=$(command git status --porcelain)
-	if echo "$git_out" | cut -c -2 | grep -E 'M|\?|D' >/dev/null; then
+	local git_out=$(command git status --porcelain | cut -c -2)
+	if echo "$git_out" | grep -E 'M|\?|D' >/dev/null; then
 		echo "$ZSH_THEME_GIT_PROMPT_MODIFIED_COLOR"
-	elif echo "$git_out" | cut -c -2 | grep A >/dev/null; then
+	elif echo "$git_out" | grep A >/dev/null; then
 		echo "$ZSH_THEME_GIT_PROMPT_STAGED_COLOR"
 	else
 		echo "$ZSH_THEME_GIT_PROMPT_CLEAN_COLOR"

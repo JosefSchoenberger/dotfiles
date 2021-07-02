@@ -85,8 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias rgrep='rgrep -n --color=auto'
-
-	alias :q="exit 0" # yeah, so I use bash in vim a lot...
+	alias ip='ip -c'
 fi
 
 # colored GCC warnings and errors
@@ -101,8 +100,8 @@ export LESS="--mouse --wheel-lines=3 -R"
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
 alias vi='vim --clean' # why not?
 
-alias gdb='gdb -q' # I've seen the copyright statement.
-alias rust-gdb='rust-gdb -q'
+which gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
+which rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
 
 cdtmp() {
 	cd $(mktemp -d)
@@ -136,3 +135,4 @@ autoload -U + X bashcompinit && bashcompinit
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 unset PATH_TO_THIS_FILE
+source /home/josef/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
