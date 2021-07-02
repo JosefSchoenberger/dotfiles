@@ -87,3 +87,4 @@ if &term =~ 'kitty'
 endif
 
 au BufReadPost *.S set syntax=gas
+au BufNew *.S set syntax=gas
