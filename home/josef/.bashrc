@@ -119,6 +119,14 @@ which rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
 cdtmp() {
 	cd $(mktemp -d)
 }
+rmcwd() {
+	echo -n "Do you really want to remove this folder (y/n): "
+	cat <(pwd)
+	read && if [ "$REPLY" = y ]; then 
+		rm "$(pwd)" -r
+		cd ..
+	fi
+}
 mkcdir() {
 	mkdir -p -- "$1" && cd -P -- "$1"
 }
