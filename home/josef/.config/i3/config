@@ -218,7 +218,7 @@ bindsym $mod+r mode "resize"
 bar {
     status_command i3blocks
 	font pango:monospace 9
-	output primary
+	#output primary
 	strip_workspace_numbers yes
 	#mode hide
 }
@@ -262,3 +262,5 @@ default_border pixel
 exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Accel Speed" .4
+
+bindsym --whole-window $mod+button2 kill
