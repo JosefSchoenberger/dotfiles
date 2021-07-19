@@ -130,6 +130,12 @@ set ttymouse=sgr " with support for more than 220 columns in Windows Terminal
 " Scroll early to always keep 2 lines above/below cursor if available
 set so=2
 
+if !isdirectory($HOME."/.vim/undo-dir")
+	call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+set undodir=~/.vim/undo-dir
+set undofile
+
 " cause I'm an idiot
 cmap sudow w !sudo tee > /dev/null %
 " move line(s) up and down using Ctrl+j and Ctrl+k
