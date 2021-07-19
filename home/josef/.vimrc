@@ -105,6 +105,8 @@ syntax on
 set number
 " Break a line with a hook right arrow
 set linebreak
+set encoding=utf-8
+scriptencoding utf-8
 set showbreak=↪
 set colorcolumn=121
 
