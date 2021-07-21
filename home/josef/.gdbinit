@@ -626,16 +626,16 @@ class Dashboard(gdb.Command):
 
     @staticmethod
     def parse_inits(python):
-		# paths where the .gdbinit.d directory might be
-		search_paths = [
-			'/etc/gdb-dashboard',
-			'{}/gdb-dashboard'.format(os.getenv('XDG_CONFIG_HOME', '~/.config')),
-			'~/Library/Preferences/gdb-dashboard',
-			'~/.gdbinit.d'
-		]
-		# expand the tilde and walk the paths
-		inits_dirs = (os.walk(os.path.expanduser(path)) for path in search_paths)
-		# process all the init files in order
+        # paths where the .gdbinit.d directory might be
+        search_paths = [
+            '/etc/gdb-dashboard',
+            '{}/gdb-dashboard'.format(os.getenv('XDG_CONFIG_HOME', '~/.config')),
+            '~/Library/Preferences/gdb-dashboard',
+            '~/.gdbinit.d'
+        ]
+        # expand the tilde and walk the paths
+        inits_dirs = (os.walk(os.path.expanduser(path)) for path in search_paths)
+        # process all the init files in order
         for root, dirs, files in itertools.chain.from_iterable(inits_dirs):
             dirs.sort()
             for init in sorted(files):
