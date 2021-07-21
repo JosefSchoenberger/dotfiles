@@ -123,8 +123,10 @@ rmcwd() {
 	echo -n "Do you really want to remove this folder (y/n): "
 	cat <(pwd)
 	read && if [ "$REPLY" = y ]; then 
+		local o="$OLDPWD"
 		rm "$(pwd)" -r
 		cd ..
+		OLDPWD=$o
 	fi
 }
 mkcdir() {
