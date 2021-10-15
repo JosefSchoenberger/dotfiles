@@ -1,3 +1,6 @@
 [submodule "home/josef/.config/zsh/zsh-syntax-highlighting"]
 	path = home/josef/.config/zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "home/josef/.config/zsh/zsh-autosuggestions"]
+	path = home/josef/.config/zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
