@@ -148,6 +148,7 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " tnoremap <esc><esc> <C-w>N
 tnoremap <C-q> <C-w>N
+autocmd TerminalOpen * setlocal nonumber norelativenumber
 
 " Enable spellcheck in demand. Use `:set nospell' to disable again
 " requires German language pack to be downloaded manually:
@@ -210,3 +211,19 @@ function Noarrow()
 	noremap <PageUp> <nop>
 	noremap <PageDown> <nop>
 endfunction
+
+" Enclose in parentheses
+vnoremap ;( c()<Esc>Pg;h
+vnoremap ;{ c{}<Esc>Pg;h
+vnoremap ;[ c[]<Esc>Pg;h
+
+nnoremap ;(w c()<Esc>Pg;h
+nnoremap ;{w c{}<Esc>Pg;h
+nnoremap ;[w c[]<Esc>Pg;h
+
+" Map <C-W> commands to a more comfortable position for NEOQWERTZ
+nnoremap _& <C-W><C-P>
+nnoremap _? <C-W>h
+nnoremap _( <C-W>j
+nnoremap _) <C-W>k
+nnoremap _- <C-W>l

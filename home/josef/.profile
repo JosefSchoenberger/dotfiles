@@ -31,7 +31,6 @@ if [ -d "/sbin" ] ; then
 	PATH="$PATH:/sbin"
 fi
 
-# set PATH so it includes sbin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
 	PATH="$PATH:$HOME/.local/bin"
 fi
