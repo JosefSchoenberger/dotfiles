@@ -61,7 +61,7 @@ if [ "$color_prompt" = yes ]; then
 	else
 		color_user="%F{2}"
 	fi
-	[ -n "$SSH_TTY" ] && color_host="%B%F{220}" || color_host="%F{2}"
+	[ -n "$SSH_TTY" ] && color_host="%B%F{3}" || color_host="%F{2}"
 	
 	ZSH_THEME_GIT_PROMPT_MODIFIED_COLOR="%F{1}"
 	ZSH_THEME_GIT_PROMPT_STAGED_COLOR="%F{3}"
@@ -134,5 +134,5 @@ autoload -U + X bashcompinit && bashcompinit
 [ -r "$PATH_TO_THIS_FILE/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-autosuggestions/zsh-autosuggestions.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+[ -r "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 unset PATH_TO_THIS_FILE
-source /home/josef/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
