@@ -98,7 +98,7 @@ alias lla='ls -lhFA'
 #alias l='ls -CF'
 export LESS="--mouse --wheel-lines=3 -R"
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
-alias vi='vim --clean' # why not?
+which vim >/dev/null && alias vi='vim --clean' # why not?
 
 which gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
 which rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
@@ -107,9 +107,21 @@ cdtmp() {
 	cd $(mktemp -d)
 }
 
+rmcwd() {
+	echo -n "Do you really want to remove this folder (y/n): "
+	pwd
+	read && if [ "$REPLY" = y ]; then 
+		local o="$OLDPWD"
+		rm "$(pwd)" -r
+		cd ..
+		OLDPWD=$o
+	fi
+}
+
 mkcdir() {
 	mkdir -p -- "$1" && cd -P -- "$1"
 }
+
 mvcd() {
 	mv -- "$1" "$2" && cd -- "$2"
 }

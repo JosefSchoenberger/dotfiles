@@ -124,7 +124,7 @@ cdtmp() {
 }
 rmcwd() {
 	echo -n "Do you really want to remove this folder (y/n): "
-	cat <(pwd)
+	pwd
 	read && if [ "$REPLY" = y ]; then 
 		local o="$OLDPWD"
 		rm "$(pwd)" -r
