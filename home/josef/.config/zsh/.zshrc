@@ -68,7 +68,8 @@ if [ "$color_prompt" = yes ]; then
 	ZSH_THEME_GIT_PROMPT_CLEAN_COLOR="%F{2}"
 
 	# default: PROMPT='%m%#'
-	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%(?..%B%F{1} (%?%))%b%f%# "
+	# PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%(?..%B%F{1} (%?%))%b%f%# "
+	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%b%f%(?..%B%F{1})%# "
 else
 	PROMPT="%n@%m:%~$git (%?.. (%?%))%#"
 fi
