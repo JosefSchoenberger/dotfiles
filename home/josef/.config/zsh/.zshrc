@@ -69,7 +69,7 @@ if [ "$color_prompt" = yes ]; then
 
 	# default: PROMPT='%m%#'
 	# PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%(?..%B%F{1} (%?%))%b%f%# "
-	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%b%f%(?..%B%F{1})%# "
+	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%b%f%(?..%B%F{1})%#$b "
 else
 	PROMPT="%n@%m:%~$git (%?.. (%?%))%#"
 fi
@@ -126,6 +126,26 @@ mkcdir() {
 mvcd() {
 	mv -- "$1" "$2" && cd -- "$2"
 }
+
+DISABLE_AUTO_TITLE="true"
+if [ -n "$SSH_TTY" ]; then
+	function set_terminal_title_precmd() {
+		echo -en "\e]2;SSH $HOST: ${PWD/\/home\/$USER/~}\a"
+	}
+	function set_terminal_title_preexec() {
+		echo -en "\e]2;SSH $HOST ❯ $1\a"
+	}
+else
+	function set_terminal_title_precmd() {
+		echo -en "\e]2;ZSH: ${PWD/\/home\/$USER/~}\a"
+	}
+	function set_terminal_title_preexec() {
+		echo -en "\e]2;❯ $1\a"
+	}
+fi
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set_terminal_title_precmd
+add-zsh-hook preexec set_terminal_title_preexec
 
 stty quit 
 
