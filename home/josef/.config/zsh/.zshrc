@@ -169,3 +169,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 [ -r "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 unset PATH_TO_THIS_FILE
+
+if [ -e "$HOME/.cargo/env" ]; then
+	. "$HOME/.cargo/env"
+fi
