@@ -30,7 +30,7 @@ bindkey '[1;5D' backward-word # Ctrl+Left
 bindkey '' backward-kill-word # Ctrl+Backspace
 bindkey -M menuselect '[Z' reverse-menu-complete # Shift+Tab
 
-[ -x /ust/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 case "$TERM" in
 	xterm-color|*-256color|xterm-kitty) color_prompt=yes;;
