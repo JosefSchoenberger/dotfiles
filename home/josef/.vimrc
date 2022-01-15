@@ -217,10 +217,6 @@ vnoremap ;( c()<Esc>Pg;h
 vnoremap ;{ c{}<Esc>Pg;h
 vnoremap ;[ c[]<Esc>Pg;h
 
-nnoremap ;(w c()<Esc>Pg;h
-nnoremap ;{w c{}<Esc>Pg;h
-nnoremap ;[w c[]<Esc>Pg;h
-
 " Map <C-W> commands to a more comfortable position for NEOQWERTZ
 nnoremap _& <C-W><C-P>
 nnoremap _? <C-W>h
