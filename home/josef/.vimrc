@@ -227,3 +227,8 @@ nnoremap _? <C-W>h
 nnoremap _( <C-W>j
 nnoremap _) <C-W>k
 nnoremap _- <C-W>l
+
+nnoremap <F5> :YcmCompleter GetType<CR>
+nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
+nnoremap <F7> :YcmCompleter GetDoc<CR>
+nnoremap <F8> :YcmCompleter GoTo<CR>
