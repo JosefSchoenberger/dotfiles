@@ -79,9 +79,11 @@ PARTITION=/
 interval=10
 
 [cpu_usage]
-command=./cpu_usage
+# You will need to build it first
+command=./c-rewrite/cpu_usage.out
 format=json
-interval=2
+interval=persist
+LOGPATH=./log.txt
 
 #[cpu_usage2]
 #command=i3blocks-contrib/cpu_usage2/cpu_usage2 
