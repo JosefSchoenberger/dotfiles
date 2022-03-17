@@ -104,6 +104,8 @@ which vim >/dev/null && alias vi='vim --clean' # why not?
 which gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
 which rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
 
+alias make='make -j12'
+
 cdtmp() {
 	cd $(mktemp -d)
 }
@@ -173,3 +175,10 @@ unset PATH_TO_THIS_FILE
 if [ -e "$HOME/.cargo/env" ]; then
 	. "$HOME/.cargo/env"
 fi
+
+redstderr() {
+	set -o pipefail;
+	"$@" 2> >(sed $'s/.*/\e[31m&\e[m/' >&2)
+}
+
+export DEBUGFS_PAGER=cat
