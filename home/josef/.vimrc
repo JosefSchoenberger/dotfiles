@@ -37,6 +37,9 @@ Plugin 'ycm-core/YouCompleteMe' " for semantic completion; _not_ lightweight!
 " Note: install.py might claim that no semantic completion for C/C++/ObjC
 " will be available. That's normal, because you dont need libclang, however,
 " semantic analysis will still be available using clangd...
+"
+" My personal command by the way:
+" python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer --go-completer --java-completer --ts-completer --rust-completer
 
 Plugin 'rhysd/vim-clang-format' " for :ClangFormat
 " Well, you better have clang-format installed here... :-P
@@ -57,7 +60,12 @@ filetype plugin indent on
 " YCM
 " let g:ycm_clangd_binary_path = "/usr/bin/clangd-11"
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" let g_ycm_log_level='debug'
+" let g:ycm_log_level='debug'
+if file_readable($HOME."/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
+	let g:ycm_rust_toolchain_root = $HOME."/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/"
+elseif file_readable($HOME."/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer")
+	let g:ycm_rust_toolchain_root = $HOME."/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/"
+endif
 nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
 
 " Markdown Preview
