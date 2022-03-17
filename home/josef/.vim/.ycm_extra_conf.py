@@ -22,8 +22,8 @@ flags = [
 '-Walloc-zero',
 
 # Likely to be changed on a per-project basis
-'-Wpedantic',
-'-Wno-long-long',
+#'-Wpedantic',
+#'-Wno-long-long',
 #'-Wdouble-promotion', #useful for vecorization
 '-Wunsage-loop-optimizations',
 #'-Wformat-overflow=2',
