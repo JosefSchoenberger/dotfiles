@@ -133,14 +133,14 @@ if [ -n "$SSH_TTY" ]; then
 		echo -en "\e]2;SSH $HOST: ${PWD/\/home\/$USER/~}\a"
 	}
 	function set_terminal_title_preexec() {
-		echo -en "\e]2;SSH $HOST ❯ $1\a"
+		echo -en "\e]2;SSH $HOST ❯ ${1//\\e/e}\a"
 	}
 else
 	function set_terminal_title_precmd() {
 		echo -en "\e]2;ZSH: ${PWD/\/home\/$USER/~}\a"
 	}
 	function set_terminal_title_preexec() {
-		echo -en "\e]2;❯ $1\a"
+		echo -en "\e]2;❯ ${1//\\e/e}\a"
 	}
 fi
 autoload -Uz add-zsh-hook
