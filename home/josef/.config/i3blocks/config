@@ -105,6 +105,7 @@ interval=2
 
 [bat]
 interval=10
+bat=1
 
 [volume]
 interval=5
