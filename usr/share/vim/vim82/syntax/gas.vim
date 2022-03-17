@@ -2058,6 +2058,12 @@ call <SID>MapOpcode('gasOpcode_X64_SSE42'      , 'x64'        , 'sse4.2')
 call <SID>MapOpcode('gasOpcode_X64_VMX'        , 'x64'        , 'vmx')
 call <SID>MapOpcode('gasOpcode_X86_64_Base'    , 'x64'        , 'base')
 
+call <SID>MapOpcode('gasOpcode_Base', 'x64', 'base')
+call <SID>MapOpcode('gasOpcode_SSE', 'x64', 'sse')
+call <SID>MapOpcode('gasOpcode_SSE2', 'x64', 'sse2')
+call <SID>MapOpcode('gasOpcode_SSE41', 'x64', 'sse4.1')
+call <SID>MapOpcode('gasOpcode_SSE42', 'x64', 'sse4.2')
+
 " support CPP preprocessor tags
 if !exists('g:gasDisablePreproc') && !exists('b:gasDisablePreproc')
 	syn case match
