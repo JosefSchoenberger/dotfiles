@@ -15,6 +15,10 @@ zmodload zsh/complist
 # End of lines added by compinstall
 _comp_options+=(globdots)
 
+if [ -e "$HOME/.cargo/env" ]; then
+	. "$HOME/.cargo/env" # Load Rust even if non-interactive
+fi
+
 # do nothing if not interactive
 case $- in
 	*i*) ;;
@@ -172,8 +176,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 [ -r "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 unset PATH_TO_THIS_FILE
 
-if [ -e "$HOME/.cargo/env" ]; then
-	. "$HOME/.cargo/env"
+if [ -n "$SSH_TTY" ]; then
+	. ~/.profile
 fi
 
 redstderr() {

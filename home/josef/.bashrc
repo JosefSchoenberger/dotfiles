@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+if [ -e "$HOME/.cargo/env" ]; then
+	. "$HOME/.cargo/env" # Load Rust even if non-interactive
+fi
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -167,7 +171,3 @@ stty quit 
 
 # use color in manpages
 export LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul)
-
-if [ -e "$HOME/.cargo/env" ]; then
-	. "$HOME/.cargo/env"
-fi
