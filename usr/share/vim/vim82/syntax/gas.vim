@@ -1359,8 +1359,11 @@ syn keyword gasOpcode_SANDYBRIDGE_AVX	vaesdeclast vaesdeclastb vaesdeclastw vaes
 syn keyword gasOpcode_SANDYBRIDGE_AVX	vaesimc vaesimcb vaesimcw vaesimcl vaesimcq
 syn keyword gasOpcode_SANDYBRIDGE_AVX	vaeskeygenassist vaeskeygenassistb vaeskeygenassistw vaeskeygenassistl vaeskeygenassistq
 
-"-- Section: New instructions in Barcelona
-syn keyword gasOpcode_X64_Base		lzcnt
+
+"-- Section: Intel BMI
+syn keyword gasOpcode_BMI1		lzcnt
+syn keyword gasOpcode_BMI1		andn bextr blsi blsmsk blsr tzcnt
+syn keyword gasOpcode_BMI2		bzhi mulx pdep pext rorx sarx shrx shlx
 
 "-- Section: Intel AVX instructions
 syn keyword gasOpcode_SANDYBRIDGE_AVX	vaddpd vaddpdb vaddpdw vaddpdl vaddpdq
@@ -2048,6 +2051,8 @@ call <SID>MapOpcode('gasOpcode_PENT_MMX'       , 'pentium'    , 'mmx')
 call <SID>MapOpcode('gasOpcode_PRESCOTT_Base'  , 'prescott'   , 'base')
 call <SID>MapOpcode('gasOpcode_PRESCOTT_SSE3'  , 'prescott'   , 'sse3')
 call <SID>MapOpcode('gasOpcode_SANDYBRIDGE_AVX', 'sandybridge', 'avx')
+call <SID>MapOpcode('gasOpcode_BMI1'           , 'x64'        , 'bmi1')
+call <SID>MapOpcode('gasOpcode_BMI2'           , 'x64'        , 'bmi2')
 call <SID>MapOpcode('gasOpcode_X642_Base'      , 'x642'       , 'base')
 call <SID>MapOpcode('gasOpcode_X64_Base'       , 'x64'        , 'base')
 call <SID>MapOpcode('gasOpcode_X64_MMX'        , 'x64'        , 'mmx')
