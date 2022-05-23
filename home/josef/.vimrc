@@ -127,7 +127,7 @@ set shiftwidth=4
 " Import color settings
 if file_readable($HOME."/.vim/colors.vim")
 	source $HOME/.vim/colors.vim
-elseif
+else
 	echo "Error: Could not find/read colors file."
 	echo "Please create ~/.vim/colors.vim"
 endif
