@@ -74,6 +74,7 @@ if [ "$color_prompt" = yes ]; then
 	# default: PROMPT='%m%#'
 	# PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%(?..%B%F{1} (%?%))%b%f%# "
 	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%b%f%(?..%B%F{1}%b)%#%f "
+	RPROMPT='%F{235}%(?..($?%) )$(OUT=$(git branch --show-current 2>/dev/null) && echo "[$OUT] ")%1(j.(%j jobs%) .)%D{%a %d.%m, %H:%M:%S Uhr}'
 else
 	PROMPT="%n@%m:%~$git (%?.. (%?%))%#"
 fi
