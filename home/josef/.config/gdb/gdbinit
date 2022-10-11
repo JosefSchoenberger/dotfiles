@@ -1,0 +1,15 @@
+source ~/.config/gdb/dashboard.gdb
+source ~/.config/gdb/skip_interrupt.gdb
+source ~/.config/gdb/stack_layout.gdb
+source ~/.config/gdb/dashboard_additions.gdb
+
+set disassembly-flavor intel
+set print asm-demangle on
+set detach-on-fork off
+set history size 65536
+set history filename ~/.config/gdb/.gdb_history
+
+#define hook-quit
+#	set confirm off
+#	kill
+#end
