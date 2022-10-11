@@ -60,6 +60,8 @@ filetype plugin indent on
 " YCM
 " let g:ycm_clangd_binary_path = "/usr/bin/clangd-11"
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_echo_current_diagnostic = 'virtual-text'
 " let g:ycm_log_level='debug'
 if file_readable($HOME."/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
 	let g:ycm_rust_toolchain_root = $HOME."/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/"
@@ -116,7 +118,12 @@ set linebreak
 set encoding=utf-8
 scriptencoding utf-8
 set showbreak=↪
+set breakindent
+set breakindentopt=shift:2
 set colorcolumn=121
+
+set formatoptions+=j
+autocmd BufNewFile,BufRead *.md set formatoptions+=n " indent following a enumeration with '1.'
 
 set fillchars+=vert:┃
 
@@ -132,17 +139,25 @@ else
 	echo "Please create ~/.vim/colors.vim"
 endif
 
+set ttimeoutlen=10 " ESC basically immediately
 set mouse=a " enable mouse
 set ttymouse=sgr " with support for more than 220 columns in Windows Terminal
+set listchars=tab:-->,space:␣,leadmultispace:···⍿,multispace:·,nbsp:━,trail:⦚ ",eol:↵
+
+set cursorline
+set cursorlineopt=number
 
 " Scroll early to always keep 2 lines above/below cursor if available
 set so=2
+set siso=5 " 5 column on each side (when not wrapping)
 
 if !isdirectory($HOME."/.vim/undo-dir")
 	call mkdir($HOME."/.vim/undo-dir", "", 0700)
 endif
 set undodir=~/.vim/undo-dir
 set undofile
+
+set autoread " when file changes and there are no changes in VIM's buffer, reload automatically
 
 " cause I'm an idiot
 cmap sudow w !sudo tee > /dev/null %

@@ -2,7 +2,7 @@ if has("gui_running")
 	color slate
 	hi Comment guifg=grey60
 elseif &t_Co == 256
-	color peachpuff
+	color oldpeachpuff
 endif
 
 if &t_Co == 256 || has("gui_running")
@@ -30,6 +30,12 @@ if &t_Co == 256 || has("gui_running")
 	hi FoldColumn ctermbg=235 ctermfg=117
 
 	hi ColorColumn ctermbg=234
+
+	hi CursorLine cterm=NONE ctermbg=235
+	hi CursorLineNr cterm=NONE ctermbg=3 ctermfg=235
+
+	hi SpecialKey cterm=bold ctermfg=23
+	"hi NonText cterm=bold ctermfg=240
 	
 	let s:ycm_color_enabled=1
 	function UpdateYCM() 
