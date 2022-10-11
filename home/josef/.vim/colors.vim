@@ -9,6 +9,7 @@ if &t_Co == 256 || has("gui_running")
 	hi Visual cterm=bold ctermbg=239 gui=bold guifg=NONE guibg=grey30
 	hi Search cterm=reverse ctermbg=Black guibg=Black
 	hi Folded ctermbg=darkgray ctermfg=NONE
+	hi MatchParen ctermbg=39
 
 	" Make spell highlighting more readable
 	hi SpellCap ctermbg=75 ctermfg=white
@@ -26,7 +27,7 @@ if &t_Co == 256 || has("gui_running")
 	hi StatusLineNC cterm=NONE ctermbg=238 ctermfg=white
 	hi WildMenu ctermfg=235 ctermbg=117
 
-	hi VertSplit cterm=NONE ctermbg=NONE ctermfg=white
+	hi VertSplit cterm=NONE ctermfg=gray ctermbg=darkgray
 	hi FoldColumn ctermbg=235 ctermfg=117
 
 	hi ColorColumn ctermbg=234

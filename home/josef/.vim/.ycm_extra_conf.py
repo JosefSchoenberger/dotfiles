@@ -38,7 +38,7 @@ flags = [
 
 '-fexceptions',
 # '-x', 'c++',
-#'-std=gnu++17',
+# '-std=gnu++20',
 ]
 
 include_dirs = [

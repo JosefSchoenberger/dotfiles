@@ -7,4 +7,6 @@ let g:clang_format#style_options = {
 			\ "Standard" : "Auto",
 			\ "AccessModifierOffset" : -4,
 			\ "AllowShortIfStatementsOnASingleLine" : "false",
+			\ "AllowShortLoopsOnASingleLine" : "false",
+			\ "AllowShortFunctionsOnASingleLine" : "Empty",
 			\ }

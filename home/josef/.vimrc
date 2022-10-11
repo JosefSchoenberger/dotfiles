@@ -61,7 +61,7 @@ filetype plugin indent on
 " let g:ycm_clangd_binary_path = "/usr/bin/clangd-11"
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_echo_current_diagnostic = 'virtual-text'
+" let g:ycm_echo_current_diagnostic = 'virtual-text'
 " let g:ycm_log_level='debug'
 if file_readable($HOME."/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
 	let g:ycm_rust_toolchain_root = $HOME."/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/"
@@ -143,6 +143,7 @@ set ttimeoutlen=10 " ESC basically immediately
 set mouse=a " enable mouse
 set ttymouse=sgr " with support for more than 220 columns in Windows Terminal
 set listchars=tab:-->,space:␣,leadmultispace:···⍿,multispace:·,nbsp:━,trail:⦚ ",eol:↵
+nnoremap <F4> :set list!<CR>
 
 set cursorline
 set cursorlineopt=number
@@ -217,7 +218,7 @@ let c_gnu=1 " C-source is GNU-C
 let c_space_errors=1 " highlight trailing spaces/tabs and spaces before tabs
 					 " It is understandable if one wants to disable this, it
 					 " can be annoying sometimes.
-let g:load_doxygen_syntax=1 " enably doxygen highlighting for C, C++, C# and IDL
+" let g:load_doxygen_syntax=1 " enably doxygen highlighting for C, C++, C# and IDL
 
 " only fold from the 10th level on initially
 set foldlevel=10
@@ -248,6 +249,10 @@ nnoremap _) <C-W>k
 nnoremap _- <C-W>l
 
 nnoremap <F5> :YcmCompleter GetType<CR>
-nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
+" nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
+nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F7> :YcmCompleter GetDoc<CR>
 nnoremap <F8> :YcmCompleter GoTo<CR>
+
+nnoremap gö :tabe<CR>
+nnoremap gÖ :tabc<CR>
