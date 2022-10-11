@@ -114,14 +114,14 @@ alias lla='ls -lhFA'
 #alias l='ls -CF'
 export LESS="--mouse --wheel-lines=3 -R"
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
-which vim >/dev/null && alias vi='vim --clean' # why not?
+command -v vim >/dev/null && alias vi='vim --clean' # why not?
 
-if [ ! -n "$(which mpv)" ] && [ -n ${WSLENV+"non_zero_string if and only if WSLENV set"} ]; then
+if [ ! -n "$(command -v mpv)" ] && [ -n ${WSLENV+"non_zero_string if and only if WSLENV set"} ]; then
 	alias mpv='mpv.com'
 fi
 
-which gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
-which rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
+command -v gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
+command -v rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
 
 cdtmp() {
 	cd $(mktemp -d)
@@ -163,7 +163,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-which gtk-launch >/dev/null && alias start='gtk-launch' # in case I forget the standard application...
+command -v gtk-launch >/dev/null && alias start='gtk-launch' # in case I forget the standard application...
 
 # to replace Ctrl+[ for german keyboards. See `man stty' for more information
 stty quit 

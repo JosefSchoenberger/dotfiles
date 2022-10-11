@@ -104,10 +104,10 @@ alias lla='ls -lhFA'
 #alias l='ls -CF'
 export LESS="--mouse --wheel-lines=3 -R"
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
-which vim >/dev/null && alias vi='vim --clean' # why not?
+command -v vim >/dev/null && alias vi='vim --clean' # why not?
 
-which gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
-which rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
+command -v gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
+command -v rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffplay='ffplay -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
