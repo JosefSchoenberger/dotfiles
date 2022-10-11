@@ -2,8 +2,8 @@ PATH_TO_THIS_FILE="$ZDOTDIR"
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.config/zsh/.histfile
-HISTSIZE=2000
-SAVEHIST=2000
+HISTSIZE=200000
+SAVEHIST=200000
 unsetopt beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -158,6 +158,7 @@ add-zsh-hook precmd set_terminal_title_precmd
 add-zsh-hook preexec set_terminal_title_preexec
 
 stty quit 
+export WORDCHARS=$(tr -d '/' <<<"$WORDCHARS")
 
 export LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul)
 
