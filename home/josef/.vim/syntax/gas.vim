@@ -1,9 +1,9 @@
 " Vim syntax file
 " Language:     GNU as (AT&T) assembler for X86
-" Maintainer:   Rene Koecher <shirk@bitspin.org>
-" Last Change:  2016 Jul 08
-" Version:      0.11
-" Remark:       Intel compatible instructions only (for now)
+" Maintainer:   Rene Koecher <info@bitspin.org>
+" Last Change:  2022 Mar 07
+" Version:      0.16
+" Remark:       Intel and AVR compatible instructions only (for now)
 " License:      BSD (3 clause), see LICENSE
 "
 
@@ -17,69 +17,13 @@ setlocal iskeyword +=%,.,-,_
 
 syn case ignore
 
-" directives
-syn keyword gasDirective	.abort .ABORT .align .balignw .balignl
-syn keyword gasDirective	.cfi_startproc .cfi_sections .cfi_endproc .cfi_personality
-syn keyword gasDirective	.cfi_lsda .cfi_def_cfa .cfi_def_cfa_register .cfi_def_cfa_offset
-syn keyword gasDirective	.cfi_adjust_cfa_offset .cfi_offset .cfi_rel_offset .cfi_register
-syn keyword gasDirective	.cfi_restore .cfi_undefined .cfi_same_value .cfi_remember_state
-syn keyword gasDirective	.cfi_return_column .cfi_signal_frame .cfi_window_save .cfi_escape
-syn keyword gasDirective	.cfi_val_encoded_addr .data .def .desc .dim .eject
-syn keyword gasDirective	.else .elseif .endef .endif .endr .equ .equiv .eqv .err
-syn keyword gasDirective	.error .exitm .extern .fail .file .fill .global .globl
-syn keyword gasDirective	.gnu_attribute .hidden .ident .if .incbin .include .internal
-syn keyword gasDirective	.irp .irpc .lcomm .lflags .line .linkonce .list .ln .loc .loc_mark_labels
-syn keyword gasDirective	.local .mri .nolist .org .p2alignw .p2alignl
-syn keyword gasDirective	.popsection .previous .print .protected .psize .purgem .pushsection
-syn keyword gasDirective	.reloc .rept .sbttl .scl .section .set .single .size .skip .sleb128
-syn keyword gasDirective	.stabd .stabn .stabs .struct .subsection
-syn keyword gasDirective	.symver .tag .text .title .type .uleb128 .val .version
-syn keyword gasDirective	.vtable_entry .vtable_inherit .warning .weak .weakref
-
-
-syn keyword gasDirectiveStore	.byte .hword .word .int .long .double .short .float .octa .quad
-syn keyword gasDirectiveStore	.string .string8 .string16 .ascii .asciz .comm .space
-
-syn keyword gasDirectiveMacro	.altmacro .macro .noaltmacro .endmacro .endm .func .endfunc
-
-" i*86 directives
-syn keyword gasDirectiveX86	.att_syntax .intel_syntax .att_mnemonic .intel_mnemonic .code16 .code32 .code64 .lcomm
-
-
 " symbols and labels
+" - these need to appear at the top to get lowest precedence
 
 syn match   gasLabel		/[-_$.A-Za-z0-9]\+\s*:/
 syn match   gasSymbol		/\<[^; \t()]\+\>/
 syn match   gasSymbolRef	/\$[-_$.A-Za-z][-_$.A-Za-z0-9]*\>/
-" syn match   gasSpecial		/\<[$.]\>/
-
-
-" i*86 register set
-syn keyword gasRegisterX86	%rax %rbx %rcx %rdx %rdi %rsi %rsp %rbp
-syn keyword gasRegisterX86	%eax %ebx %ecx %edx %ax %bx %cx %dx %ah %al %bh %bl %ch %cl %dh %dl
-syn keyword gasRegisterX86	%edi %esi %esp %ebp %di %si %sp %bp %sph %spl %bph %bpl
-syn keyword gasRegisterX86	%cs %ds %es %fs %gs %ss %ip %eip %rip %eflags
-syn keyword gasRegisterX86  %r8 %r8l %r8w %r8d %r8b %r9 %r9l %r9w %r9d %r9b
-syn keyword gasRegisterX86  %r10 %r10l %r10w %r10d %r10b %r11 %r11l %r11w %r11d %r11b
-syn keyword gasRegisterX86  %r12 %r12l %r12w %r12d %r12b %r13 %r13l %r13w %r13d %r13b
-syn keyword gasRegisterX86  %r14 %r14l %r14w %r14d %r14b %r15 %r15l %r15w %r15d %r15b
-
-syn keyword gasRegisterX86	rax rbx rcx rdx rdi rsi rsp rbp
-syn keyword gasRegisterX86	eax ebx ecx edx ax bx cx dx ah al bh bl ch cl dh dl
-syn keyword gasRegisterX86	edi esi esp ebp di si sp bp sph spl bph bpl
-syn keyword gasRegisterX86	cs ds es fs gs ss ip eip rip eflags
-syn keyword gasRegisterX86  r8 r8l r8w r8d r8b r9 r9l r9w r9d r9b
-syn keyword gasRegisterX86  r10 r10l r10w r10d r10b r11 r11l r11w r11d r11b
-syn keyword gasRegisterX86  r12 r12l r12w r12d r12b r13 r13l r13w r13d r13b
-syn keyword gasRegisterX86  r14 r14l r14w r14d r14b r15 r15l r15w r15d r15b
-
-" i*86 special registers
-syn match gasRegisterX86Cr	/\<%\?cr[0-8]\>/
-syn match gasRegisterX86Dr	/\<%\?dr[0-8]\>/
-syn match gasRegisterX86Tr	/\<%\?tr[0-8]\>/
-syn match gasRegisterX86Fp	/\<%\?sp\(([0-7])\)\?\>/
-syn match gasRegisterX86Mask	/\<%\?k[0-7]\>/
-syn match gasRegisterX86MMX	/\<%\?\(x\|y\|z\|t\)\?mm[0-7]\>/
+syn match   gasSpecial		/\<[$.]\>/
 
 " constants
 syn region  gasString		start=/"/  end=/"/ skip=/\\"/
@@ -90,18 +34,70 @@ syn match   gasOctalNumber	/\$\?-\?0\d\+/
 syn match   gasHexNumber	/\$\?-\?0x\x\+/
 " -- TODO: gasFloatNumber
 
+" directives
+syn keyword gasDirective	.abort .ABORT .align .balignw .balignl
+syn keyword gasDirective	.bundle_align_mode .bundle_lock .bundle_unlock .bss
+syn keyword gasDirective	.cfi_startproc .cfi_sections .cfi_endproc .cfi_personality
+syn keyword gasDirective	.cfi_lsda .cfi_def_cfa .cfi_def_cfa_register .cfi_def_cfa_offset
+syn keyword gasDirective	.cfi_adjust_cfa_offset .cfi_offset .cfi_rel_offset .cfi_register
+syn keyword gasDirective	.cfi_restore .cfi_undefined .cfi_same_value .cfi_remember_state
+syn keyword gasDirective	.cfi_return_column .cfi_signal_frame .cfi_window_save .cfi_escape
+syn keyword gasDirective	.cfi_val_encoded_addr .data .def .desc .dim .eject
+syn keyword gasDirective	.else .elseif .endef .endif .endr .equ .equiv .eqv .err
+syn keyword gasDirective	.error .exitm .extern .fail .file .fill .global .globl
+syn keyword gasDirective	.gnu_attribute .hidden .ident .if .incbin .include .internal
+syn keyword gasDirective	.irp .irpc .lcomm .lflags .line .linkonce .list .ln .loc .loc_mark_labels
+syn keyword gasDirective	.local .mri .nolist .org .p2align .p2alignw .p2alignl
+syn keyword gasDirective	.popsection .previous .print .protected .psize .purgem .pushsection
+syn keyword gasDirective	.reloc .rept .sbttl .scl .section .set .single .size .skip .sleb128
+syn keyword gasDirective	.stabd .stabn .stabs .struct .subsection
+syn keyword gasDirective	.symver .tag .text .title .type .uleb128 .val .version
+syn keyword gasDirective	.vtable_entry .vtable_inherit .warning .weak .weakref
+
+
+syn keyword gasDirectiveStore	.byte .hword .word .int .long .double .short .float .quad .octa
+syn keyword gasDirectiveStore	.string .string8 .string16 .ascii .asciz .comm .space
+
+syn keyword gasDirectiveMacro	.altmacro .macro .noaltmacro .endm .endmacro .func .endfunc
+
+" i*86 directives
+syn keyword gasDirectiveX86	.att_syntax .intel_syntax .att_mnemonic .intel_mnemonic .code16 .code32 .code64 .lcomm
+
+" i*86 register set
+syn keyword gasRegisterX86	%rax %rbx %rcx %rdx %rdi %rsi %rsp %rbp
+syn keyword gasRegisterX86	%eax %ebx %ecx %edx %ax %bx %cx %dx %ah %al %bh %bl %ch %cl %dh %dl
+syn keyword gasRegisterX86	%edi %esi %esp %ebp %di %si %sp %bp %sph %spl %bph %bpl
+syn keyword gasRegisterX86	%cs %ds %es %fs %gs %ss %ip %eip %rip %eflags
+syn match   gasRegisterX86	/\<%\?r\([8-9]\|1[0-5]\)[lwd]\?\>/
+
+syn keyword gasRegisterX86	rax rbx rcx rdx rdi rsi rsp rbp
+syn keyword gasRegisterX86	eax ebx ecx edx ax bx cx dx ah al bh bl ch cl dh dl
+syn keyword gasRegisterX86	edi esi esp ebp di si sp bp sph spl bph bpl
+syn keyword gasRegisterX86	cs ds es fs gs ss ip eip rip eflags
+
+" i*86 special registers
+syn match gasRegisterX86Cr	/\<%\?cr[0-8]\>/
+syn match gasRegisterX86Dr	/\<%\?dr[0-8]\>/
+syn match gasRegisterX86Tr	/\<%\?tr[0-8]\>/
+syn match gasRegisterX86Fp	/\<%\?sp\(([0-7])\)\?\>/
+syn match gasRegisterX86MMX	/\<%\?x\?mm[0-7]\>/
+syn match gasRegisterAVX	/\<%\?ymm\([0-9]\|1[0-5]\)\>/
+syn match gasRegisterAVX512	/\<%\?ymm\(1[6-9]\|2[0-9]\|3[0-1]\)\>/
+syn match gasRegisterAVX512	/\<%\?zmm\([0-9]\|[1-2][0-9]\|3[0-1]\)\>/
+syn match gasRegisterAVX512MASK	/\<%\?k[0-7]\>/
+syn match gasRegisterAMX	/\<%\?tmm[0-7]\>/
+
 " local label needs to be matched *after* numerics
 syn match   gasLocalLabel	/\d\{1,2\}[:fb]/
 
 " comments etc.
-syn match   gasOperator		/+\|-\|*\|\/\|=\|<\|>\||\|&\|\~\|<=\|>=\|<>\|?\|:\|,/
-" syn match   gasOperator		/[+-/*=|&~<>]\|<=\|>=\|<>/
-syn keyword gasTodo contained 	TODO FIXME XXX NOTE
-syn region  gasComment		start=/\/\*/ end=/\*\// contains=gasTodo
-syn region  gasCommentSingle    start=/#/ end=/$/ contains=gasTodo
-syn region  gasCommentSingle    start=/@/ end=/$/ contains=gasTodo
-if !exists('g:gasDisableCppComments')
-	syn region  gasCommentSingle start=/\/\// end=/$/ contains=gasTodo
+syn match   gasOperator		/[+-/*=|&~<>]\|<=\|>=\|<>\|?\|:\|,/
+syn match   gasTODO		/\<\(TODO\|FIXME\|NOTE\)\>/ contained
+syn region  gasComment		start=/\/\*/ end=/\*\// contains=gasTODO
+syn region  gasCommentSingle    start=/#/ end=/$/ contains=gasTODO
+syn region  gasCommentSingle    start=/@/ end=/$/ contains=gasTODO
+if exists('g:gasCppComments')
+	syn region  gasCommentSingle start=/\/\// end=/$/ contains=gasTODO
 endif
 
 " ARM specific directives
@@ -111,8 +107,8 @@ syn keyword gasDirectiveARM	.arch .arch_expression .arm .asciiz .cantunwind .cod
 
 " ARM register set
 " Must be defined after gasSymbol to have higher precedence
-syn keyword gasRegisterARM	        sp lr pc
-syn match   gasRegisterARM	        /\<%\?r\([0-9]\|1[0-5]\)\>/
+syn keyword gasRegisterARM		sp lr pc
+syn match   gasRegisterARM		/\<%\?r\([0-9]\|1[0-5]\)\>/
 
 syn keyword gasDirectiveMacroARM	.dn .dq .req .unreq .tlsdescseq
 
@@ -557,7 +553,7 @@ syn keyword gasOpcode_8086_Base		cwd
 syn keyword gasOpcode_386_Base		cwde
 syn keyword gasOpcode_8086_Base		daa
 syn keyword gasOpcode_8086_Base		das
-syn keyword gasOpcode_X64_Base		dec
+syn keyword gasOpcode_X64_Base		dec decb decw decl decq
 syn keyword gasOpcode_X64_Base		div
 syn keyword gasOpcode_P6_Base		dmint
 syn keyword gasOpcode_PENT_MMX		emms
@@ -667,7 +663,7 @@ syn keyword gasOpcode_386_Base		ibts
 syn keyword gasOpcode_386_Base		icebp
 syn keyword gasOpcode_X64_Base		idiv
 syn keyword gasOpcode_X64_Base		imul imulb imulw imull imulq
-syn keyword gasOpcode_386_Base		in
+syn keyword gasOpcode_386_Base		in inb inw ind
 syn keyword gasOpcode_X64_Base		inc incb incw incl incq
 syn keyword gasOpcode_Base		incbin
 syn keyword gasOpcode_186_Base		insb
@@ -738,10 +734,7 @@ syn keyword gasOpcode_X64_Base		neg
 syn keyword gasOpcode_X64_Base		nop
 syn keyword gasOpcode_X64_Base		not
 syn keyword gasOpcode_386_Base		or orb orw orl orq
-syn keyword gasOpcode_386_Base		out
-syn keyword gasOpcode_386_Base		outb
-syn keyword gasOpcode_386_Base		outd
-syn keyword gasOpcode_386_Base		outw
+syn keyword gasOpcode_386_Base		out outb outd outw
 syn keyword gasOpcode_186_Base		outsb
 syn keyword gasOpcode_386_Base		outsd
 syn keyword gasOpcode_186_Base		outsw
@@ -936,6 +929,14 @@ syn keyword gasOpcode_SANDYBRIDGE_AVX	vpclmulhqlqdq vpclmulhqlqdqb vpclmulhqlqdq
 syn keyword gasOpcode_SANDYBRIDGE_AVX	vpclmullqhqdq vpclmullqhqdqb vpclmullqhqdqw vpclmullqhqdql vpclmullqhqdqq
 syn keyword gasOpcode_SANDYBRIDGE_AVX	vpclmulhqhqdq vpclmulhqhqdqb vpclmulhqhqdqw vpclmulhqhqdql vpclmulhqhqdqq
 syn keyword gasOpcode_SANDYBRIDGE_AVX	vpclmulqdq vpclmulqdqb vpclmulqdqw vpclmulqdql vpclmulqdqq
+
+"-- Section: Intel Haswell AVX2 instructions
+syn keyword gasOpcode_HASWELL_AVX2	vbroadcastss vbroadcastssb vbroadcastssw vbroadcastssl vbroadcastssq
+syn keyword gasOpcode_HASWELL_AVX2	vbroadcastsd vbroadcastsdb vbroadcastsdw vbroadcastsdl vbroadcastsdq
+syn keyword gasOpcode_HASWELL_AVX2	vpbroadcastsb vpbroadcastsw vpbroadcastsd vpbroadcastsq
+syn keyword gasOpcode_HASWELL_AVX2	vbroadcasti128 vinserti128 vextracti128 vgatherdpd vgatherqpd vgatherdps vgatherqps
+syn keyword gasOpcode_HASWELL_AVX2	vpgatherdd vpgatherdq vpgatherqd vpgatherqq vpmaskmovd vpmaskmovq vpermps vpermmd
+syn keyword gasOpcode_HASWELL_AVX2	vpermpd vpermq vperm2i128 vpblendd vpsllvd vpsllvq vpsrlvd vpsrlvq vpsravd
 
 "-- Section: AMD SSE5 instructions
 syn keyword gasOpcode_AMD_SSE5		fmaddps fmaddpsb fmaddpsw fmaddpsl fmaddpsq
@@ -1966,13 +1967,13 @@ syn keyword gasOpcode_AVR       sub subi swap tst wdr xch
 " links
 hi def link gasDirectiveX86	        gasDirective
 hi gasRegisterX86 ctermfg=158
-" hi def link gasRegisterX86	        gasRegister
 hi gasRegisterX86Cr ctermfg=225
-" hi def link gasRegisterX86Cr	    gasRegister
-hi def link gasRegisterX86Dr	    gasRegisterX86Cr
-hi def link gasRegisterX86Mask		gasRegisterX86Cr
+hi def link gasRegisterX86Dr	        gasRegisterX86Cr
+hi def link gasRegisterX86MMX	        gasRegisterX86MMX
+hi def link gasRegisterAVX	        gasRegisterX86MMX
+hi def link gasRegisterAVX512	        gasRegisterX86MMX
+hi def link gasRegisterAVX512MASK	gasRegisterX86Cr
 hi gasRegisterX86MMX ctermfg=193
-" hi def link gasRegisterX86MMX	    gasRegisterX86
 hi def link gasDirectiveARM	        gasDirective
 hi def link gasRegisterARM	        gasRegister
 hi def link gasDirectiveMacroARM	gasDirectiveMacro
@@ -1993,10 +1994,10 @@ hi def link gasSymbol		Function
 hi def link gasSymbolRef	Special
 hi def link gasSpecial		Special
 hi def link gasLabel		Function
-hi def link gasLocalLabel	gasLabel
+hi def link gasLocalLabel	Label
 hi def link gasOperator		Operator
+hi def link gasTODO		Todo
 hi def link gasOpcode		Keyword
-hi def link gasTodo			Todo
 hi def link gasComment		Comment
 hi def link gasCommentSingle	Comment
 
@@ -2051,6 +2052,7 @@ call <SID>MapOpcode('gasOpcode_PENT_MMX'       , 'pentium'    , 'mmx')
 call <SID>MapOpcode('gasOpcode_PRESCOTT_Base'  , 'prescott'   , 'base')
 call <SID>MapOpcode('gasOpcode_PRESCOTT_SSE3'  , 'prescott'   , 'sse3')
 call <SID>MapOpcode('gasOpcode_SANDYBRIDGE_AVX', 'sandybridge', 'avx')
+call <SID>MapOpcode('gasOpcode_HASWELL_AVX2'   , 'haswell'    , 'avx2')
 call <SID>MapOpcode('gasOpcode_BMI1'           , 'x64'        , 'bmi1')
 call <SID>MapOpcode('gasOpcode_BMI2'           , 'x64'        , 'bmi2')
 call <SID>MapOpcode('gasOpcode_X642_Base'      , 'x642'       , 'base')
@@ -2076,7 +2078,7 @@ if !exists('g:gasDisablePreproc') && !exists('b:gasDisablePreproc')
 	syn include @cPP syntax/c.vim
 	syn match   cPPLineCont "\\$" contained
 
-	syn region  cPPPreProc start=/^\s*#\s*\(if\|else\|endif\|define\|include\)/ end=/\n\|\r/ contains=@cPP,cPPLineCont
+	syn region  cPPPreProc start=/^\s*#\s*\(if\|else\|endif\|define\|include\)/ end=/$/ contains=@cPP,cPPLineCont
 endif
 
 " finishing touches
@@ -2086,3 +2088,4 @@ syn sync ccomment
 syn sync linebreaks=1
 
 " vim: ts=8 sw=8 :
+
