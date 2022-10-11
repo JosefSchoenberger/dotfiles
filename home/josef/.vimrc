@@ -11,7 +11,9 @@ Plugin 'VundleVim/Vundle.vim' " necessary: Vundle itself for updates
 
 Plugin 'itchyny/lightline.vim' " for the beautiful line, my favourite
 
-Plugin 'ycm-core/YouCompleteMe' " for semantic completion; _not_ lightweight!
+if get(g:, "no_ycm", 0) == 0
+	Plugin 'ycm-core/YouCompleteMe' " for semantic completion; _not_ lightweight!
+endif
 " Before installing, make sure you actually want this. It can sometimes be 
 " slow. Next, decide which language you want to be supported and install the
 " necessary dependencies (packages in Debian's repository):

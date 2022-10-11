@@ -114,7 +114,7 @@ alias lla='ls -lhFA'
 #alias l='ls -CF'
 export LESS="--mouse --wheel-lines=3 -R"
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
-command -v vim >/dev/null && alias vi='vim --clean' # why not?
+command -v vim >/dev/null && alias vi='vim --cmd "let g:no_ycm=1"'
 
 if [ ! -n "$(command -v mpv)" ] && [ -n ${WSLENV+"non_zero_string if and only if WSLENV set"} ]; then
 	alias mpv='mpv.com'
