@@ -96,7 +96,7 @@ syn match   gasTODO		/\<\(TODO\|FIXME\|NOTE\)\>/ contained
 syn region  gasComment		start=/\/\*/ end=/\*\// contains=gasTODO
 syn region  gasCommentSingle    start=/#/ end=/$/ contains=gasTODO
 syn region  gasCommentSingle    start=/@/ end=/$/ contains=gasTODO
-if exists('g:gasCppComments')
+if !exists('g:gasNoCppComments')
 	syn region  gasCommentSingle start=/\/\// end=/$/ contains=gasTODO
 endif
 

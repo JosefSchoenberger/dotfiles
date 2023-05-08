@@ -120,10 +120,8 @@ if file_readable($HOME."/.vim/syntax/cyp.vim")
 	autocmd BufNewFile,BufRead *.cprf,*cthy setfiletype cyp
 endif
 
-" Kaitai Struct files
-
-" Kaitai Struct files
-autocmd BufNewFile,BufRead *.ksy setfiletype yaml
+autocmd FileType c,cpp,java,rust,go,html,bash,python setlocal foldmethod=syntax
+autocmd FileType vim setlocal foldmethod=manual
 
 " Highlight search
 set hlsearch
@@ -147,6 +145,7 @@ scriptencoding utf-8
 set showbreak=↪
 set breakindent
 set breakindentopt=shift:2
+set smoothscroll
 set colorcolumn=121
 
 set formatoptions+=j
