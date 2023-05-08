@@ -1,0 +1,89 @@
+snippet maina "C main with args" b
+int main(int argc, char** argv) {
+	$0
+}
+endsnippet
+
+snippet main "C main without args" b
+int main(void) {
+	$0
+}
+endsnippet
+
+
+snippet inc "#include <...>" b
+#include <${1:stdio}.h>
+
+endsnippet
+
+snippet Inc "#include <...>" b
+#include "${1:stdio.h}"
+
+endsnippet
+
+
+snippet errif "if(...) err(EXIT_FAILURE, ...);" b
+if (${1:${VISUAL:error}})
+	err(${2:EXIT_FAILURE}, "$3");
+
+endsnippet
+
+snippet errxif "if(...) err(EXIT_FAILURE, ...);" b
+if (${1:${VISUAL:error}})
+	err(${2:EXIT_FAILURE}, "$3");
+
+endsnippet
+
+snippet incerr "include everything for snippet errif/errxif/usage" b
+#include <stdlib.h>
+#include <err.h>
+
+endsnippet
+
+snippet usage "usage using if(argc ...) errx(...);" b
+if (argc ${2:`!p snip.rv = "<" if t[1].strip().endswith("...") else "!="` `!p snip.rv = len(list(filter(lambda x: x != '...' and x != '', t[1].strip().split(' ')))) + 1`})
+	errx(EXIT_FAILURE, "usage: %s $1", argv[0] ?: "<argv[0] missing>");
+
+endsnippet
+
+
+snippet once "#pragma once" b
+#pragma once
+
+endsnippet
+
+
+snippet struct "struct ... { ... };" b
+struct $1 {
+	${VISUAL}$0
+};
+endsnippet
+
+snippet union "union ... { ... };" b
+union $1 {
+	${VISUAL}$0
+};
+endsnippet
+
+snippet enum "enum ... { ... };" b
+enum $1 {
+	${VISUAL}$0
+};
+endsnippet
+
+snippet for "for-loop" b
+for (${1:unsigned} ${2:i} = ${3:0}; ${4:$2 < ${5:sizeof(buffer)}}; ${6:$2++}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet strtol "strtol with endptr" b
+${1:long} ${2:value};
+{
+	char* endptr;
+	$2 = strto${3:l}(${4:buffer}, &endptr, ${5:0});
+	${6:if (*endptr ${7:&& *endptr != ' ' && *endptr != '\n'})
+		${8:errx(EXIT_FAILURE, "'%c' is not a valid digit. Abort.", *endptr);}}
+}
+
+endsnippet

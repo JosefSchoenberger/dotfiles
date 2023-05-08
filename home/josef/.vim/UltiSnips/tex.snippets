@@ -1,0 +1,22 @@
+priority 2
+snippet -> "'->' => '$\rightarrow$'"
+$\rightarrow$
+endsnippet
+
+snippet frame "Beamer frame environment" b
+\begin{frame}`!p snip.rv='[' if t[1] else ""`${1:t}`!p snip.rv=']' if t[1] else ""``!p snip.rv='{' if t[2] else ""`${2:title}`!p snip.rv='}' if t[2] else ""``!p snip.rv='{' if t[3] else ""`${3:subtitle}`!p snip.rv='}' if t[3] else ""`
+	${0:${VISUAL}}
+\end{frame}
+endsnippet
+
+snippet minipage "Minipage" b
+\begin{minipage}`!p snip.rv='[' if t[1] else ""`${1:t}`!p snip.rv=']' if t[1] else ""`{${2:.${3:95}\linewidth}}
+	${0:${VISUAL}}
+\end{minipage}
+endsnippet
+
+snippet lst "lstlisting" b
+\begin{lstlisting}`!p snip.rv='[' if t[1] else ""`${1:linewidth=\linewidth}`!p snip.rv=']' if t[1] else ""`
+	${0:${VISUAL}}
+\end{lstlisting}
+endsnippet

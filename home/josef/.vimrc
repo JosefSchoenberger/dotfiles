@@ -43,6 +43,9 @@ endif
 " My personal command by the way:
 " python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer --go-completer --java-completer --ts-completer --rust-completer
 
+Plugin 'SirVer/ultisnips' " for some nice snippets
+Plugin 'honza/vim-snippets'
+
 Plugin 'rhysd/vim-clang-format' " for :ClangFormat
 " Well, you better have clang-format installed here... :-P
 
@@ -71,6 +74,15 @@ elseif file_readable($HOME."/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/
 	let g:ycm_rust_toolchain_root = $HOME."/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/"
 endif
 nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
+
+let g:ycm_autoclose_preview_window_after_completion=1
+
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+
+" UltiSnips
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 " Markdown Preview
 let g:mkdp_open_to_the_world = 1
