@@ -94,7 +94,19 @@ set noshowmode " Hide unnecessary '--INSERT--'
 set showcmd " ...but show keys pressed on the bottom right
 let g:lightline = {
 	\ 'colorscheme' : 'wombat',
+	\ 'active': {
+	\   'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified'], ['cmd']],
+	\   'right': [['lineinfo'], ['percent'], ['YCM', 'fileformat', 'fileencoding', 'filetype']]
+	\ },
+	\ 'component': {
+	\	'filename': '%{%mode()=="t"?"%f":"%t"%}',
+	\   'cmd': '%S',
+	\   'YCM': get(g:, "no_ycm", 0) ? '' : '%{%youcompleteme#GetErrorCount() ? youcompleteme#GetErrorCount() .. " Errors, " .. youcompleteme#GetWarningCount() .. " Warnings" : youcompleteme#GetWarningCount() ? youcompleteme#GetWarningCount() .. " Warnings" : ""%}',
+	\   'readonly': '%(%H-%)%R',
+	\   'fileformat': '%<%{&ff}',
+	\ },
 	\ }
+set showcmdloc=statusline
 set wildmenu " show suggestions in line
 set wildmode=longest:full,full
 
@@ -127,6 +139,7 @@ set autoindent
 
 syntax on
 set number
+set signcolumn=number " Show YCM errors and warnings in numberbar
 " Break a line with a hook right arrow
 set linebreak
 set encoding=utf-8
@@ -262,11 +275,18 @@ nnoremap _( <C-W>j
 nnoremap _) <C-W>k
 nnoremap _- <C-W>l
 
+
 nnoremap <F5> :YcmCompleter GetType<CR>
 " nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F7> :YcmCompleter GetDoc<CR>
-nnoremap <F8> :YcmCompleter GoTo<CR>
+if file_readable($HOME."/.vim/tagstack.vim")
+	source $HOME/.vim/tagstack.vim
+	nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoToImprecise<CR>
+else
+	nnoremap <F8> :YcmCompleter GoToImprecise<CR>
+endif
+nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
 
 nnoremap gö :tabe<CR>
 nnoremap gÖ :tabc<CR>
