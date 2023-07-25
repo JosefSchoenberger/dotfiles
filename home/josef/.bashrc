@@ -170,4 +170,12 @@ stty quit 
 #set -o vi
 
 # use color in manpages
-export LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul)
+if [ -x /usr/bin/tput ]; then
+	function man() {
+		env LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul) GROFF_NO_SGR=1 man "$@"
+	}
+else
+	function man() {
+		env LESS_TERMCAP_md=$'\e[1;36m' LESS_TERMCAP_us=$'\e[4;38;5;219m' LESS_TERMCAP_ue=$'\e[0;24m' GROFF_NO_SGR=1 man "$@"
+	}
+fi
