@@ -47,6 +47,8 @@ endif
 Plugin 'SirVer/ultisnips' # for some nice snippets
 Plugin 'honza/vim-snippets'
 
+Plugin 'fatih/vim-go' # for Go
+
 Plugin 'rhysd/vim-clang-format' # for :ClangFormat
 # Well, you better have clang-format installed here... :-P
 
@@ -64,16 +66,17 @@ call vundle#end()
 filetype plugin indent on
 
 # YCM
-# let g:ycm_clangd_binary_path = "/usr/bin/clangd-11"
+# g:ycm_clangd_binary_path = "/usr/bin/clangd-11"
 g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 g:ycm_confirm_extra_conf = 0
-# let g:ycm_echo_current_diagnostic = 'virtual-text'
-# let g:ycm_log_level='debug'
+# g:ycm_echo_current_diagnostic = 'virtual-text'
+# g:ycm_log_level='debug'
 if file_readable($HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
 	g:ycm_rust_toolchain_root = $HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/"
 elseif file_readable($HOME .. "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer")
 	g:ycm_rust_toolchain_root = $HOME .. "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/"
 endif
+# g:ycm_gopls_binary_path='gopls'
 nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
 
 g:ycm_autoclose_preview_window_after_completion = 1
