@@ -19,13 +19,6 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans 9
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
@@ -245,9 +238,15 @@ bindsym $mod+c exec --no-startup-id "rofi -show run -dpi 0 -show-icons -modi dru
 bindsym $mod+x exec --no-startup-id "rofi -show window -dpi 0 -show-icons -modi window,windowcd"
 bindsym $mod+y exec --no-startup-id "rofi -show drun -dpi 0 -show-icons -modi drun,run"
 
-# lock
-bindsym $mod+Ctrl+l exec --no-startup-id "i3lock -fei ~/Bilder/Stagetec\ Hintergrund\ 768p.png"
-bindsym $mod+Ctrl+Shift+l exec --no-startup-id "i3lock -fei ~/Bilder/Stagetec\ Hintergrund\ 768p.png && systemctl suspend"
+# lock:
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/josef/.config/i3/lock
+bindsym $mod+Ctrl+l exec --no-startup-id "/home/josef/.config/i3/lock"
+bindsym $mod+Ctrl+Shift+l exec --no-startup-id "/home/josef/.config/i3/lock"
 
 # GPaste
 bindsym $mod+Shift+v exec --no-startup-id "/usr/libexec/gpaste/gpaste-ui"
