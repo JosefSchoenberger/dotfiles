@@ -46,6 +46,31 @@ include_dirs = [
 # e.g. '/usr/include/X11/'
 ]
 
+## Add this for the linux kernel:
+#flags = [
+#'-Wall',
+##'-Wextra',
+#'-x', 'c',
+#'-std=gnu11',
+#'-Wc++98-compat',
+#'-D__KERNEL__',
+#'-DUSE_CLANG_COMPLETER',
+#'-nostdinc',
+#'-include', 'include/linux/compiler-version.h',
+#'-include', 'include/linux/kconfig.h',
+#]
+#include_dirs = [
+#'arch/x86/include',
+#'arch/x86/include/generated',
+#'include',
+#'include/linux',
+#'arch/x86/include/uapi',
+#'arch/x86/include/generated/uapi',
+#'include/uapi',
+#'include/generated/uapi',
+#]
+## Then run 'make headers'.
+
 # ------------------------------------------------------
 
 # if 'c++' in flags or 'cpp' in flags:
@@ -54,7 +79,6 @@ include_dirs = [
 flags += list(map(lambda x: '-I' + x, include_dirs))
 
 DIR_OF_THIS_SCRIPT = os.path.abspath( os.path.dirname( __file__ ) )
-DIR_OF_THIRD_PARTY = os.path.expanduser('~') + "/.vim/third_party"
 SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
 
 def IsHeaderFile( filename ):
