@@ -9,12 +9,13 @@ endif
 if &t_Co == "256" || has("gui_running")
 	hi Visual cterm=bold ctermbg=239 gui=bold guifg=NONE guibg=grey30
 	hi Search cterm=reverse ctermbg=Black guibg=Black
-	hi Folded ctermbg=darkgray ctermfg=NONE
+	hi Folded ctermbg=236 ctermfg=NONE
 	hi MatchParen ctermbg=39
 
 	# Make spell highlighting more readable
 	hi SpellCap ctermbg=75 ctermfg=white
-	hi SpellBad ctermfg=darkred
+	# hi SpellBad ctermfg=darkred
+	hi SpellBad ctermfg=NONE ctermbg=52
 
 	# Suggestion / Completion list color
 	hi Pmenu ctermbg=24 ctermfg=white
