@@ -35,12 +35,12 @@
 
 # TESTING
 
-deb https://deb.debian.org/debian testing main contrib non-free
+deb https://deb.debian.org/debian testing main contrib non-free non-free-firmware
 # deb http://mirror.plusserver.com/debian/debian testing main contrib non-free
 # deb http://debian.mirror.lrz.de/debian/ testing main contrib non-free
-deb-src https://deb.debian.org/debian testing main contrib non-free
+deb-src https://deb.debian.org/debian testing main contrib non-free non-free-firmware
 # deb-src http://mirror.plusserver.com/debian/debian testing main contrib non-free
 # deb-src http://debian.mirror.lrz.de/debian/ testing main contrib non-free
 
-deb http://security.debian.org/ testing-security main contrib non-free
-deb-src http://security.debian.org testing-security main contrib non-free
+deb https://security.debian.org/ testing-security main contrib non-free non-free-firmware
+deb-src https://security.debian.org testing-security main contrib non-free non-free-firmware
