@@ -172,6 +172,7 @@ set ttimeoutlen=10 # ESC basically immediately
 set mouse=a # enable mouse
 set ttymouse=sgr # with support for more than 220 columns in Windows Terminal
 set listchars=tab:-->,space:␣,leadmultispace:···⍿,multispace:·,nbsp:━,trail:⦚ #,eol:↵
+nnoremap <F3> :set spell!<CR>
 nnoremap <F4> :set list!<CR>
 
 set cursorline
@@ -207,15 +208,15 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 # requires German language pack to be downloaded manually:
 # wget -P ~/.vim/spell/ http://ftp.vim.org/vim/runtime/spell/de.utf-8.spl
 # wget -P ~/.vim/spell/ http://ftp.vim.org/vim/runtime/spell/de.utf-8.sug
-function Deutsch()
+function g:Deutsch()
 	setlocal spell spelllang=de
 endfunction
 
-function English()
+function g:English()
 	setlocal spell spelllang=en
 endfunction
 
-function Denglisch() # use both German and English
+function g:Denglisch() # use both German and English
 	setlocal spell spelllang=de,en
 endfunction
 
