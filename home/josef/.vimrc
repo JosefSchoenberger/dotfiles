@@ -285,9 +285,9 @@ nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F7> :YcmCompleter GetDoc<CR>
 if file_readable($HOME .. "/.vim/tagstack.vim")
 	source $HOME/.vim/tagstack.vim
-	nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoToImprecise<CR>
+	nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoTo<CR>
 else
-	nnoremap <F8> :YcmCompleter GoToImprecise<CR>
+	nnoremap <F8> :YcmCompleter GoTo<CR>
 endif
 nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
 
