@@ -83,8 +83,8 @@ if &t_Co < "256" && !has('gui_running')
 				\ }
 endif
 
+# the gui uses undercurl, which is always preferable
 function UnderlineSpell()
-	# the gui uses undercurl, which is always preferable
 	hi SpellBad cterm=underline ctermul=Red ctermbg=NONE ctermfg=NONE
 	hi SpellCap cterm=underline ctermul=81 ctermbg=NONE ctermfg=NONE
 	hi SpellLocal cterm=underline ctermul=14 ctermbg=NONE ctermfg=NONE
