@@ -66,7 +66,7 @@ call vundle#end()
 filetype plugin indent on
 
 # YCM
-# g:ycm_clangd_binary_path = "/usr/bin/clangd-11"
+# g:ycm_clangd_binary_path = "/usr/bin/clangd"
 g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 g:ycm_confirm_extra_conf = 0
 # g:ycm_echo_current_diagnostic = 'virtual-text'
