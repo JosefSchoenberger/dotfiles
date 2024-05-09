@@ -1,17 +1,19 @@
-[submodule "home/josef/.config/gdb/gdb-dashboard"]
-       path = home/josef/.config/gdb/gdb-dashboard
-       url = https://github.com/cyrus-and/gdb-dashboard
-[submodule "home/josef/.config/i3blocks/c-rewrite"]
-       path = home/josef/.config/i3blocks/c-rewrite
-       url = fake
-       active = false
-[submodule "home/josef/.config/i3blocks/i3blocks-contrib"]
-       path = home/josef/.config/i3blocks/i3blocks-contrib
-       url = https://github.com/vivien/i3blocks-contrib.git
-       active = false
 [submodule "home/josef/.config/zsh/zsh-syntax-highlighting"]
 	path = home/josef/.config/zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "home/josef/.config/zsh/zsh-autosuggestions"]
 	path = home/josef/.config/zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "home/josef/.config/i3blocks/c-rewrite"]
+	path = home/josef/.config/i3blocks/c-rewrite
+	url = https://github.com/jojaa350/my-i3-blocks-snippets
+	#path = home/josef/.config/i3blocks/c-rewrite
+	#url = fake
+	active = false
+[submodule "home/josef/.config/i3blocks/i3blocks-contrib"]
+	path = home/josef/.config/i3blocks/i3blocks-contrib
+	url = https://github.com/vivien/i3blocks-contrib
+	active = false
+[submodule "home/josef/.config/gdb/gdb-dashboard"]
+	path = home/josef/.config/gdb/gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard
