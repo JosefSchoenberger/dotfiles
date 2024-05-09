@@ -16,7 +16,8 @@
 	attributesfile = ~/.gitattributes
 
 [pull]
-	rebase = false
+	#rebase = true
+	ff = only
 
 [diff]
 	tool = vimdiff
