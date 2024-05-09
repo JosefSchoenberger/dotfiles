@@ -116,6 +116,8 @@ export LESS="--mouse --wheel-lines=3 -R"
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
 command -v vim >/dev/null && alias vi='vim --cmd "let g:no_ycm=1"'
 
+export GPG_TTY=$(tty)
+
 if [ ! -n "$(command -v mpv)" ] && [ -n ${WSLENV+"non_zero_string if and only if WSLENV set"} ]; then
 	alias mpv='mpv.com'
 fi

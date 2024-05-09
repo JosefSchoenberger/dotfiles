@@ -197,3 +197,4 @@ redstderr() {
 }
 
 export DEBUGFS_PAGER=cat
+export GPG_TTY="$(tty)"
