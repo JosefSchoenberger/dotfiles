@@ -1,6 +1,10 @@
 [user]
 	name = Josef Schönberger
 	email = josef.schoenberger@tum.de
+	#signingkey = FF6C81F69A50B15E
+
+[commit]
+	gpgsign = true
 
 # This is an nice alias for a compact overview over all commits. Append this to your own .gitconfig file
 [alias]
