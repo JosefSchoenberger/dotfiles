@@ -61,6 +61,9 @@ Plugin 'cespare/vim-toml' # for TOML-files syntax (i.e. Cargo.toml for Rust)
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf' # Testing it out, looks cool, will require configuration;
 					  # requires fzf?
+
+Plugin 'airblade/vim-gitgutter' # git status on the left
+
 # ------------------END OF PLUGINS ----------------------------
 call vundle#end()
 filetype plugin indent on
@@ -221,8 +224,11 @@ set ttimeoutlen=10 # ESC basically immediately
 set mouse=a # enable mouse
 set ttymouse=sgr # with support for more than 220 columns in Windows Terminal
 set listchars=tab:-->,space:␣,leadmultispace:···⍿,multispace:·,nbsp:━,trail:⦚ #,eol:↵
+nmap <F1> :Files<CR>
 nnoremap <F3> :set spell!<CR>
 nnoremap <F2> :set relativenumber!<CR>
+autocmd VimEnter * GitGutterDisable
+nnoremap <S-F2> :GitGutterToggle<CR>
 nnoremap <F4> :set list!<CR>
 
 set cursorline
@@ -252,7 +258,10 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 
 # tnoremap <esc><esc> <C-w>N
 tnoremap <C-q> <C-w>N
-autocmd TerminalOpen * setlocal nonumber norelativenumber
+# Use TerminalWinOpen event instead to not interfere with fzf
+# See https://github.com/junegunn/fzf.vim/issues/503.
+autocmd TerminalWinOpen * setlocal nonumber norelativenumber
+#autocmd TerminalOpen * setlocal nonumber norelativenumber
 
 # Enable spellcheck in demand. Use `:set nospell' to disable again
 # requires German language pack to be downloaded manually:
