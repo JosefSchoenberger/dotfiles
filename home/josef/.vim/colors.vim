@@ -24,6 +24,10 @@ if &t_Co == "256" || has("gui_running")
 	# Suggestion list scrollbar background
 	hi PmenuSbar ctermbg=0 guibg=Black
 
+	# Colors for YCM hover box
+	hi HoverBox ctermbg=233 ctermfg=white
+	hi HoverBoxBorder cterm=bold ctermbg=232 ctermfg=blue
+
 	# Colors for WildMenu
 	hi StatusLine cterm=NONE ctermbg=235 ctermfg=252
 	hi StatusLineNC cterm=NONE ctermbg=238 ctermfg=white

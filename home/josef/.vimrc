@@ -110,6 +110,25 @@ g:ycm_language_server = [
 	},
 ]
 
+augroup YcmSetHoverSyntax
+	autocmd!
+	autocmd FileType * b:ycm_hover = {
+				\   'command': 'GetDoc',
+				\   'syntax': &filetype,
+				\   'popup_params': {
+				\     'dragall': 1,
+				\     'resize': 1,
+				\     'maxwidth': 96,
+				\     'wrap': 1,
+				\     'border': [],
+				\     'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
+				\     'highlight': 'HoverBox',
+				\     'borderhighlight': ['HoverBoxBorder'],
+				\     'title': '─┤  Info  ├',
+				\   },
+				\ }
+augroup END
+
 # UltiSnips
 g:UltiSnipsJumpForwardTrigger = "<tab>"
 g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
