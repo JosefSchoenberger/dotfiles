@@ -117,6 +117,10 @@ alias make='make -j$(nproc)'
 alias docker-image-dependencies="docker inspect --format='{{.Size}} {{truncate .Id 16}} {{if .Parent}}-> {{truncate .Parent 16}}{{else}}   ---------{{end}} {{.RepoTags}}' \$(docker images --all -q) | sed 's/sha256://g' | sort -k2 | numfmt --field=1 --to=iec-i --pad=6 --suffix=B"
 
 alias sudopriv="sudo -E setpriv --reuid $(id -u) --regid $(id -g) --groups $(id -g),$(groups | tr ' ' ',') --inh-caps=+all --ambient-caps=+all $SHELL"
+alias gh='git hist --color=always --all | head -n20'
+alias ghl='git hist --color=always --all | less'
+#gs = ghostscript
+#alias gs='git status'
 
 cdtmp() {
 	cd $(mktemp -d)
