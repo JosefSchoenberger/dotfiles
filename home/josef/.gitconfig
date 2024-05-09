@@ -12,9 +12,14 @@
 
 [core]
 	pager = "less -RF" # use pager only when necessary
+	excludesFile = ~/.gitignore
+	attributesfile = ~/.gitattributes
 
 [pull]
 	rebase = false
 
 [diff]
 	tool = vimdiff
+[diff "pdf"]
+	binary = true
+	textconv = bash -c 'pdftotext $0 -'
