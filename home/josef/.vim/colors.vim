@@ -28,6 +28,11 @@ if &t_Co == "256" || has("gui_running")
 	hi HoverBox ctermbg=233 ctermfg=white
 	hi HoverBoxBorder cterm=bold ctermbg=232 ctermfg=blue
 
+	# GitGutter
+	hi GitGutterAdd ctermfg=green ctermbg=None
+	hi GitGutterChange ctermfg=yellow ctermbg=None
+	hi GitGutterDelete ctermfg=red ctermbg=None
+
 	# Colors for WildMenu
 	hi StatusLine cterm=NONE ctermbg=235 ctermfg=252
 	hi StatusLineNC cterm=NONE ctermbg=238 ctermfg=white
