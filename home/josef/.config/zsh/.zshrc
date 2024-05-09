@@ -103,6 +103,7 @@ alias la='ls -A'
 alias lla='ls -lhFA'
 #alias l='ls -CF'
 export LESS="--mouse --wheel-lines=3 -R"
+[ -e /etc/wsl.conf ] && export BROWSER="$PATH_TO_THIS_FILE/wsl-open-with-firefox.bash" || : # for rustup doc
 alias minemount="sudo mount -o exec,gid=$(id -u),uid=$(id -u),umask=027" # mount for me
 command -v vim >/dev/null && alias vi='vim --cmd "let g:no_ycm=1"'
 
