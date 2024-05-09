@@ -38,3 +38,7 @@ fi
 if [ -e "$HOME/.cargo/env" ]; then
 	. "$HOME/.cargo/env"
 fi
+
+if [ -e "$HOME/go/bin" ]; then
+	PATH="$PATH:$HOME/go/bin"
+fi
