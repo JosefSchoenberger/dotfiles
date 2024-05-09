@@ -20,3 +20,19 @@ snippet lst "lstlisting" b
 	${0:${VISUAL}}
 \end{lstlisting}
 endsnippet
+
+snippet it "italic text"
+\\textit{${1:${VISUAL:text}}}${0}
+endsnippet
+
+snippet bf "bold face text"
+\\textbf{${1:${VISUAL:text}}}${0}
+endsnippet
+
+snippet pa "path"
+\\path{${1:${VISUAL:text}}}${0}
+endsnippet
+
+snippet bb "mathbb"
+\\mathbb{${1:${VISUAL:N}}}${0}
+endsnippet
