@@ -286,7 +286,10 @@ nnoremap _- <C-W>l
 nnoremap <F5> :YcmCompleter GetType<CR>
 # nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
-nnoremap <F7> :YcmCompleter GetDoc<CR>
+g:ycm_auto_hover = 0
+nnoremap <F7> <plug>(YCMHover)
+inoremap <F7> <Esc><plug>(YCMHover)a
+nnoremap <S-F7> :YcmCompleter GetDoc<CR>
 if file_readable($HOME .. "/.vim/tagstack.vim")
 	source $HOME/.vim/tagstack.vim
 	nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoTo<CR>
