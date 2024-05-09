@@ -117,6 +117,16 @@ alias make='make -j$(nproc)'
 
 alias docker-image-dependencies="docker inspect --format='{{.Size}} {{truncate .Id 16}} {{if .Parent}}-> {{truncate .Parent 16}}{{else}}   ---------{{end}} {{.RepoTags}}' \$(docker images --all -q) | sed 's/sha256://g' | sort -k2 | numfmt --field=1 --to=iec-i --pad=6 --suffix=B"
 
+analyze_latex_log() {
+	( [ -r "$1" ] && cat "$1" || cat "build/exam.tex/$1/$1.log" ) \
+		| python3 -c "import regex, sys; [print(regex.sub(r'\\(jcc\\)|\\(/usr/share[^()]*(""(?R) *)*[^()]*\) *', '', line), end='') for line in sys.stdin]" \
+		| sed -e 's/\/usr\/share\/tex[A-Za-z0-9/._\-]*\//'$'\e[38;5;239m\\0\e[39m/g' \
+		      -e 's/chapter \([0-9]\+.\|without number\)/'$'\e[38;5;239m\\0\e[39m/g' \
+			  -e 's/\[[0-9]\+\]/'$'\e[38;5;239m\\0\e[39m/g' \
+			  -e 's/^.*\(Warning\|warning\|Error\|Underfull\|Overfull\|\!\|Reference\|Label\|Citation\).*$/'$'\e[31m\\0\e[39m/' \
+			  -e 's!/endterm/[A-Za-z0-9./_-]*tex!'$'\e[33m\\0\e[39m!g'
+}
+
 alias sudopriv="sudo -E setpriv --reuid $(id -u) --regid $(id -g) --groups $(id -g),$(groups | tr ' ' ',') --inh-caps=+all --ambient-caps=+all $SHELL"
 alias gh='git hist --color=always --all | head -n20'
 alias ghl='git hist --color=always --all | less'
