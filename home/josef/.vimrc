@@ -173,6 +173,7 @@ set mouse=a # enable mouse
 set ttymouse=sgr # with support for more than 220 columns in Windows Terminal
 set listchars=tab:-->,space:␣,leadmultispace:···⍿,multispace:·,nbsp:━,trail:⦚ #,eol:↵
 nnoremap <F3> :set spell!<CR>
+nnoremap <F2> :set relativenumber!<CR>
 nnoremap <F4> :set list!<CR>
 
 set cursorline
