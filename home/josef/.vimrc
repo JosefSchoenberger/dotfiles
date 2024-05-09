@@ -82,6 +82,33 @@ g:ycm_autoclose_preview_window_after_completion = 1
 g:ycm_key_list_select_completion = ['<Down>']
 g:ycm_key_list_previous_completion = ['<Up>']
 g:ycm_echo_current_diagnostic = 'virtual-text'
+g:ycm_language_server = [
+	{
+		'name': 'bash',
+		'cmdline': [ '/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start' ],
+		'filetypes': [ 'sh' ],
+	},
+	{
+		'name': 'html',
+		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-html-language-server', '--stdio' ],
+		'filetypes': [ 'html' ],
+	},
+	{
+		'name': 'css',
+		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-css-language-server', '--stdio' ],
+		'filetypes': [ 'css' ],
+	},
+	{
+		'name': 'json',
+		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-json-language-server', '--stdio' ],
+		'filetypes': [ 'json' ],
+	},
+	{
+		'name': 'markdown',
+		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-markdown-language-server', '--stdio' ],
+		'filetypes': [ 'markdown' ],
+	},
+]
 
 # UltiSnips
 g:UltiSnipsJumpForwardTrigger = "<tab>"
