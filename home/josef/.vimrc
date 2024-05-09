@@ -336,6 +336,9 @@ nnoremap <silent> <F5> <Plug>(YCMToggleInlayHints)
 nnoremap <S-F5> :YcmCompleter GetType<CR>
 # nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
+nnoremap <S-F6> :YcmCompleter FixIt<CR>
+# For more advanced refactoring commands
+nnoremap <C-F6> :YcmCompleter Refactor
 g:ycm_auto_hover = ''
 nnoremap <F7> <plug>(YCMHover)
 inoremap <F7> <Esc><plug>(YCMHover)a
@@ -343,10 +346,23 @@ nnoremap <S-F7> :YcmCompleter GetDoc<CR>
 if file_readable($HOME .. "/.vim/tagstack.vim")
 	source $HOME/.vim/tagstack.vim
 	nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoTo<CR>
+	nnoremap <S-F8> :call tagstack#push()<CR>:YcmCompleter GoToImplementation<CR>
+	nnoremap <C-F8> :call tagstack#push()<CR>:YcmCompleter GoToDeclaration<CR>
+	nnoremap <M-F8> :call tagstack#push()<CR>:YcmCompleter GoToCallers<CR>
+	nnoremap <M-C-F8> :call tagstack#push()<CR>:YcmCompleter GoToReferences<CR>
+	nnoremap <F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInWorkspace)
+	nnoremap <S-F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInDocument)
+	nnoremap <C-F9> :call tagstack#push()<CR>:YcmCompleter GoToDocumentOutline<CR>
 else
 	nnoremap <F8> :YcmCompleter GoTo<CR>
+	nnoremap <S-F8> :YcmCompleter GoToImplementation<CR>
+	nnoremap <C-F8> :YcmCompleter GoToDeclaration<CR>
+	nnoremap <M-F8> :YcmCompleter GoToCallers<CR>
+	nnoremap <M-C-F8> :YcmCompleter GoToReferences<CR>
+	nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
+	nnoremap <S-F9> <Plug>(YCMFindSymbolInDocument)
+	nnoremap <C-F9> :YcmCompleter GoToDocumentOutline<CR>
 endif
-nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
 
 nnoremap gö :tabe<CR>
 nnoremap gÖ :tabc<CR>
