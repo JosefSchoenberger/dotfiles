@@ -126,6 +126,9 @@ endif
 autocmd FileType c,cpp,java,rust,go,html,bash,python setlocal foldmethod=syntax
 autocmd FileType vim setlocal foldmethod=manual
 
+autocmd BufNewFile,BufRead kea-*.conf set ft=json
+autocmd BufNewFile,BufRead kea-*.conf syntax match Comment +#.\+$+
+
 # Highlight search
 set hlsearch
 set incsearch
