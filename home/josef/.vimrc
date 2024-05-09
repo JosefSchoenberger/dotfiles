@@ -286,10 +286,11 @@ nnoremap _) <C-W>k
 nnoremap _- <C-W>l
 
 
-nnoremap <F5> :YcmCompleter GetType<CR>
+nnoremap <silent> <F5> <Plug>(YCMToggleInlayHints)
+nnoremap <S-F5> :YcmCompleter GetType<CR>
 # nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
-g:ycm_auto_hover = 0
+g:ycm_auto_hover = ''
 nnoremap <F7> <plug>(YCMHover)
 inoremap <F7> <Esc><plug>(YCMHover)a
 nnoremap <S-F7> :YcmCompleter GetDoc<CR>
