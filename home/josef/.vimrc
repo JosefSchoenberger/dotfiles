@@ -69,7 +69,6 @@ filetype plugin indent on
 # g:ycm_clangd_binary_path = "/usr/bin/clangd"
 g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 g:ycm_confirm_extra_conf = 0
-# g:ycm_echo_current_diagnostic = 'virtual-text'
 # g:ycm_log_level='debug'
 if file_readable($HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
 	g:ycm_rust_toolchain_root = $HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/"
@@ -82,6 +81,7 @@ nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
 g:ycm_autoclose_preview_window_after_completion = 1
 g:ycm_key_list_select_completion = ['<Down>']
 g:ycm_key_list_previous_completion = ['<Up>']
+g:ycm_echo_current_diagnostic = 'virtual-text'
 
 # UltiSnips
 g:UltiSnipsJumpForwardTrigger = "<tab>"
