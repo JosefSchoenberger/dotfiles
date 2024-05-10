@@ -13,8 +13,9 @@ if &t_Co == "256" || has("gui_running")
 	hi MatchParen ctermbg=39
 
 	# Make spell highlighting more readable
-	hi SpellCap ctermbg=75 ctermfg=white
+	# hi SpellCap ctermbg=75 ctermfg=white
 	# hi SpellBad ctermfg=darkred
+	hi SpellCap ctermfg=NONE ctermbg=19
 	hi SpellBad ctermfg=NONE ctermbg=52
 
 	# Suggestion / Completion list color
