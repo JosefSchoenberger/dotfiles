@@ -201,14 +201,24 @@ if [ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
 	source /usr/share/doc/fzf/examples/completion.zsh
 	#export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target --preview 'tree -C {}'"
 	#	export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+	ansi=
+	if command -V fdfind >/dev/null 2>&1; then
+		export FZF_DEFAULT_COMMAND='fdfind -c always --strip-cwd-prefix --hidden --follow --exclude .git'
+		export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+		ansi=--ansi
+	fi
 	if [ -e "$PATH_TO_THIS_FILE/fzf-preview.sh" ]; then
-		export FZF_CTRL_T_OPTS="--preview '$PATH_TO_THIS_FILE/fzf-preview.sh {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+		export FZF_DEFAULT_OPTS="--preview '$PATH_TO_THIS_FILE/fzf-preview.sh {}' --bind 'ctrl-/:change-preview-window(down|hidden|)' $ansi"
+		export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 	elif command -V bat >/dev/null 2>&1; then
-		export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+		export FZF_DEFAULT_OPTS="--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)' $ansi"
+		export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 	else
-		export FZF_CTRL_T_OPTS="--preview 'cat {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+		export FZF_DEFAULT_OPTS="--preview 'cat {}' --bind 'ctrl-/:change-preview-window(down|hidden|)' $ansi"
+		export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 	fi
 	export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+	unset ansi
 fi
 
 [ -r "$PATH_TO_THIS_FILE/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-autosuggestions/zsh-autosuggestions.zsh"
