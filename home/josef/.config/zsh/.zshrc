@@ -203,7 +203,7 @@ if [ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
 	#	export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 	ansi=
 	if command -V fdfind >/dev/null 2>&1; then
-		export FZF_DEFAULT_COMMAND='fdfind -c always --strip-cwd-prefix --hidden --follow --exclude .git'
+		export FZF_DEFAULT_COMMAND='fdfind -c always --strip-cwd-prefix --hidden --follow --exclude .git,/proc'
 		export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 		ansi=--ansi
 	fi
