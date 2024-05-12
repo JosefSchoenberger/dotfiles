@@ -362,6 +362,7 @@ if file_readable($HOME .. "/.vim/tagstack.vim")
 	nnoremap <F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInWorkspace)
 	nnoremap <S-F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInDocument)
 	nnoremap <C-F9> :call tagstack#push()<CR>:YcmCompleter GoToDocumentOutline<CR>
+	nnoremap <F10> :call tagstack#push()<CR>viw"ny:Rg <c-r>n<CR>
 else
 	nnoremap <F8> :YcmCompleter GoTo<CR>
 	nnoremap <S-F8> :YcmCompleter GoToImplementation<CR>
@@ -371,6 +372,7 @@ else
 	nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
 	nnoremap <S-F9> <Plug>(YCMFindSymbolInDocument)
 	nnoremap <C-F9> :YcmCompleter GoToDocumentOutline<CR>
+	nnoremap <F10> viw"ny:Rg <c-r>n<CR>
 endif
 
 nnoremap gö :tabe<CR>
