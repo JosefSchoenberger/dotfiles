@@ -23,6 +23,12 @@ fi
 file=${1/#\~\//$HOME/}
 type=$(file --dereference --mime -- "$file")
 
+if [[ $type =~ application/pdf ]] && command -V pdftoppm >/dev/null 2>&1; then
+	pdftoppm -l 1 "$file" /tmp/fzf-preview-img -png -singlefile -scale-to-x 500 -scale-to-y -1 \
+		&&	type="/tmp/fzf-preview-img.png: image/png; charset=binary" \
+		&&	file=/tmp/fzf-preview-img.png
+fi
+
 if [[ ! $type =~ image/ ]]; then
   if [[ $type =~ =binary ]]; then
     file "$1" | fold -s -w "${FZF_PREVIEW_COLUMNS:-80}"
