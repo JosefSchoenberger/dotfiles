@@ -130,8 +130,10 @@ analyze_latex_log() {
 alias sudopriv="sudo -E setpriv --reuid $(id -u) --regid $(id -g) --groups $(id -g),$(groups | tr ' ' ',') --inh-caps=+all --ambient-caps=+all $SHELL"
 alias gh='git hist --color=always --all | head -n20'
 alias ghl='git hist --color=always --all | less'
-#gs = ghostscript
-#alias gs='git status'
+#alias gs='git status' # gs = ghostscript
+alias gi='git status'
+alias help='PAGER="less -RF" run-help'
+alias pd=pushd
 
 cdtmp() {
 	cd $(mktemp -d)
