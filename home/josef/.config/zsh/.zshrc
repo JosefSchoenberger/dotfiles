@@ -40,7 +40,7 @@ case "$TERM" in
 	xterm-color|*-256color|xterm-kitty) color_prompt=yes;;
 esac
 
-force_color_prompt=yes
+#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
 	if [ -x /usr/bin/tput ] && tput setaf 1>&/dev/null; then
@@ -50,16 +50,9 @@ if [ -n "$force_color_prompt" ]; then
 	fi
 fi
 
-setopt PROMPT_SUBST
-if [ -r $PATH_TO_THIS_FILE/git_prompt.zsh ]; then
-	source $PATH_TO_THIS_FILE/git_prompt.zsh && git='$(git_prompt_info)' || git=''
-else
-	git=''
-fi
-ZSH_THEME_GIT_PROMPT_PREFIX=' ['
-ZSH_THEME_GIT_PROMPT_SUFFIX="]"
-
 if [ "$color_prompt" = yes ]; then
+	setopt PROMPT_SUBST
+
 	if [ $EUID = 0 ]; then
 		color_user="%B%F{9}"
 	else
@@ -67,17 +60,64 @@ if [ "$color_prompt" = yes ]; then
 	fi
 	[ -n "$SSH_TTY" ] && color_host="%B%F{3}" || color_host="%F{2}"
 	
-	ZSH_THEME_GIT_PROMPT_MODIFIED_COLOR="%F{1}"
-	ZSH_THEME_GIT_PROMPT_STAGED_COLOR="%F{3}"
-	ZSH_THEME_GIT_PROMPT_CLEAN_COLOR="%F{2}"
+	#ZSH_THEME_GIT_PROMPT_MODIFIED_COLOR="%F{1}"
+	#ZSH_THEME_GIT_PROMPT_STAGED_COLOR="%F{3}"
+	#ZSH_THEME_GIT_PROMPT_CLEAN_COLOR="%F{2}"
+
+	RPROMPT_COLOR='%F{238}'
 
 	# default: PROMPT='%m%#'
 	# PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%(?..%B%F{1} (%?%))%b%f%# "
 	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%b%f%(?..%B%F{1}%b)%#%f "
-	RPROMPT='%F{238}%(?..($?%) )$(OUT=$(git branch --show-current 2>/dev/null) && echo "[$OUT] ")%1(j.(%j jobs%) .)%D{%a %d.%m, %H:%M:%S Uhr}'
+	RPROMPT=$RPROMPT_COLOR'%(?..($?%) )'
+	#RPROMPT+='$(OUT=$(timeout 0.3s git branch --show-current 2>/dev/null) && echo "[$OUT] ")'
+	if [ -r $PATH_TO_THIS_FILE/git-prompt.zsh ]; then
+		RPROMPT+='$(gitprompt)$(gitprompt_secondary)'"$RPROMPT_COLOR"
+		ZSH_GIT_PROMPT_ENABLE_SECONDARY=y
+		ZSH_THEME_GIT_PROMPT_PREFIX="["
+		ZSH_THEME_GIT_PROMPT_SUFFIX="$RPROMPT_COLOR] "
+		ZSH_THEME_GIT_PROMPT_SEPARATOR="$RPROMPT_COLOR|"
+		ZSH_THEME_GIT_PROMPT_DETACHED="%B%F{52}"
+		ZSH_THEME_GIT_PROMPT_BRANCH="%B"
+		ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%{$fg[red]%}(%{$fg[yellow]%}"
+		ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX="%{$fg[red]%})"
+		ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING="%F{52}$"
+		ZSH_THEME_GIT_PROMPT_BEHIND="%K{52}%F{244}↓"
+		ZSH_THEME_GIT_PROMPT_AHEAD="%F{28}↑"
+		ZSH_THEME_GIT_PROMPT_UNMERGED="%F{22}✖"
+		ZSH_THEME_GIT_PROMPT_STAGED="%F{28}●"
+		ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{58}✚"
+		ZSH_THEME_GIT_PROMPT_UNTRACKED=$RPROMPT_COLOR"…"
+		ZSH_THEME_GIT_PROMPT_STASHED="%F{21}⚑"
+		ZSH_THEME_GIT_PROMPT_CLEAN="%F{22}✔"
+		ZSH_THEME_GIT_PROMPT_SECONDARY_PREFIX=""
+		ZSH_THEME_GIT_PROMPT_SECONDARY_SUFFIX=" "
+		ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=$RPROMPT_COLOR","
+		ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="-"
+		ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX=""
+		ZSH_THEME_GIT_PROMPT_TAG="%F{95}"
+		source $PATH_TO_THIS_FILE/git-prompt.zsh
+	else
+		RPROMPT+='$(OUT=$(timeout 0.3s git branch --show-current 2>/dev/null) && echo "[$OUT] ")'
+	fi
+
+	#RPROMPT+='$(DIFF=$(timeout 0.1s git diff --shortstat 2>/dev/null | sed -e '\''s!, ! !g'\'' -e '\''s!\s*[0-9]\+ files\? changed!!'\'' -e '\''s!\s*\([0-9]\+\) insertions\?(+)!\1+!'\'' -e '\''s!\([0-9]\+\) deletions\?(-)!\1-!'\'' -e '\''s!\s\s\+! !g'\'') && { [ -n "$DIFF" ] && echo "%F{52}$DIFF%F{238} " })'
+	PRPROMT+='%1(j.(%j jobs%) .)'
+	RPROMPT+='%D{%a %d.%m, %H:%M:%S Uhr}'
 else
 	PROMPT="%n@%m:%~$git (%?.. (%?%))%#"
 fi
+
+#if [ -r $PATH_TO_THIS_FILE/git_prompt.zsh ]; then
+#	source $PATH_TO_THIS_FILE/git_prompt.zsh && git='$(git_prompt_info)' || git=''
+#else
+#	git=''
+#fi
+#ZSH_THEME_GIT_PROMPT_PREFIX=' ['
+#ZSH_THEME_GIT_PROMPT_SUFFIX="]"
+
+
+setopt nomultios # this is stupid. >&1 >&1 duplicates the output...
 
 unset color_user color_host color_prompt force_color_prompt
 
@@ -115,7 +155,8 @@ alias ffprobe='ffprobe -hide_banner'
 
 alias make='make -j$(nproc)'
 
-alias docker-image-dependencies="docker inspect --format='{{.Size}} {{truncate .Id 16}} {{if .Parent}}-> {{truncate .Parent 16}}{{else}}   ---------{{end}} {{.RepoTags}}' \$(docker images --all -q) | sed 's/sha256://g' | sort -k2 | numfmt --field=1 --to=iec-i --pad=6 --suffix=B"
+#alias docker-image-dependencies="docker inspect --format='{{.Size}} {{truncate .Id 16}} {{if .Parent}}-> {{truncate .Parent 16}}{{else}}   ---------{{end}} {{.RepoTags}}' \$(docker images --all -q) | sed 's/sha256://g' | sort -k2 | numfmt --field=1 --to=iec-i --pad=6 --suffix=B"
+alias docker-image-dependencies='docker inspect --format='\''{{.Size}} {{truncate .Id 16}} {{if .Parent}} {{truncate .Parent 16}}{{else}} ---------{{end}} {{.RepoTags}}'\'' $(docker images --all -q) | sort -h | numfmt --field=1 --to=iec-i --pad=6 --suffix=B | sed "s/sha256://g" | column --tree-id=2 --tree-parent=3 --tree 4 -H 3 -o " "'
 
 analyze_latex_log() {
 	( [ -r "$1" ] && cat "$1" || cat "build/exam.tex/$1/$1.log" ) \
@@ -130,10 +171,8 @@ analyze_latex_log() {
 alias sudopriv="sudo -E setpriv --reuid $(id -u) --regid $(id -g) --groups $(id -g),$(groups | tr ' ' ',') --inh-caps=+all --ambient-caps=+all $SHELL"
 alias gh='git hist --color=always --all | head -n20'
 alias ghl='git hist --color=always --all | less'
-#alias gs='git status' # gs = ghostscript
-alias gi='git status'
-alias help='PAGER="less -RF" run-help'
-alias pd=pushd
+#gs = ghostscript
+#alias gs='git status'
 
 cdtmp() {
 	cd $(mktemp -d)
