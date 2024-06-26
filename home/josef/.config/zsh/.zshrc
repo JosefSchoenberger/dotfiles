@@ -68,7 +68,7 @@ if [ "$color_prompt" = yes ]; then
 
 	# default: PROMPT='%m%#'
 	# PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%(?..%B%F{1} (%?%))%b%f%# "
-	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b$git%b%f%(?..%B%F{1}%b)%#%f "
+	PROMPT="$color_user%n%f%b@$color_host%m%f%b:%B%F{4}%~%b%f%(?..%B%F{1}%b)%#%f "
 	RPROMPT=$RPROMPT_COLOR'%(?..($?%) )'
 	#RPROMPT+='$(OUT=$(timeout 0.3s git branch --show-current 2>/dev/null) && echo "[$OUT] ")'
 	if [ -r $PATH_TO_THIS_FILE/git-prompt.zsh ]; then
@@ -84,7 +84,7 @@ if [ "$color_prompt" = yes ]; then
 		ZSH_THEME_GIT_PROMPT_UPSTREAM_NO_TRACKING="%F{52}$"
 		ZSH_THEME_GIT_PROMPT_BEHIND="%K{52}%F{244}↓"
 		ZSH_THEME_GIT_PROMPT_AHEAD="%F{28}↑"
-		ZSH_THEME_GIT_PROMPT_UNMERGED="%F{22}✖"
+		ZSH_THEME_GIT_PROMPT_UNMERGED="%K{52}✖"
 		ZSH_THEME_GIT_PROMPT_STAGED="%F{28}●"
 		ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{58}✚"
 		ZSH_THEME_GIT_PROMPT_UNTRACKED=$RPROMPT_COLOR"…"
