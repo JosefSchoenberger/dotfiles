@@ -173,6 +173,13 @@ alias gh='git hist --color=always --all | head -n20'
 alias ghl='git hist --color=always --all | less'
 #gs = ghostscript
 #alias gs='git status'
+alias gst='git status'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gdw='git diff --color-words'
+alias gdws='git diff --color-words --staged'
+alias gsw='git show'
+alias ga='git add'
 
 cdtmp() {
 	cd $(mktemp -d)
