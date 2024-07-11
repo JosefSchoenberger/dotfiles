@@ -89,8 +89,8 @@ endif
 
 if &t_Co < "256" && !has('gui_running')
 	g:lightline = {
-				\ 'colorscheme' : '16color',
-				\ }
+				'colorscheme': '16color',
+				}
 endif
 
 # the gui uses undercurl, which is always preferable
