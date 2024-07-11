@@ -5,7 +5,7 @@
 bat=$(acpi -b | grep -E '[1-9][0-9]?[0]?%' | cut -c 9-9)
 
 percent=$(acpi -b | grep -E -o '[1-9][0-9]?[0]?%')
-state=$(LANG= acpi -b | grep "Battery ${bat}:" | grep -E -o "Unknown|Charging|Discharging|Full")
+state=$(LANG= acpi -b | grep "Battery ${bat}:" | grep -E -o "Unknown|Charging|Discharging|Full|Not charging")
 addInfo=""
 
 wattage() {
@@ -53,6 +53,7 @@ esac
 
 case $state in
 	Unknown) icon="🔌🔋" ;;
+	"Not charging") icon="🔌🔋" ;;
 	Charging) icon="🔌🗲🔋" ;;
 	Discharging) icon="🔋" ;;
 	Full) icon="🔌🔋" ;;
