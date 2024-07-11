@@ -272,6 +272,7 @@ if [ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
 		export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 	fi
 	export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+	export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=top,30%,wrap"
 	unset ansi
 fi
 
