@@ -7,13 +7,16 @@ then
 	location="Swap: "
 	txt="SWP:"
 	short_txt="SWP"
+
+	string=$(LANG=C free | grep $location | LANG=C awk '{printf "%5.1f", $3/$2*100}')
 else
 	location="Mem:"
 	txt="RAM:"
 	short_txt="RAM"
+
+	string=$(grep '^MemTotal:\|^Cached:\|^Active:' /proc/meminfo | awk '{if (x++ <= 0) {total=$2} else{sum+=$2}} END{printf "%5.1f", sum*100/total}')
 fi
 
-string=$(LANG=C free | grep $location | LANG=C awk '{printf "%5.1f", $3/$2*100}')
 
 if [ "$string" = " -nan" ]
 then
