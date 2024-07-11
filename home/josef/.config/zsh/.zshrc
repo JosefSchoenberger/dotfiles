@@ -107,7 +107,7 @@ if [ "$color_prompt" = yes ]; then
 	RPROMPT+='%1(j.(%j job%2(j.s.)%) .)'
 	RPROMPT+='%D{%a %d.%m, %H:%M:%S Uhr}'
 else
-	PROMPT="%n@%m:%~$git (%?.. (%?%))%#"
+	PROMPT="%n@%m:%~$git%(?.. (%?%))%# "
 fi
 
 #if [ -r $PATH_TO_THIS_FILE/git_prompt.zsh ]; then
