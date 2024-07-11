@@ -1,7 +1,8 @@
 [user]
 	name = Josef Schönberger
 	email = josef.schoenberger@tum.de
-	#signingkey = FF6C81F69A50B15E
+	# see gpg -K --keyid-format=long
+	signingkey = FF6C81F69A50B15E
 
 [commit]
 	gpgsign = true
