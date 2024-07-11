@@ -186,6 +186,10 @@ alias ga='git add'
 cdtmp() {
 	cd $(mktemp -d)
 }
+# same, but persistent (i.e. persist accross reboots)
+cdptmp() {
+	cd $(mktemp -d -p /var/tmp)
+}
 
 rmcwd() {
 	echo -n "Do you really want to remove this folder (y/n): "
