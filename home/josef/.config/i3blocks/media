@@ -16,7 +16,7 @@ then
 	exit 0;
 fi
 
-pause=$(echo '{ "command": ["get_property", "pause"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data)
+pause=$(echo '{ "command": ["get_property", "pause"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | grep 'true|false' -Eo)
 if [ "$pause" != "true" ] && [ "$pause" != "false" ]
 then
 	exit 0
@@ -24,7 +24,7 @@ fi
 
 
 # Handle button presses
-loop=$(echo '{ "command": ["get_property", "loop"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data)
+loop=$(echo '{ "command": ["get_property", "loop"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | grep 'true|false|inf' -Eo)
 
 case $BLOCK_BUTTON in
 	1) 	if [ "$pause" = "true" ]	# Left mouse button 
@@ -39,7 +39,7 @@ case $BLOCK_BUTTON in
 
 		exit 0;				# Middle mouse button (aka. mouse wheel)
 		;;
-	3)	if [ "$loop" = "true" ] 	# Right mouse button
+	3)	if [ "$loop" = "true" ] || [ "$loop" = "inf" ]	# Right mouse button
 		then
 			loop="false"
 		else
@@ -65,7 +65,7 @@ else
 	icon="⏸"
 fi
 
-if [ "$loop" = "true" ]
+if [ "$loop" = "true" ] || [ "$loop" = "inf" ]
 then
 	icon="$icon 🔁"
 fi
@@ -144,7 +144,7 @@ fi
 
 
 # TIMESTAMP
-position=$(echo '{ "command": ["get_property", "time-pos"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | nice jq .data)
+position=$(echo '{ "command": ["get_property", "time-pos"] }' | socat - ${SOCKET:="/tmp/mpvsocket"} | cut -c 9- | sed 's/\([0-9.]*\).*/\1/')
 if [ "${position}" = "null" ]
 then
 	exit 1;
