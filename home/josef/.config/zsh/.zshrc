@@ -29,6 +29,8 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 setopt histignorealldups
 
+setopt interactivecomments
+
 bindkey '[1;5C' forward-word # Ctrl+Right
 bindkey '[1;5D' backward-word # Ctrl+Left
 bindkey '' backward-kill-word # Ctrl+Backspace
@@ -272,7 +274,10 @@ fi
 [ -r "$PATH_TO_THIS_FILE/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-autosuggestions/zsh-autosuggestions.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-[ -r "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -r "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+	source "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+	ZSH_HIGHLIGHT_STYLES[comment]=fg=blue
+fi
 unset PATH_TO_THIS_FILE
 
 if [ -n "$SSH_TTY" ]; then
