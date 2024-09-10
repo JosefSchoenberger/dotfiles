@@ -1,50 +1,62 @@
-#!/bin/sh
+#!/bin/bash
 
 # Dependencies: amixer, pacmd
 
 volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
-muted=$(pacmd list-sinks | grep "muted" | cut -c 9-)
-port=$(pacmd list-sinks | grep "active port: " | cut -c 15-)
-
-if [ "$BLOCK_BUTTON" != "" ]
-then
-	if [ $BLOCK_BUTTON = "1" ]
-	then
-		if [ $muted = "yes" ]
-		then
-			pacmd set-sink-mute 0 0 > /dev/null
-			muted="no"
-		else
-			pacmd set-sink-mute 0 1 > /dev/null
-			muted="yes"
-		fi
-	elif [ $BLOCK_BUTTON = "4" ] # scroll up
-	then
-		amixer sset "Master" 3%+ > /dev/null
-		volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
-	elif [ $BLOCK_BUTTON = "5" ] # scroll down
-	then
-		amixer sset "Master" 3%- > /dev/null
-		volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
-	fi
+#muted=$(pacmd list-sinks | grep "muted" | cut -c 9-)
+muted=$(amixer sget "Master" | grep "Front Left:" | grep -o "\[off]")
+if [[ "$(pactl get-default-sink)" =~ "Headphones__sink" ]]; then
+	port="[Out] Headphone"
+elif [[ "$(pactl get-default-sink)" =~ "Speaker__sink" ]]; then
+	port="[Out] Speaker"
+elif [ -r ~/.local/state/wireplumber/default-routes ]; then
+	port=$(grep -v '\\s' ~/.local/state/wireplumber/default-routes | grep -o '\[Out\] Headphone')
+else
+	port=$(pacmd list-sinks | grep "active port: " | cut -c 15-)
 fi
 
-if [ $muted = "yes" ]
+if [ "$BLOCK_BUTTON" = "1" ]
+then
+	if [ "$muted" = "[off]" ]
+	then
+		#pacmd set-sink-mute 0 0 > /dev/null
+		amixer sset Master on >/dev/null
+		muted="[on]"
+	else
+		#pacmd set-sink-mute 0 1 > /dev/null
+		amixer sset Master off >/dev/null
+		muted="[off]"
+	fi
+elif [ "$BLOCK_BUTTON" = "4" ] # scroll up
+then
+	amixer sset Master on >/dev/null
+	muted="[on]"
+	amixer sset "Master" 2%+ > /dev/null
+	volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
+elif [ "$BLOCK_BUTTON" = "5" ] # scroll down
+then
+	amixer sset Master on >/dev/null
+	muted="[on]"
+	amixer sset "Master" 2%- > /dev/null
+	volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
+fi
+
+if [ "$muted" = "[off]" ]
 then
 	icon="🔇"
-elif [ $port = "<analog-output-headphones>" ]
+elif [ "$port" = "[Out] Headphone" ] || [ "$port" = "<analog-output-headphones>" ]
 then
 	icon="🎧"
-elif [ ${volume%?} -le 30 ]
+elif [ "${volume%?}" -le 30 ]
 then
 	icon="🔈"
-elif [ ${volume%?} -le 60 ]
+elif [ "${volume%?}" -le 60 ]
 then
 	icon="🔉"
 else
 	icon="🔊"
 fi
 
-printf "%s %3d%%\n" $icon ${volume%?}
-printf "%s %d%%\n" $icon ${volume%?}
+printf "%s %3d%%\n" $icon "${volume%?}"
+printf "%s %d%%\n" $icon "${volume%?}"
 exit 0
