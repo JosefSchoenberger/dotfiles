@@ -26,6 +26,7 @@ color=#A4C2F4
 command=./i3blocks-contrib/wlan-dbm/wlan-dbm
 IFACE=wlp2s0 # change for every sytem
 USE_PERCENT=0
+interval=30
 
 #[net-connections]
 #interval=60
@@ -34,13 +35,21 @@ USE_PERCENT=0
 #SHOW_IF_DOWN=0
 #SHOW_IN_SHORT=0
 
-#[ip-address]
-#command=i3blocks-contrib/iface/iface
-#LABEL=IP: 
+[ip-address]
+command=i3blocks-contrib/iface/iface
+#LABEL=IPv4:
 ##IFACE=enp0s3
-#ADDRESS_FAMILY=inet
-##color=#00FF00
-#interval=10
+ADDRESS_FAMILY=inet
+color=#AAFFAA
+interval=30
+
+#[ip6-address]
+#command=i3blocks-contrib/iface/iface
+#LABEL=IPv6:
+###IFACE=enp0s3
+#ADDRESS_FAMILY=inet6
+#color=#AAAAFF
+#interval=30
 
 # [wlan-address]
 # command=i3blocks-contrib/iface/iface
@@ -51,7 +60,7 @@ USE_PERCENT=0
 # interval=10
 
 [bandwidth]
-command=./i3blocks-contrib/bandwidth2/bandwidth2 
+command=./i3blocks-contrib/bandwidth2/bandwidth2 -t 2
 interval=persist
 markup=pango
 label=⥯
