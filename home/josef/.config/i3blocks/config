@@ -1,4 +1,4 @@
-# Signals: 
+# Signals:
 # 	10 - CAPS
 # 	11 - All for Volume (Function Keys)
 
@@ -14,13 +14,13 @@ interval=once
 markup=pango
 signal=10
 
-[media]
-interval=1
+#[media]
+#interval=1
 
-# [weather]
-# command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
-# interval=3600
-# color=#A4C2F4
+[weather]
+#command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
+interval=3600
+color=#A4C2F4
 
 [wlan-dbm]
 command=./i3blocks-contrib/wlan-dbm/wlan-dbm
