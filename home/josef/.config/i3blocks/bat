@@ -9,45 +9,53 @@ state=$(LANG= acpi -b | grep "Battery ${bat}:" | grep -E -o "Unknown|Charging|Di
 addInfo=""
 
 wattage() {
-	sensors=$(sensors)
-	voltage="$(echo "$sensors" | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?V")"
-	if [ -z "${voltage##*"m"*}"]
-	then
-		voltage=$(echo "$voltage" | sed 's/\ mV//')
-		voltage=$(echo "$voltage" | LANG=C awk '{print $1/1000}')
-	else
-		voltage=$(echo "$voltage" | sed 's/\ V//');
-	fi
+	UPOWER_OUTPUT="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)"
+	addInfo="BAT $(echo "${UPOWER_OUTPUT}" | grep energy-rate | grep -Eo '[0-9]{1,3}\.[0-9]{1,4} m?W')"
+	#sensors=$(sensors)
+	#voltage="$(echo "$sensors" | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?V")"
+	#if [ -z "${voltage##*"m"*}" ]
+	#then
+	#	voltage=$(echo "$voltage" | sed 's/\ mV//')
+	#	voltage=$(echo "$voltage" | LANG=C awk '{print $1/1000}')
+	#else
+	#	voltage=$(echo "$voltage" | sed 's/\ V//');
+	#fi
 
-	amps="$(echo "$sensors" | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?A")"
-	if [ -z "${amps##*"m"*}"]
-	then
-		amps=$(echo "$amps" | sed 's/\ mA//')
-		amps=$(echo "$amps" | LANG=C awk '{print $1/1000}')
-	else
-		amps=$(echo "$amps" | sed 's/\ A//');
-	fi
-	addInfo=$(echo "$voltage $amps" | LANG=C awk '{printf "%5.2f W", $1*$2}')
+	#amps="$(echo "$sensors" | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?A")"
+	#if [ -z "${amps##*"m"*}"]
+	#then
+	#	amps=$(echo "$amps" | sed 's/\ mA//')
+	#	amps=$(echo "$amps" | LANG=C awk '{print $1/1000}')
+	#else
+	#	amps=$(echo "$amps" | sed 's/\ A//');
+	#fi
+	#addInfo=$(echo "$voltage $amps" | LANG=C awk '{printf "%5.2f W", $1*$2}')
 }
 
 voltage() {
-	addInfo="$(sensors | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?V")"
+	UPOWER_OUTPUT="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)"
+	addInfo="$(echo "${UPOWER_OUTPUT}" | grep voltage | grep -Eo '[0-9]{1,3}\.[0-9]{1,4} m?V')"
+	#addInfo="$(sensors | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?V")"
 }
 
 amps() {
+	#UPOWER_OUTPUT="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)"
+	#addInfo="$(echo "${UPOWER_OUTPUT}" | grep energy-rate | grep -Eo '[0-9]{1,3}\.[0-9]{1,4} m?W')"
 	addInfo="$(sensors | grep BAT -A2 | grep -E -o "[0-9]?[0-9]?[0-9].[0-9][0-9]?\ m?A")"
 }
 
 time() {
-	addInfo=$(acpi -b | sed -n "/${bat}/p" | grep -E -o '([0-9]?[0-9]:)?[0-9]?[0-9]:[0-9][0-9]')
+	UPOWER_OUTPUT="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)"
+	addInfo="$(echo "${UPOWER_OUTPUT}" | grep 'time to' | grep -Eo '[0-9].*$')"
+	#addInfo=$(acpi -b | sed -n "/${bat}/p" | grep -E -o '([0-9]?[0-9]:)?[0-9]?[0-9]:[0-9][0-9]')
 }
 
 # Adjust these lines to fulfill all needs and all possibilities
 case $BLOCK_BUTTON in
-	1)	time ;;
-	3)	voltage ;;
-	4)  wattage ;;
-	5)  amps ;;
+	3)	time ;;
+	4)	voltage ;;
+	2)  wattage ;;
+	#5)  amps ;;
 	*)	addInfo="" ;;
 esac
 
@@ -80,6 +88,9 @@ then
 elif [ ${percent%?} -le "30" ]
 then
 	echo "#FFFFB0"
+elif [ ${percent%?} -ge "90" ]
+then
+	echo "#B0D0FF"
 else
 	echo "#FFFFFF"
 fi
