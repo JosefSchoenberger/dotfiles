@@ -1,0 +1,13 @@
+# vim: ft=dosini
+
+[summary="Connection Established" app-name="NetworkManager Applet"]
+default-timeout=5000
+
+[summary="VPN Login Message" app-name="NetworkManager Applet"]
+default-timeout=5000
+
+#[summary="VPN Connection Failed" app-name="NetworkManager Applet"]
+#default-timeout=5000
+
+[mode=silent]
+invisible=1
