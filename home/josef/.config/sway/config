@@ -127,8 +127,9 @@ set $ws19 "19:F9"
 set $ws20 "20:F10"
 set $ws21 "21:F11"
 set $ws22 "22:F12"
-set $ws25 "25:"
-set $ws26 "26:"
+set $ws25 "25:󰎇"
+set $ws26 "26:"
+set $ws27 "27:"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -153,8 +154,9 @@ bindsym $mod+F9 workspace number $ws19
 bindsym $mod+F10 workspace number $ws20
 bindsym $mod+F11 workspace number $ws21
 bindsym $mod+F12 workspace number $ws22
-bindsym $mod+Insert workspace number $ws25
-bindsym $mod+Delete workspace number $ws26
+bindsym $mod+ssharp workspace number $ws25
+bindsym $mod+Insert workspace number $ws26
+bindsym $mod+Delete workspace number $ws27
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -179,8 +181,9 @@ bindsym $mod+Shift+F9 move container to workspace number $ws19
 bindsym $mod+Shift+F10 move container to workspace number $ws20
 bindsym $mod+Shift+F11 move container to workspace number $ws21
 bindsym $mod+Shift+F12 move container to workspace number $ws22
-bindsym $mod+Shift+Insert move container to workspace number $ws25
-bindsym $mod+Shift+Delete move container to workspace number $ws26
+bindsym $mod+Shift+ssharp move container to workspace number $ws25
+bindsym $mod+Shift+Insert move container to workspace number $ws26
+bindsym $mod+Shift+Delete move container to workspace number $ws27
 
 # bind workspaces to screens
 workspace $ws1 output eDP-1
