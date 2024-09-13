@@ -7,7 +7,7 @@ elseif &t_Co == "256"
 endif
 
 if &t_Co == "256" || has("gui_running")
-	hi Visual cterm=bold ctermbg=239 gui=bold guifg=NONE guibg=grey30
+	hi Visual cterm=bold ctermfg=None ctermbg=240 gui=bold guifg=NONE guibg=grey30
 	hi Search cterm=reverse ctermbg=Black guibg=Black
 	hi Folded ctermbg=236 ctermfg=NONE
 	hi MatchParen ctermbg=39
