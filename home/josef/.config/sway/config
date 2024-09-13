@@ -320,9 +320,9 @@ bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
 bindsym --release Num_Lock exec pkill -SIGRTMIN+10 i3blocks
 
 # Signal 11 - Volume
-bindsym --release XF86AudioRaiseVolume exec pkill -SIGRTMIN+11 i3blocks
-bindsym --release XF86AudioLowerVolume exec pkill -SIGRTMIN+11 i3blocks
-bindsym --release XF86AudioMute exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release XF86AudioRaiseVolume exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release XF86AudioLowerVolume exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release XF86AudioMute exec pkill -SIGRTMIN+11 i3blocks
 
 ## rofi
 #bindsym $mod+c exec --no-startup-id "rofi -show run -dpi 190 -show-icons -modi drun,run"
