@@ -272,6 +272,10 @@ bar {
 	#output primary
 	strip_workspace_numbers yes
 	#mode hide
+	#colors {
+	#	focused_background #000000FF
+	#	background #00000040
+	#}
 }
 
 input type:keyboard {
@@ -392,8 +396,11 @@ bindsym XF86Display exec /home/josef/.config/sway/toggle_refreshrate
 
 # better notifications (essentially dunst for Wayland)
 exec mako
+# TODO (use systemd --user for mako, playerctl and/or gammastep?)
 
 exec playerctld
+
+exec gammastep
 
 workspace_auto_back_and_forth yes
 
