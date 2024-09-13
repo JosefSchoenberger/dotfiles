@@ -303,8 +303,7 @@ bindgesture --exact swipe:3:up exec wtype -p XF86AudioNext -P XF86AudioNext
 bindgesture --exact swipe:3:down exec wtype -p XF86AudioPrev -P XF86AudioPrev
 
 # set background image
-# exec --no-startup-id ~/.fehbg
-output * bg /home/josef/Pictures/Stagetec Hintergrund.jpg fill
+output * bg /home/josef/Pictures/Wallpapers/Stagetec_Hintergrund.jpg fit #000000
 
 # Thinkpad P14s 2024 integrated screen (eDP-1)
 output 'Lenovo Group Limited 0x8AB1 Unknown' pos 10000 10000 scale 2
@@ -356,8 +355,8 @@ bindsym $mod+y exec --no-startup-id "wofi --show drun,run --insensitive --allow-
 # lock:
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
-set $lockcmd "swaylock -klfei '~/Pictures/Stagetec Hintergrund.jpg' --indicator-radius 70"
-bindsym $mod+Ctrl+l exec --no-startup-id $lockcmd
+set $lockcmd "swaylock -klfeFi '~/Pictures/Wallpapers/Stagetec_Hintergrund.jpg' --indicator-radius 70"
+bindsym $mod+Ctrl+l exec --no-startup-id "$lockcmd"
 exec swayidle -w \
 	timeout 300 $lockcmd \
 	timeout 310 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \

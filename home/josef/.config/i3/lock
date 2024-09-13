@@ -1,9 +1,16 @@
 #!/bin/sh
 # See man i3lock:
+
 revert() {
 	xset dpms 300 300 300
 }
 trap revert HUP INT TERM
 xset +dpms dpms 5 5 5
-i3lock -n -feni ~/Pictures/Stagetec\ Hintergrund\ 1440p.png
+
+#if [ "$1" = "usesystemd" ]; then
+#	loginctl lock-session
+#else
+	i3lock -n -feni "/home/josef/Pictures/Wallpapers/Stagetec Hintergrund 3072x1920.png"
+#fi
+
 revert 
