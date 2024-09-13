@@ -344,6 +344,7 @@ nnoremap _- <C-W>l
 
 nnoremap <silent> <F5> <Plug>(YCMToggleInlayHints)
 nnoremap <S-F5> :YcmCompleter GetType<CR>
+nnoremap <C-F5> :YcmShowDetailedDiagnostic popup<CR>
 # nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <S-F6> :YcmCompleter FixIt<CR>

@@ -67,6 +67,7 @@ if &t_Co == "256" || has("gui_running")
 	hi link YcmErrorSection Error
 	hi YcmWarningSection ctermbg=75 ctermfg=white guifg=#FF0000 guibg=#DDDD00
 	hi YcmWarningSign ctermfg=0 ctermbg=75
+	hi YcmErrorPopup ctermbg=16 ctermfg=203
 	nnoremap <F12> :call UpdateYCM()<CR>
 
 	# Diff colors:
