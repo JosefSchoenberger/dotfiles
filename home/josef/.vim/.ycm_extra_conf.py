@@ -110,4 +110,13 @@ def Settings( **kwargs ):
         }}
 
     return result
+  elif kwargs[ 'language'] == 'rust':
+    return {
+        'ls': {
+          'cargo': {
+            'features': "all",
+          },
+          }
+        }
   return {}
+# vim: et ts=2 sts=2 sw=2
