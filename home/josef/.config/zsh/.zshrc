@@ -301,3 +301,4 @@ redstderr() {
 
 export DEBUGFS_PAGER=cat
 export GPG_TTY="$(tty)"
+export ANSIBLE_NOCOWS=1
