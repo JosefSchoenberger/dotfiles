@@ -299,15 +299,28 @@ bindgesture --exact swipe:3:down exec wtype -p XF86AudioPrev -P XF86AudioPrev
 output * bg /home/josef/Pictures/Stagetec Hintergrund.jpg fill
 
 # Thinkpad P14s 2024 integrated screen (eDP-1)
-output 'Lenovo Group Limited 0x8AB1 Unknown' pos 10000 10000
+output 'Lenovo Group Limited 0x8AB1 Unknown' pos 10000 10000 scale 2
+# 3072x1920 x2.0 => (10000,10000) -- (11536,10960)
+
+output 'Fujitsu Siemens Computers GmbH P27-8 TS Pro YVAQ003088' pos 8976 8560 scale 1
+# 2560x1440 x1.0 => (9488,8560) -- (12048,10000)
+# position: 10000 - ((2560/1.0) - (3072/2.0))/2  X  10000 - (1440/1.0)
+
+output 'Dell Inc. DELL U2713H C6F0K58O06EL' scale 1 transform 270 pos 11536 8400
+
+# LG HDR 4K Nr. 3 (WBG Büro)
+output 'LG Electronics LG HDR 4K 0x000226C2' pos 9488 8560 scale 1.5
+# 3840x2160 x1.5 => (9488,8560) -- (12048,10000)
+# position: 10000 - ((3840/1.5) - (3072/2.0))/2  X  10000 - (2160/1.5)
+
 # Dell monitor at ETHZ Systems Group (SSRF, 2024)
 output 'Dell Inc. DELL U2412M YPPY083619FS' pos 9804 8800 scale 1
 
 # Map backlight keys
-bindsym XF86MonBrightnessUp exec /home/josef/.config/sway/brightness --inc 10%
-bindsym XF86MonBrightnessDown exec /home/josef/.config/sway/brightness --dec 10%
-bindsym $mod+XF86MonBrightnessUp exec /home/josef/.config/sway/brightness --set 100%
-bindsym $mod+XF86MonBrightnessDown exec --no-startup-id /home/josef/.config/i3/brightness_rofi
+bindsym XF86MonBrightnessUp exec --no-startup-id /home/josef/.config/sway/brightness --inc 10%
+bindsym XF86MonBrightnessDown exec --no-startup-id /home/josef/.config/sway/brightness --dec 10%
+bindsym $mod+XF86MonBrightnessUp exec --no-startup-id /home/josef/.config/sway/brightness --set 100%
+bindsym $mod+XF86MonBrightnessDown exec --no-startup-id /home/josef/.config/sway/brightness_wofi
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
