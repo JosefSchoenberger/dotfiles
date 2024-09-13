@@ -155,6 +155,7 @@ command -v rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffplay='ffplay -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
+alias kitty-mpv="mpv --vo=kitty --vo-kitty-use-shm=yes"
 
 alias make='make -j$(nproc)'
 
