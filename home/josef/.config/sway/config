@@ -303,7 +303,13 @@ bindgesture --exact swipe:3:up exec wtype -p XF86AudioNext -P XF86AudioNext
 bindgesture --exact swipe:3:down exec wtype -p XF86AudioPrev -P XF86AudioPrev
 
 # set background image
-output * bg /home/josef/Pictures/Wallpapers/Stagetec_Hintergrund.jpg fit #000000
+#output * bg /home/josef/Pictures/Wallpapers/Stagetec_Hintergrund.jpg fit #000000
+## desert dune at night
+#output * bg '/home/josef/Pictures/Wallpapers/daniel-olah-6KQETG8J-zI-unsplash.jpg' fill
+## mountains
+#output * bg '/home/josef/Pictures/Wallpapers/john-towner-JgOeRuGD_Y4-unsplash.jpg' fill
+# forest
+output * bg '/home/josef/Pictures/Wallpapers/emmanuel-phaeton-I0DT3QlPEoE-unsplash.jpg' fill
 
 # Thinkpad P14s 2024 integrated screen (eDP-1)
 output 'Lenovo Group Limited 0x8AB1 Unknown' pos 10000 10000 scale 2
