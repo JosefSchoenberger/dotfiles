@@ -161,6 +161,8 @@ alias make='make -j$(nproc)'
 #alias docker-image-dependencies="docker inspect --format='{{.Size}} {{truncate .Id 16}} {{if .Parent}}-> {{truncate .Parent 16}}{{else}}   ---------{{end}} {{.RepoTags}}' \$(docker images --all -q) | sed 's/sha256://g' | sort -k2 | numfmt --field=1 --to=iec-i --pad=6 --suffix=B"
 alias docker-image-dependencies='docker inspect --format='\''{{.Size}} {{truncate .Id 16}} {{if .Parent}} {{truncate .Parent 16}}{{else}} ---------{{end}} {{.RepoTags}}'\'' $(docker images --all -q) | sort -h | numfmt --field=1 --to=iec-i --pad=6 --suffix=B | sed "s/sha256://g" | column --tree-id=2 --tree-parent=3 --tree 4 -H 3 -o " "'
 
+alias help='run-help'
+
 analyze_latex_log() {
 	( [ -r "$1" ] && cat "$1" || cat "build/exam.tex/$1/$1.log" ) \
 		| python3 -c "import regex, sys; [print(regex.sub(r'\\(jcc\\)|\\(/usr/share[^()]*(""(?R) *)*[^()]*\) *', '', line), end='') for line in sys.stdin]" \
