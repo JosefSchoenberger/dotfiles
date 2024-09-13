@@ -302,3 +302,23 @@ redstderr() {
 export DEBUGFS_PAGER=cat
 export GPG_TTY="$(tty)"
 export ANSIBLE_NOCOWS=1
+
+if [ -z "$SSH_TTY" ]; then
+	function presentationmode() {
+		if ! pgrep mako >/dev/null 2>&1; then
+			echo "Error: Mako is not currently running."
+			return
+		fi
+		if [ "$1" = "" ]; then
+			echo "Usage: presentationmode <time>" >&2
+			return
+		fi
+		if makoctl mode | grep -q silent; then
+			echo "Already in presentation mode." >&2
+			return
+		fi
+		makoctl mode -a silent >/dev/null || return
+		systemd-inhibit --what=idle sleep "$1"
+		makoctl mode -r silent >/dev/null
+	}
+fi
