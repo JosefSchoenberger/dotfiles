@@ -34,6 +34,7 @@ setopt interactivecomments
 bindkey '[1;5C' forward-word # Ctrl+Right
 bindkey '[1;5D' backward-word # Ctrl+Left
 bindkey '' backward-kill-word # Ctrl+Backspace
+bindkey '[3;5~' kill-word # Ctrl+Delete
 bindkey -M menuselect '[Z' reverse-menu-complete # Shift+Tab
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
