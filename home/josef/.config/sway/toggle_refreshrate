@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. /home/josef/.config/sway/notification_status.sh
+
+REFRESH="$(swaymsg -t get_outputs | jq '.[] | select(.name == "eDP-1") | .current_mode.refresh')"
+
+if [ "$REFRESH" -ge 120000 ]; then
+	TARGET=60
+else
+	TARGET=120
+fi
+
+swaymsg output eDP-1 resolution 3072x1920@${TARGET}Hz
+#notify-send "$TARGET Hz" -t 1500
+show_notification_status refreshrate "Screen refresh rate: $TARGET Hz"

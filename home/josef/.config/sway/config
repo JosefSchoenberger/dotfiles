@@ -388,6 +388,8 @@ bindsym $mod+m exec /home/josef/.config/sway/i3-input -F 'mark %s' -P 'Mark: '
 bindsym $mod+g exec /home/josef/.config/sway/i3-input -F '[con_mark="%s"] focus' -P 'Goto: '
 bindsym $mod+p sticky toggle
 
+bindsym XF86Display exec /home/josef/.config/sway/toggle_refreshrate
+
 # better notifications (essentially dunst for Wayland)
 exec mako
 
