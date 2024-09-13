@@ -185,6 +185,7 @@ alias gds='git diff --staged'
 alias gdw='git diff --color-words'
 alias gdws='git diff --color-words --staged'
 alias gsw='git show'
+alias gsww='git show --color-words'
 alias ga='git add'
 
 cdtmp() {
