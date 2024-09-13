@@ -357,7 +357,11 @@ hide_edge_borders smart
 #new_window 1pixel
 default_border pixel
 
-# gaps inner 10
+titlebar_padding 4 2
+#title_align center
+
+#gaps inner 5
+#gaps outer -5
 
 #exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
 #exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
