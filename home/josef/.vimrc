@@ -350,6 +350,7 @@ nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
 nnoremap <S-F6> :YcmCompleter FixIt<CR>
 # For more advanced refactoring commands
 nnoremap <C-F6> :YcmCompleter Refactor
+nnoremap <M-F6> :YcmCompleter Format<CR>
 g:ycm_auto_hover = ''
 nnoremap <F7> <plug>(YCMHover)
 inoremap <F7> <Esc><plug>(YCMHover)a
