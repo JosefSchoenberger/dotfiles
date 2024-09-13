@@ -5,9 +5,11 @@
 volume=$(amixer sget "Master" | grep "Front Left:" | grep -E -o "[1-9]?[0-9]+[0-9]?%")
 #muted=$(pacmd list-sinks | grep "muted" | cut -c 9-)
 muted=$(amixer sget "Master" | grep "Front Left:" | grep -o "\[off]")
-if [[ "$(pactl get-default-sink)" =~ "Headphones__sink" ]]; then
+if [[ "$(pactl get-default-sink)" =~ "__Headphones__sink" ]]; then
 	port="[Out] Headphone"
-elif [[ "$(pactl get-default-sink)" =~ "Speaker__sink" ]]; then
+elif [[ "$(pactl get-default-sink)" =~ __HDMI.__sink ]]; then
+	port="[Out] HDMI"
+elif [[ "$(pactl get-default-sink)" =~ "__Speaker__sink" ]]; then
 	port="[Out] Speaker"
 elif [ -r ~/.local/state/wireplumber/default-routes ]; then
 	port=$(grep -v '\\s' ~/.local/state/wireplumber/default-routes | grep -o '\[Out\] Headphone')
@@ -47,10 +49,13 @@ then
 elif [ "$port" = "[Out] Headphone" ] || [ "$port" = "<analog-output-headphones>" ]
 then
 	icon="🎧"
-elif [ "${volume%?}" -le 30 ]
+elif [ "$port" = "[Out] HDMI" ]
+then
+	icon="🖥️"
+elif [ "${volume%?}" -le 20 ]
 then
 	icon="🔈"
-elif [ "${volume%?}" -le 60 ]
+elif [ "${volume%?}" -le 50 ]
 then
 	icon="🔉"
 else
