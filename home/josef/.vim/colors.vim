@@ -103,7 +103,46 @@ function UnderlineSpell()
 endfunction
 
 if &term =~ 'kitty'
-	call UnderlineSpell()
+	hi SpellBad cterm=undercurl ctermul=124 ctermbg=NONE ctermfg=NONE
+	hi SpellCap cterm=undercurl ctermul=27 ctermbg=NONE ctermfg=NONE
+	hi SpellLocal cterm=undercurl ctermul=24 ctermbg=NONE ctermfg=NONE
+	hi SpellRare cterm=undercurl ctermul=225 ctermbg=NONE ctermfg=NONE
+	#hi YcmWarningSection cterm=underline ctermul=153 ctermbg=NONE ctermfg=NONE
+
+	# https://sw.kovidgoyal.net/kitty/faq/#using-a-color-theme-with-a-background-color-does-not-work-well-in-vim
+
+	# Underline/curl/dash with color
+	&t_Ce = "\<Esc>[4:0m"
+	&t_Us = "\<Esc>[4:2m"
+	&t_Cs = "\<Esc>[4:3m"
+	&t_ds = "\<Esc>[4:4m"
+	&t_Ds = "\<Esc>[4:5m"
+	&t_AU = "\<Esc>[58:5:%dm"
+	&t_8u = "\<Esc>[58:2:%lu:%lu:%lum"
+
+	# Strikethrough
+	&t_Ts = "\<Esc>[9m"
+	&t_Te = "\<Esc>[29m"
+	# Truecolor support
+	&t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+	&t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+	&t_RF = "\<Esc>]10;?\<Esc>\\"
+	&t_RB = "\<Esc>]11;?\<Esc>\\"
+	# Bracketed paste
+	&t_BE = "\<Esc>[?2004h"
+	&t_BD = "\<Esc>[?2004l"
+	&t_PS = "\<Esc>[200~"
+	&t_PE = "\<Esc>[201~"
+	# Cursor control
+	&t_RC = "\<Esc>[?12$p"
+	&t_SH = "\<Esc>[%d q"
+	&t_RS = "\<Esc>P$q q\<Esc>\\"
+	&t_VS = "\<Esc>[?12l"
+	# Focus tracking
+	&t_fe = "\<Esc>[?1004h"
+	&t_fd = "\<Esc>[?1004l"
+	execute "set <FocusGained>=\<Esc>[I"
+	execute "set <FocusLost>=\<Esc>[O"
 endif
 
 au BufReadPost *.S set syntax=gas
