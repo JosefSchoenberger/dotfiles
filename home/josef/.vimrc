@@ -173,6 +173,7 @@ if file_readable($HOME .. "/.vim/syntax/cyp.vim")
 endif
 
 autocmd FileType c,cpp,java,rust,go,html,bash,python setlocal foldmethod=syntax
+autocmd FileType rust setlocal colorcolumn=101
 autocmd FileType vim setlocal foldmethod=manual
 
 autocmd BufNewFile,BufRead kea-*.conf set ft=json
