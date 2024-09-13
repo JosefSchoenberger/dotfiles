@@ -27,9 +27,11 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # start Firefox
 bindsym $mod+o exec firefox
+bindsym $mod+Shift+o exec firefox -private-window
 bindsym $mod+i exec thunderbird
 bindsym $mod+u exec element-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
 bindsym $mod+z exec signal-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
+bindsym $mod+n exec nautilus --new-window
 
 # kill focused window
 bindsym $mod+Shift+q kill
