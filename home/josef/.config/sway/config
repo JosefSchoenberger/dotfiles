@@ -33,6 +33,8 @@ bindsym $mod+u exec element-desktop --enable-features=UseOzonePlatform,WaylandWi
 bindsym $mod+z exec signal-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
 bindsym $mod+n exec nautilus --new-window
 
+for_window [title="^Login to account .*" app_id="thunderbird"] floating enable
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
