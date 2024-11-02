@@ -28,8 +28,12 @@ case "$1" in
 			echo "error: expected one argument after --inc!"
 			exit 2
 		fi
-		current_brightness="$(($current_brightness + (${2%\%*} * $max_brightness / 100)))"
-		current_brightness="$(($current_brightness > $max_brightness ? $max_brightness : $current_brightness))"
+		if [ "$(($current_brightness * 100 / $max_brightness))" -lt "10" ]; then
+			current_brightness="$(($current_brightness + (${2%\%*} * $max_brightness / 400)))"
+		else
+			current_brightness="$(($current_brightness + (${2%\%*} * $max_brightness / 100)))"
+			current_brightness="$(($current_brightness > $max_brightness ? $max_brightness : $current_brightness))"
+		fi
 		brightnessctl set "$current_brightness"
 		show_notification_status brightness "Screen brightness: $(($(brightnessctl g)*100/$max_brightness))%"
 		;;
@@ -39,8 +43,12 @@ case "$1" in
 			echo "error: expected one argument after --dec!"
 			exit 3
 		fi
-		current_brightness="$(($current_brightness - (${2%\%*} * $max_brightness / 100)))"
-		current_brightness="$(($current_brightness < 1 ? 1 : $current_brightness))"
+		if [ "$(($current_brightness * 100 / $max_brightness))" -le "10" ]; then
+			current_brightness="$(($current_brightness - (${2%\%*} * $max_brightness / 400)))"
+		else
+			current_brightness="$(($current_brightness - (${2%\%*} * $max_brightness / 100)))"
+			current_brightness="$(($current_brightness < 1 ? 1 : $current_brightness))"
+		fi
 		brightnessctl set "$current_brightness"
 		show_notification_status brightness "Screen brightness: $(($(brightnessctl g)*100/$max_brightness))%"
 		;;
