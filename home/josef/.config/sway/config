@@ -31,7 +31,9 @@ bindsym $mod+Shift+o exec firefox -private-window
 bindsym $mod+i exec thunderbird
 bindsym $mod+u exec element-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
 bindsym $mod+z exec signal-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
+bindsym $mod+t exec okular
 bindsym $mod+n exec nautilus --new-window
+bindsym $mod+b exec dolphin --new-window
 
 for_window [title="^Login to account .*" app_id="thunderbird"] floating enable
 
