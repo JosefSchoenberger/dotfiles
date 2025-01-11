@@ -5,9 +5,12 @@
 # Debugging:
 # BLOCK_BUTTON=2
 
+#location=
+location=Munich
+
 case $BLOCK_BUTTON in
 	2) # mouse wheel press -> wind
-		wind=$(curl -s wttr.in/?format=%w)
+		wind=$(curl -s wttr.in/$location?format=%w)
 		speed=$(echo $wind | grep -E -o '[0-9]*' )
 		
 		# Debugging:
@@ -43,7 +46,7 @@ case $BLOCK_BUTTON in
 		echo $color
 		;;
 	3) # right button -> rain amount
-		mm=$(curl -s wttr.in/?format="%p")
+		mm=$(curl -s wttr.in/$location?format="%p")
 
 		# Debugging:
 		# mm=0.0mm
@@ -61,12 +64,12 @@ case $BLOCK_BUTTON in
 			icon="🌧 "
 			color="#A0B0FF"
 		else
-			icon=$(curl -s wttr.in/?format="%c")" "
+			icon=$(curl -s wttr.in/$location?format="%c")" "
 			color="#FFFFFF"
 		fi
 
 		
-		prop=$(curl -s wttr.in/?format="%o")
+		prop=$(curl -s wttr.in/$location?format="%o")
 
 		# Debugging:
 		# prop=90.4%
@@ -94,7 +97,7 @@ case $BLOCK_BUTTON in
 		echo $color
 		;;
 	4) # mouse wheel up -> humidity
-		hum=$(curl -s wttr.in/?format="%h")
+		hum=$(curl -s wttr.in/$location?format="%h")
 		
 		# Debugging
 		# hum=100%
@@ -114,14 +117,14 @@ case $BLOCK_BUTTON in
 		echo $color
 		;;
 	5) # mouse wheel down -> air pressure
-		press=$(curl -s wttr.in/?format=%P)
+		press=$(curl -s wttr.in/$location?format=%P)
 		echo $press
 		echo $press
 		echo "#FFFFFF"
 		;;
 	*) # no button / left button -> temp
-		sym=$(curl -s wttr.in/?format="%c")
-		temp=$(curl -s wttr.in/?format="%t" | tr -d '+')
+		sym=$(curl -s wttr.in/$location?format="%c")
+		temp=$(curl -s wttr.in/$location?format="%t" | tr -d '+')
 
 		echo "$sym $temp"
 		echo $sym
