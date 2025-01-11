@@ -112,6 +112,16 @@ g:ycm_language_server = [
 		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-markdown-language-server', '--stdio' ],
 		'filetypes': [ 'markdown' ],
 	},
+	{
+		'name': 'verilog',
+		'cmdline': [ '/opt/veridian/target/release/veridian' ],
+		'filetypes': [ 'systemverilog', 'verilog' ],
+	},
+	{
+		'name': 'tex',
+		'cmdline': [ '/opt/texlab-bin' ],
+		'filetypes': [ 'latex', 'tex' ],
+	},
 ]
 
 augroup YcmSetHoverSyntax
