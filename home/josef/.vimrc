@@ -71,6 +71,7 @@ filetype plugin indent on
 # YCM
 g:ycm_clangd_binary_path = "/usr/bin/clangd"
 g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+g:ycm_clangd_args = ['--background-index', '--clang-tidy']
 g:ycm_confirm_extra_conf = 0
 # g:ycm_log_level='debug'
 if file_readable($HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
