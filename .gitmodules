@@ -6,7 +6,7 @@
 	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule "home/josef/.config/i3blocks/c-rewrite"]
 	path = home/josef/.config/i3blocks/c-rewrite
-	url = https://github.com/jojaa350/my-i3-blocks-snippets
+	url = https://github.com/JosefSchoenberger/i3-blocks-snippets
 	#path = home/josef/.config/i3blocks/c-rewrite
 	#url = fake
 	active = false
