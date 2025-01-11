@@ -296,6 +296,7 @@ input type:keyboard {
 }
 
 input type:touchpad {
+	#accel_profile flat
 	natural_scroll enabled
 	tap enabled
 }
@@ -313,11 +314,13 @@ bindgesture --exact swipe:3:down exec wtype -p XF86AudioPrev -P XF86AudioPrev
 # set background image
 #output * bg /home/josef/Pictures/Wallpapers/Stagetec_Hintergrund.jpg fit #000000
 ## desert dune at night
-#output * bg '/home/josef/Pictures/Wallpapers/daniel-olah-6KQETG8J-zI-unsplash.jpg' fill
+output * bg '/home/josef/Pictures/Wallpapers/daniel-olah-6KQETG8J-zI-unsplash.jpg' fill
 ## mountains
 #output * bg '/home/josef/Pictures/Wallpapers/john-towner-JgOeRuGD_Y4-unsplash.jpg' fill
-# forest
-output * bg '/home/josef/Pictures/Wallpapers/emmanuel-phaeton-I0DT3QlPEoE-unsplash.jpg' fill
+## forest
+#output * bg '/home/josef/Pictures/Wallpapers/emmanuel-phaeton-I0DT3QlPEoE-unsplash.jpg' fill
+## stars
+#output * bg '/home/josef/Pictures/Wallpapers/slava-auchynnikau-4gKn7yFDSt8-unsplash.jpg' fill
 
 include ~/.config/sway/output-configs
 
