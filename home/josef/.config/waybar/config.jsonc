@@ -1,0 +1,205 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 24, // Waybar height
+    // "width": 120, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    //"modules-center": ["sway/window"],
+    "modules-right": ["network#ip", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "wireplumber", "custom/clock", "tray"],
+    // Modules configuration
+     "sway/workspaces": {
+         //"disable-scroll": true,
+         "disable-markup" : false,
+         //"all-outputs": true,
+         "format": "{name}",
+         //"format":"{icon}",
+         //"format-icons": {
+         //    "focused": "",
+         //    "default": ""
+         //}
+     },
+    "sway/mode": {
+        //"format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 4
+    },
+    "clock": {
+        "tooltip-format": "{:%d.%m.%Y | %H:%M}",
+        "format-alt": "{:%a, %d. %m. %Y %T}"
+    },
+    "cpu": {
+        "format": "  <span letter_spacing='-4000' stretch='ultracondensed' >{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{icon20}{icon21}</span>",
+        //"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "format-icons": [
+              "▁", // green
+              "▂", // blue
+              "▃", // white
+              "▄", // white
+              "▅", // yellow
+              "▆", // yellow
+              "▇", // orange
+              "█"  // red
+         ],
+        "states": {
+            "99": 99,
+            "92": 92,
+            "75": 75,
+            "50": 50
+        },
+        "on-click": "pkill -USR1 cpu_usage-way",
+        "on-click-right": "pkill -USR2 cpu_usage-way",
+        "interval": 2
+    },
+    "custom/cpu": {
+        "exec": "~/.config/i3blocks/c-rewrite/cpu_usage-waybar.out",
+        "on-click": "pkill -USR1 cpu_usage-way",
+        "on-click-right": "pkill -USR2 cpu_usage-way",
+        "states": {
+            "99": 99,
+            "92": 92,
+            "75": 75,
+            "50": 50
+        },
+        "return-type": "json"
+    },
+    "memory": {
+        "format": "  {}% |"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C ",
+        "interval": 2
+    },
+	"disk": {
+		"format": "󰋊 {free}"
+	},
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "states": [0,50],
+        "format-icons": ["", ""]
+    },
+    "battery": {
+        "states": {
+            "normal": 85,
+            "warning": 35,
+            "low": 20,
+            "verylow": 13,
+            "critical": 8
+        },
+        "format": "{capacity}% {icon}",
+        "format-discharging": "{capacity}% {icon} {power}W",
+        "format-charging": "{capacity}% {icon} {time}",
+        "tooltip-format": "{capacity}%\r{timeTo}\r{power} W\r{cycles} charge cycles\rhealth: {health}%",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [" ", " ", " ", " ", " "],
+        "interval": 5
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network#ip": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": "{ipaddr}",
+        /*"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",*/
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{ifname}:\r{essid}\r{ipaddr}/{cidr} via {gwaddr}\r{frequency} GHz, {signaldBm} dBm ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}:\r{ipaddr}/{cidr} via {gwaddr}",
+        "interval" : 7
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": " ",
+        /*"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",*/
+        "format-ethernet": "󰈀 ",
+        "format-disconnected": "offline",
+        "format-linked": "offline",
+        "format-disabled": "offline",
+        "tooltip-format-wifi": "{ifname}:\r{essid}\r{ipaddr}/{cidr} via {gwaddr}\r{frequency} GHz, {signaldBm} dBm ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}:\r{ipaddr}/{cidr} via {gwaddr}",
+        "interval" : 7
+    },
+	"network#ip6": {
+		"family": "ipv6",
+		"format": "",
+		"format-disabled": "v6",
+		"format-disconnected": "v6"
+	},
+    "network#bwdown": {
+        "format-wifi": "{bandwidthDownBytes}",
+        "format-ethernet": "{bandwidthDownBytes}",
+		"align": 1,
+        "interval" : 2,
+        "max-width": 50
+    },
+    "network#bwup": {
+        "format-wifi": "{bandwidthUpBytes}",
+        "format-ethernet": "{bandwidthUpBytes}",
+		"align": 1,
+        "interval" : 2,
+        "max-width": 50
+    },
+    "wireplumber": {
+        //"scroll-step": 1,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "<s>{volume}%</s> {icon}",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", " "]
+        },
+        "states": {
+            "over": 101
+        },
+        "on-click": "amixer sset Master toggle >/dev/null",
+        "on-click-right": "flatpak run com.saivert.pwvucontrol >/dev/null"
+    },
+    //"custom/media": {
+    //    "format": "{icon} {}",
+    //    "return-type": "json",
+    //    "max-length": 40,
+    //    "format-icons": {
+    //        "spotify": "",
+    //        "default": "🎜"
+    //    },
+    //    "escape": true,
+    //    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    //}
+    "custom/clock": {
+        "exec": "~/.config/i3blocks/c-rewrite/clock-waybar.out",
+        "return-type": "json"
+    },
+
+    "mpris": {
+        "format": "{player_icon} {status_icon} {title} – {artist}",
+        "format-paused": "{status_icon} <i>{title} – {artist}</i>",
+        "player-icons": {
+            "default": "🎵",
+            "firefox": "󰈹",
+            "mpv": " "
+        },
+        "status-icons": {
+            "default": "▶",
+            "paused": "⏸"
+        }
+    }
+}

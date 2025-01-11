@@ -1,0 +1,280 @@
+* {
+    border: none;
+    border-radius: 0px;
+    /*border-radius: 4px;*/
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0,0,0,1);
+    border-bottom: 3px solid rgba(50, 57, 62, 1);
+    color: #ffffff;
+}
+
+window#waybar.hidden {
+    opacity: 0.0;
+}
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    color: #ffffff;
+    font-family: 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
+	/* transition: padding 50ms linear; */
+    padding: 0 5px;
+    background: #222;
+    color: #888;
+	border: 1px solid;
+	border-color: rgba(255,255,255,0.15);
+    border-bottom: 3px solid;
+    border-bottom-color: #666;
+	min-width: 8px;
+}
+
+#workspaces button.visible {
+    color: #ffffff;
+    background: #64727D;
+    border-bottom: 3px solid #DDD;
+}
+#workspaces button.focused {
+    color: #ffffff;
+    background: #285577;
+    border-bottom: 3px solid #69c;
+}
+#workspaces button.urgent {
+    color: #ffffff;
+    background-color: #800000;
+    border-bottom: 3px solid #c44;
+}
+
+#mode {
+    border-radius: 4px;
+    font-family: 'DejaVuSansM Nerd Font Mono', Helvetica, Arial, sans-serif;
+    background: #800;
+    border-bottom: 3px solid #ff4040;
+}
+
+#window {
+    font-family: 'DejaVuSansM Nerd Font', Helvetica, Arial, sans-serif;
+	letter-spacing: -0.5px;
+	margin-left: 6px;
+}
+
+#clock, #battery, #custom-cpu, #cpu, #memory, #temperature, #backlight, #network, #wireplumber, #custom-media, #tray, #mode, #idle_inhibitor, #custom-clock, #disk, #mpris {
+    font-family: 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
+    border-radius: 6px;
+    padding: 2.5px 8px 0px 8px;
+    margin: 0px 3px 3px 3px;
+    border-bottom: 3px solid rgba(50, 57, 62, 0);
+    background-color: #333;
+}
+
+#clock {
+    /*background-color: #64727D;*/
+    background-color: #444;
+}
+#custom-clock {
+    background: #444;
+    color: #fff;
+}
+
+#battery {
+    /*background-color: #ffffff;*/
+    background-color: #235;
+    /*color: #000000;*/
+}
+#battery.normal {
+    background: #333;
+}
+#battery.warning {
+    background-color: #492522;
+}
+#battery.low {
+    background-color: #722;
+}
+#battery.verylow {
+    background-color: #a22;
+}
+#battery.charging {
+    color: #ffffff;
+    background-color: #253;
+}
+
+@keyframes blink {
+    to {
+        background-color: #222;
+        color: #fff;
+    }
+}
+#battery.critical:not(.charging) {
+    background: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#memory {
+    /* background: #9b59b6; */
+    color: #fff;
+	margin-right: 0;
+	border-radius: 6px 0 0 6px;
+	padding-right: 0;
+}
+#cpu {
+    /* background: #2ecc71; */
+	margin-left: 0;
+	margin-right: 0;
+	border-radius: 0;
+    color: #fff;
+	padding-right: 0;
+	padding-right: 0;
+}
+#cpu.99 {
+	background-color: #eb4d4b;
+}
+#cpu.92 {
+	background-color: #c74;
+}
+#cpu.75 {
+	background-color: #842;
+}
+#cpu.50 {
+	background-color: #444;
+}
+#custom-cpu {
+	margin-right: 0;
+	margin-left: 0;
+	border-radius: 0;
+	padding-left: 3px;
+}
+#custom-cpu.99 {
+	background-color: #eb4d4b;
+}
+#custom-cpu.92 {
+	background-color: #c74;
+}
+#custom-cpu.75 {
+	background-color: #842;
+}
+#custom-cpu.50 {
+	background-color: #444;
+}
+#temperature {
+    /* background: #f0932b;*/
+	margin-left: 0;
+    color: #fff;
+	border-radius: 0 6px 6px 0px;
+}
+#temperature.critical {
+    background: #eb4d4b;
+}
+
+#backlight {
+    background: #90b1b1;
+}
+
+#network {
+    font-family: 'DejaVuSansM NF', 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
+	letter-spacing: -0.5px;
+	background-color: #222;
+    /*background: #2980b9;*/
+	margin-right: 0;
+	margin-left: 0;
+	border-radius: 0;
+	background: #888;
+}
+#network.ethernet {
+	padding-right: 4px;
+}
+#network.wifi {
+	padding-right: 8px;
+}
+#network.ip6 {
+	padding-left:  4px;
+	padding-right: 4px;
+	font-family: Arial;
+}
+
+#network.ip {
+    background: #333;
+	margin-left: 3px;
+	margin-right: 0;
+	border-radius: 6px 0 0 6px;
+}
+
+#network.disconnected {
+    background: #522;
+	margin-left: 0;
+	margin-right: 0;
+}
+#network.disabled {
+    background: #222;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#network.bwdown {
+	min-width: 65px;
+	padding-left: 0;
+	padding-right: 0;
+	background: #333;
+	margin-left: 0;
+	margin-right: 0;
+}
+#network.bwup {
+	min-width: 65px;
+	padding-left: 0;
+	padding-right: 6px;
+	margin-right: 3px;
+	background: #333;
+	border-radius: 0 6px 6px 0px;
+}
+
+#wireplumber {
+    /*background: #f1c40f;*/
+    color: #fff;
+}
+#wireplumber.over {
+    /*background: #f1c40f;*/
+    background: #822;
+    color: #fff;
+}
+
+#wireplumber.muted {
+    /*background: #90b1b1;*/
+    color: #888;
+}
+
+#custom-media {
+    background: #66cc99;
+    color: #2a5c45;
+}
+
+.custom-spotify {
+    background: #66cc99;
+}
+
+.custom-vlc {
+    background: #ffa000;
+}
+
+#tray {
+    padding: 0 3px;
+	background: none;
+    /*background-color: #2980b9;*/
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
+
+#mpris {
+    font-family: Helvetica, Arial, sans-serif;
+}

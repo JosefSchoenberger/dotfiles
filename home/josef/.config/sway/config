@@ -267,19 +267,23 @@ mode swtchr {
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+#bar {
+#    status_command /home/josef/Documents/i3blocks/i3blocks
+#	font DejaVuSansM Nerd Font Mono 9
+#	#font CaskaydiaCove Nerd Font Mono 9
+#	#font Armino Nerd Font Mono 9
+#	#font pango:monospace 9
+#	#output primary
+#	strip_workspace_numbers yes
+#	#mode hide
+#	#colors {
+#	#	focused_background #000000FF
+#	#	background #00000040
+#	#}
+#}
+
 bar {
-    status_command /home/josef/Documents/i3blocks/i3blocks
-	font DejaVuSansM Nerd Font Mono 9
-	#font CaskaydiaCove Nerd Font Mono 9
-	#font Armino Nerd Font Mono 9
-	#font pango:monospace 9
-	#output primary
-	strip_workspace_numbers yes
-	#mode hide
-	#colors {
-	#	focused_background #000000FF
-	#	background #00000040
-	#}
+	swaybar_command waybar
 }
 
 input type:keyboard {
