@@ -369,6 +369,8 @@ bindsym $mod+Ctrl+Alt+l exec --no-startup-id systemctl hibernate
 # GPaste
 # bindsym $mod+Shift+v exec --no-startup-id "/usr/libexec/gpaste/gpaste-ui"
 # TODO execute 'wl-paste --watch cliphist store &' and configure cliphist
+exec --no-startup-id wl-paste --watch cliphist store
+bindsym $mod+Shift+v exec --no-startup-id sh -c 'cliphist list | wofi -S dmenu | cliphist decode | wl-copy'
 
 #bindsym $mod+Shift+s exec --no-startup-id "/usr/bin/spectacle"
 bindsym $mod+Shift+s exec grimshot copy anything
