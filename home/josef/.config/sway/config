@@ -370,12 +370,15 @@ bindsym $mod+y exec --no-startup-id "wofi --show drun,run --insensitive --allow-
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 set $lockcmd "swaylock -klfeFi '~/Pictures/Wallpapers/Stagetec_Hintergrund.jpg' --indicator-radius 70"
-bindsym $mod+Ctrl+l exec --no-startup-id "$lockcmd"
 exec swayidle -w \
-	timeout 300 $lockcmd \
-	timeout 310 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 	before-sleep $lockcmd \
-	lock $lockcmd
+	lock $lockcmd \
+	timeout 300 $lockcmd \
+	timeout 310 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+bindsym $mod+Ctrl+l exec --no-startup-id loginctl lock-session
+# mod+Shift is the Copilot key, directly below the period key.
+bindsym $mod+Shift+Period exec --no-startup-id loginctl lock-session
+bindsym $mod+Ctrl+Alt+l exec --no-startup-id systemctl hibernate
 
 #exec swayidle -w
 
