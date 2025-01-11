@@ -9,6 +9,20 @@ unsetopt beep
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/josef/.config/zsh/.zshrc'
 
+if command -v rustup 2>&1 >/dev/null; then
+	# Must be before compinit
+	P=~/.local/share/zsh/functions/Completions/
+	mkdir -p "$P"
+	if ! [ -s "$P/_rustup" ]; then
+		rustup completions zsh rustup >"$P/_rustup"
+	fi
+	if ! [ -s "$P/_cargo" ]; then
+		rustup completions zsh cargo >"$P/_cargo"
+	fi
+	fpath+="$P"
+	unset P
+fi
+
 autoload -Uz compinit
 compinit
 zmodload zsh/complist
