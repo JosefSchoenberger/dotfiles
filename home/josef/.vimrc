@@ -310,6 +310,13 @@ if &term =~ '^xterm'
 	# autocmd VimEnter * silent !echo -ne "\e[1 q"
 	autocmd VimLeave * silent !echo -ne "\e[1 q"
 endif
+if &term == 'xterm-kitty'
+	# Kitty uses the xterm function sequence for F3 since v0.27.0.
+	# See :help term-function-keys, the notes on
+	# https://sw.kovidgoyal.net/kitty/keyboard-protocol/#functional-key-definitions.
+	# and the discussion number 5813 on the kitty repo.
+	set <xF3>=[13~
+endif
 
 # Windows terminal doesn't support BCE, so disable it:
 set t_ut=""
