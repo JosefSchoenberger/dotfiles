@@ -46,6 +46,8 @@ if &t_Co == "256" || has("gui_running")
 
 	hi CursorLine cterm=NONE ctermbg=235
 	hi CursorLineNr cterm=NONE ctermbg=3 ctermfg=235
+	hi LineNrAbove ctermfg=36
+	hi LineNrBelow ctermfg=36
 
 	hi SpecialKey cterm=bold ctermfg=23
 	# hi NonText cterm=bold ctermfg=240
