@@ -60,4 +60,5 @@ gdb.execute('dashboard -layout ' + layouts[(asm_tty != None, mem_tty != None, qe
 # if main_term_height:
 # 	gdb.execute('dashboard assembly -style height ' + str(int(int(main_term_height) * 0.75 - 10)))
 # 	gdb.execute('dashboard source -style height ' + str(int(int(main_term_height) * 0.75 - 10)))
+gdb.execute("dashboard -style style_selected_2 '38;5;37'");
 end
