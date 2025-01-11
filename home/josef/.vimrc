@@ -379,7 +379,7 @@ if file_readable($HOME .. "/.vim/tagstack.vim")
 	nnoremap <S-F8> :call tagstack#push()<CR>:YcmCompleter GoToImplementation<CR>
 	nnoremap <C-F8> :call tagstack#push()<CR>:YcmCompleter GoToDeclaration<CR>
 	nnoremap <M-F8> :call tagstack#push()<CR>:YcmCompleter GoToCallers<CR>
-	nnoremap <M-C-F8> :call tagstack#push()<CR>:YcmCompleter GoToReferences<CR>
+	nnoremap <M-S-F8> :call tagstack#push()<CR>:YcmCompleter GoToReferences<CR>
 	nnoremap <F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInWorkspace)
 	nnoremap <S-F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInDocument)
 	nnoremap <C-F9> :call tagstack#push()<CR>:YcmCompleter GoToDocumentOutline<CR>
@@ -389,7 +389,7 @@ else
 	nnoremap <S-F8> :YcmCompleter GoToImplementation<CR>
 	nnoremap <C-F8> :YcmCompleter GoToDeclaration<CR>
 	nnoremap <M-F8> :YcmCompleter GoToCallers<CR>
-	nnoremap <M-C-F8> :YcmCompleter GoToReferences<CR>
+	nnoremap <M-S-F8> :YcmCompleter GoToReferences<CR>
 	nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
 	nnoremap <S-F9> <Plug>(YCMFindSymbolInDocument)
 	nnoremap <C-F9> :YcmCompleter GoToDocumentOutline<CR>
