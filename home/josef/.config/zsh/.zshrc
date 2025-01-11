@@ -73,7 +73,7 @@ if [ "$color_prompt" = yes ]; then
 	if [ $EUID = 0 ]; then
 		color_user="%B%F{9}"
 	else
-		color_user="%F{2}"
+		color_user="%(!.%F{3}.%F{2})"
 	fi
 	[ -n "$SSH_TTY" ] && color_host="%B%F{3}" || color_host="%F{2}"
 	
