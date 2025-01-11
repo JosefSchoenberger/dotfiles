@@ -36,6 +36,8 @@ bindsym $mod+n exec nautilus --new-window
 bindsym $mod+b exec dolphin --new-window
 
 for_window [title="^Login to account .*" app_id="thunderbird"] floating enable
+for_window [title="^An error has occurred" app_id="thunderbird"] floating enable
+for_window [title="^Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox" app_id="firefox-esr"] floating enable
 
 # kill focused window
 bindsym $mod+Shift+q kill
