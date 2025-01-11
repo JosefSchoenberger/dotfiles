@@ -302,7 +302,6 @@ if [ -r "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 	source "$PATH_TO_THIS_FILE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 	ZSH_HIGHLIGHT_STYLES[comment]=fg=blue
 fi
-unset PATH_TO_THIS_FILE
 
 if [ -n "$SSH_TTY" ]; then
 	. ~/.profile
@@ -332,7 +331,13 @@ if [ -z "$SSH_TTY" ]; then
 			return
 		fi
 		makoctl mode -a silent >/dev/null || return
+		pkill gammastep
 		systemd-inhibit --what=idle sleep "$1"
 		makoctl mode -r silent >/dev/null
+		(
+		gammastep >/dev/null 2>&1 &
+		)
 	}
 fi
+
+unset PATH_TO_THIS_FILE
