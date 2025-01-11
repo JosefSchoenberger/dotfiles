@@ -19,11 +19,13 @@ if &t_Co == "256" || has("gui_running")
 	hi SpellBad ctermfg=NONE ctermbg=52
 
 	# Suggestion / Completion list color
-	hi Pmenu ctermbg=24 ctermfg=white
+	hi Pmenu ctermbg=24 ctermfg=NONE
 	# Suggestion list scrollbar
 	hi PmenuThumb ctermbg=248 guibg=Grey
 	# Suggestion list scrollbar background
 	hi PmenuSbar ctermbg=0 guibg=Black
+	# Suggestion part of completion already typed
+	hi PmenuMatch ctermbg=24 ctermfg=247
 
 	# Colors for YCM hover box
 	hi HoverBox ctermbg=233 ctermfg=white
