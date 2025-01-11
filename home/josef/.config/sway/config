@@ -399,6 +399,8 @@ bindsym $mod+g exec /home/josef/.config/sway/i3-input -F '[con_mark="%s"] focus'
 bindsym $mod+p sticky toggle
 
 bindsym XF86Display exec /home/josef/.config/sway/toggle_refreshrate
+bindcode 248 exec /home/josef/.config/sway/toggle_wifirf
+bindcode 164 exec /home/josef/.config/sway/toggle_paprofile && $refresh_i3status
 
 # better notifications (essentially dunst for Wayland)
 exec mako

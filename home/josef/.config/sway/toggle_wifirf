@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. /home/josef/.config/sway/notification_status.sh
+
+show_notification_status rfkill "WLAN: ..."
+
+WIFI_ENABLED="$(nmcli radio wifi)"
+
+if [ "$WIFI_ENABLED" = "disabled" ]; then
+	MODE=on
+else
+	MODE=off
+fi
+
+nmcli radio wifi $MODE || exit
+#notify-send "$TARGET Hz" -t 1500
+show_notification_status rfkill "WLAN: $MODE"

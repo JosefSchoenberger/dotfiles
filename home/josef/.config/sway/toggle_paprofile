@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. /home/josef/.config/sway/notification_status.sh
+
+NEW_PROFILE="$(pactl list cards | grep 'Active Profile' | tail -n1 | grep -q Speaker && echo 'Headphones' || echo 'Speakers')"
+CARD="$(pactl list short cards | cut -f2 | tail -n1)"
+
+if [ "$NEW_PROFILE" = "Headphones" ]; then
+	pactl set-card-profile "$CARD" 'HiFi (HDMI1, HDMI2, HDMI3, Headphones, Mic1, Mic2)'
+else
+	pactl set-card-profile "$CARD" 'HiFi (HDMI1, HDMI2, HDMI3, Mic1, Mic2, Speaker)'
+fi
+
+show_notification_status paprofile "Using $NEW_PROFILE"
