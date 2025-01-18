@@ -33,7 +33,7 @@ bindsym $mod+u exec element-desktop --enable-features=UseOzonePlatform,WaylandWi
 bindsym $mod+z exec signal-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
 bindsym $mod+t exec okular
 bindsym $mod+n exec nautilus --new-window
-bindsym $mod+b exec dolphin --new-window
+bindsym $mod+Shift+n exec dolphin --new-window
 
 for_window [title="^Login to account .*" app_id="thunderbird"] floating enable
 for_window [title="^An error has occurred" app_id="thunderbird"] floating enable
@@ -51,10 +51,14 @@ bindsym $mod+d exec wmenu-run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+odiaeresis focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -63,10 +67,14 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -84,7 +92,7 @@ bindsym $mod+Ctrl+Shift+l move workspace to output up
 bindsym $mod+Ctrl+Shift+odiaeresis move workspace to output right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
