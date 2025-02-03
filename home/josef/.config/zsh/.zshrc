@@ -265,6 +265,15 @@ function man() {
 	env LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul) GROFF_NO_SGR=1 man "$@"
 }
 
+if [ -n "$KITTY_INSTALLATION_DIR" ]; then
+	KITTY_SHELL_INTEGRATION="${KITTY_SHELL_INTEGRATION//no-rc( |)}"
+	autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+    kitty-integration
+    unfunction kitty-integration
+
+	alias kssh='kitten ssh'
+fi
+
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:::::' completer _complete _approximate
