@@ -211,14 +211,23 @@ cdptmp() {
 }
 
 rmcwd() {
-	echo -n "Do you really want to remove this folder (y/n): "
+	echo -n "Do you really want to remove this folder (y/N): "
 	pwd
-	read && if [ "$REPLY" = y ]; then 
-		local o="$OLDPWD"
-		rm "$(pwd)" -r
-		cd ..
-		OLDPWD=$o
+	read && if [ "$REPLY" != y ]; then
+		return
 	fi
+	if [[ ! "$(pwd)" =~ '^/tmp' && ! "$(pwd)" =~ '^/var/tmp' ]]; then
+		echo "REALLY?! You're not within /tmp or /var/tmp (y/N)!"
+		read && if [ "$REPLY" != y ]; then
+			return
+		fi
+	fi
+
+
+	local o="$OLDPWD"
+	rm "$(pwd)" -r
+	cd ..
+	OLDPWD=$o
 }
 
 mkcdir() {
