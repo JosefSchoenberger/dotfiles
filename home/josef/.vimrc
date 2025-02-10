@@ -64,6 +64,8 @@ Plugin 'junegunn/fzf' # Testing it out, looks cool, will require configuration;
 
 Plugin 'airblade/vim-gitgutter' # git status on the left
 
+Plugin 'markonm/traces.vim' # preview substitutes
+
 # ------------------END OF PLUGINS ----------------------------
 call vundle#end()
 filetype plugin indent on
