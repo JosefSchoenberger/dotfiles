@@ -8,6 +8,9 @@ default-timeout=5000
 [summary="VPN Login Message" app-name="NetworkManager Applet"]
 default-timeout=5000
 
+[summary~="unmounted$" app-name="org.gnome.Nautilus" body="Filesystem has been disconnected."]
+default-timeout=5000
+
 #[summary="VPN Connection Failed" app-name="NetworkManager Applet"]
 #default-timeout=5000
 
