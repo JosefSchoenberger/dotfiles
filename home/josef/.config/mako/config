@@ -1,5 +1,7 @@
 # vim: ft=dosini
 
+icon-path=/usr/share/icons/breeze-dark:/usr/share/icons/Adwaita:/usr/share/icons/gnome
+
 [summary="Connection Established" app-name="NetworkManager Applet"]
 default-timeout=5000
 
