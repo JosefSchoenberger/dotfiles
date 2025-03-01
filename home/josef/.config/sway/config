@@ -350,6 +350,8 @@ bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked $mod+dead_circumflex exec playerctl play-pause
+bindsym --locked $mod+Shift+Ctrl+dead_circumflex exec playerctl previous
+bindsym --locked $mod+Shift+dead_circumflex exec playerctl next
 
 # Set signals for i3blocks
 # Signal 10 - CAPS
