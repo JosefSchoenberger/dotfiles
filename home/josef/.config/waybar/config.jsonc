@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     //"modules-center": ["sway/window"],
-    "modules-right": ["network#ip", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "wireplumber", "custom/clock", "tray"],
+    "modules-right": ["network#ip", "network#ip6", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "wireplumber", "custom/clock", "tray"],
     // Modules configuration
      "sway/workspaces": {
          //"disable-scroll": true,
@@ -136,7 +136,7 @@
 	"network#ip6": {
 		"family": "ipv6",
 		"format": "",
-		"format-disabled": "v6",
+		"format-disabled": "",
 		"format-disconnected": "v6"
 	},
     "network#bwdown": {
