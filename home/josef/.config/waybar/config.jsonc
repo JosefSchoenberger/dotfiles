@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     //"modules-center": ["sway/window"],
-    "modules-right": ["network#ip", "network#ip6", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "wireplumber", "custom/clock", "tray"],
+    "modules-right": ["idle_inhibitor", "network#ip", "network#ip6", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "wireplumber", "custom/clock", "tray"],
     // Modules configuration
      "sway/workspaces": {
          //"disable-scroll": true,
@@ -27,7 +27,9 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+        "tooltip-format-activated": "Idle Inhibited",
+        "tooltip-format-deactivated": "click to inhibit idle"
     },
     "tray": {
         "icon-size": 18,
@@ -39,17 +41,7 @@
     },
     "cpu": {
         "format": "  <span letter_spacing='-4000' stretch='ultracondensed' >{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{icon20}{icon21}</span>",
-        //"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-        "format-icons": [
-              "▁", // green
-              "▂", // blue
-              "▃", // white
-              "▄", // white
-              "▅", // yellow
-              "▆", // yellow
-              "▇", // orange
-              "█"  // red
-         ],
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
         "states": {
             "99": 99,
             "92": 92,

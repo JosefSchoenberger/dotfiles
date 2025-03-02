@@ -263,17 +263,20 @@ window#waybar.hidden {
 
 #tray {
     padding: 0 3px;
-	background: none;
+    background: none;
     /*background-color: #2980b9;*/
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    background-color: #000;
+    color: #444;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    background-color: #33a;
+    padding: 2.9px 13px 0px 7px;
+    color: #fff;
+    /*color: #2d3436;*/
 }
 
 #mpris {
