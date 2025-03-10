@@ -439,7 +439,11 @@ workspace_auto_back_and_forth yes
 
 # Make sure systemd env variables are read correctly
 exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
-include /etc/sway/config.d/*
+include /etc/sway/config.d/*-systemd-user.conf
+# As of March 2025, this should run:
+# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+# exec hash dbus-update-activation-environment 2>/dev/null && \
+#         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 seat seat0 xcursor_theme Adwaita 22
 
