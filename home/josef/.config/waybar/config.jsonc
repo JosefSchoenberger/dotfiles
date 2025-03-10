@@ -77,7 +77,13 @@
         "interval": 2
     },
 	"disk": {
-		"format": "󰋊 {free}"
+		"format": "󰋊 {free}",
+		"states": {
+			"low": 0,
+			"high": 85,
+			"veryhigh": 97,
+			"veryveryhigh": 99
+		}
 	},
     "backlight": {
         // "device": "acpi_video1",

@@ -175,6 +175,21 @@ window#waybar.hidden {
     background: #90b1b1;
 }
 
+#disk.low {
+	/* hide */
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+	background: none;
+}
+
+#disk.veryhigh {
+	background: #422;
+}
+#disk.veryveryhigh {
+	background: #622;
+}
+
 #network {
     font-family: 'DejaVuSansM NF', 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
 	letter-spacing: -0.5px;
