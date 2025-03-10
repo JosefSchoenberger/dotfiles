@@ -282,6 +282,7 @@ zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
 zstyle ':completion:*:*:vim:*' file-patterns '^*.(aux|pdf|exe|out|ps|zip|tar|pyc|xdvi|jpg):source-files' '*:all-files'
+zstyle ':completion:*:*:okular:*' file-patterns '^*.(aux|out|tex):source-files' '*:all-files'
 zstyle ':completion:*:*:log:*' file-sort time
 
 autoload -U + X bashcompinit && bashcompinit
