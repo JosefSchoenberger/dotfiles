@@ -1,3 +1,4 @@
+// vim: et ts=4 sts=4 sw=4
 {
     "layer": "top", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
@@ -66,7 +67,7 @@
     },
     "memory": {
         "format": "  {}% |",
-		"tooltip-format": "RAM: {percentage}% - {used}GiB / {total}GiB ({avail}GiB avail)\rSwap: {swapPercentage}% - {swapUsed}GiB / {swapTotal}GiB ({swapAvail}GiB avail)"
+        "tooltip-format": "RAM: {percentage}% - {used}GiB / {total}GiB ({avail}GiB avail)\rSwap: {swapPercentage}% - {swapUsed}GiB / {swapTotal}GiB ({swapAvail}GiB avail)"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -76,15 +77,15 @@
         "format": "{temperatureC}°C ",
         "interval": 2
     },
-	"disk": {
-		"format": "󰋊 {free}",
-		"states": {
-			"low": 0,
-			"high": 85,
-			"veryhigh": 97,
-			"veryveryhigh": 99
-		}
-	},
+    "disk": {
+        "format": "󰋊 {free}",
+        "states": {
+            "low": 0,
+            "high": 85,
+            "veryhigh": 97,
+            "veryveryhigh": 99
+        }
+    },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
@@ -132,23 +133,23 @@
         "tooltip-format-ethernet": "{ifname}:\r{ipaddr}/{cidr} via {gwaddr}",
         "interval" : 7
     },
-	"network#ip6": {
-		"family": "ipv6",
-		"format": "",
-		"format-disabled": "",
-		"format-disconnected": "v6"
-	},
+    "network#ip6": {
+        "family": "ipv6",
+        "format": "",
+        "format-disabled": "",
+        "format-disconnected": "v6"
+    },
     "network#bwdown": {
         "format-wifi": "{bandwidthDownBytes}",
         "format-ethernet": "{bandwidthDownBytes}",
-		"align": 1,
+        "align": 1,
         "interval" : 2,
         "max-width": 50
     },
     "network#bwup": {
         "format-wifi": "{bandwidthUpBytes}",
         "format-ethernet": "{bandwidthUpBytes}",
-		"align": 1,
+        "align": 1,
         "interval" : 2,
         "max-width": 50
     },

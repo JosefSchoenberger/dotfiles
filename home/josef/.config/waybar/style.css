@@ -1,3 +1,5 @@
+/* vim: et ts=4 sts=4 sw=4
+ * */
 * {
     border: none;
     border-radius: 0px;
@@ -19,15 +21,15 @@ window#waybar.hidden {
 #workspaces button {
     color: #ffffff;
     font-family: 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
-	/* transition: padding 50ms linear; */
+    /* transition: padding 50ms linear; */
     padding: 0 5px;
     background: #222;
     color: #888;
-	border: 1px solid;
-	border-color: rgba(255,255,255,0.15);
+    border: 1px solid;
+    border-color: rgba(255,255,255,0.15);
     border-bottom: 3px solid;
     border-bottom-color: #666;
-	min-width: 8px;
+    min-width: 8px;
 }
 
 #workspaces button.visible {
@@ -55,8 +57,8 @@ window#waybar.hidden {
 
 #window {
     font-family: 'DejaVuSansM Nerd Font', Helvetica, Arial, sans-serif;
-	letter-spacing: -0.5px;
-	margin-left: 6px;
+    letter-spacing: -0.5px;
+    margin-left: 6px;
 }
 
 #clock, #battery, #custom-cpu, #cpu, #memory, #temperature, #backlight, #network, #wireplumber, #custom-media, #tray, #mode, #idle_inhibitor, #custom-clock, #disk, #mpris {
@@ -118,54 +120,54 @@ window#waybar.hidden {
 #memory {
     /* background: #9b59b6; */
     color: #fff;
-	margin-right: 0;
-	border-radius: 6px 0 0 6px;
-	padding-right: 0;
+    margin-right: 0;
+    border-radius: 6px 0 0 6px;
+    padding-right: 0;
 }
 #cpu {
     /* background: #2ecc71; */
-	margin-left: 0;
-	margin-right: 0;
-	border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
     color: #fff;
-	padding-right: 0;
-	padding-right: 0;
+    padding-right: 0;
+    padding-right: 0;
 }
 #cpu.99 {
-	background-color: #eb4d4b;
+    background-color: #eb4d4b;
 }
 #cpu.92 {
-	background-color: #c74;
+    background-color: #c74;
 }
 #cpu.75 {
-	background-color: #842;
+    background-color: #842;
 }
 #cpu.50 {
-	background-color: #444;
+    background-color: #444;
 }
 #custom-cpu {
-	margin-right: 0;
-	margin-left: 0;
-	border-radius: 0;
-	padding-left: 3px;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 0;
+    padding-left: 3px;
 }
 #custom-cpu.99 {
-	background-color: #eb4d4b;
+    background-color: #eb4d4b;
 }
 #custom-cpu.92 {
-	background-color: #c74;
+    background-color: #c74;
 }
 #custom-cpu.75 {
-	background-color: #842;
+    background-color: #842;
 }
 #custom-cpu.50 {
-	background-color: #444;
+    background-color: #444;
 }
 #temperature {
     /* background: #f0932b;*/
-	margin-left: 0;
+    margin-left: 0;
     color: #fff;
-	border-radius: 0 6px 6px 0px;
+    border-radius: 0 6px 6px 0px;
 }
 #temperature.critical {
     background: #eb4d4b;
@@ -176,76 +178,76 @@ window#waybar.hidden {
 }
 
 #disk.low {
-	/* hide */
-	font-size: 0;
-	margin: 0;
-	padding: 0;
-	background: none;
+    /* hide */
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    background: none;
 }
 
 #disk.veryhigh {
-	background: #422;
+    background: #422;
 }
 #disk.veryveryhigh {
-	background: #622;
+    background: #622;
 }
 
 #network {
     font-family: 'DejaVuSansM NF', 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
-	letter-spacing: -0.5px;
-	background-color: #222;
+    letter-spacing: -0.5px;
+    background-color: #222;
     /*background: #2980b9;*/
-	margin-right: 0;
-	margin-left: 0;
-	border-radius: 0;
-	background: #888;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 0;
+    background: #888;
 }
 #network.ethernet {
-	padding-right: 4px;
+    padding-right: 4px;
 }
 #network.wifi {
-	padding-right: 8px;
+    padding-right: 8px;
 }
 #network.ip6 {
-	padding-left:  4px;
-	padding-right: 4px;
-	font-family: Arial;
+    padding-left:  4px;
+    padding-right: 4px;
+    font-family: Arial;
 }
 
 #network.ip {
     background: #333;
-	padding-right: 6px;
-	margin-left: 3px;
-	margin-right: 0;
-	border-radius: 6px 0 0 6px;
+    padding-right: 6px;
+    margin-left: 3px;
+    margin-right: 0;
+    border-radius: 6px 0 0 6px;
 }
 
 #network.disconnected {
     background: #522;
-	margin-left: 0;
-	margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 #network.disabled {
     background: #222;
-	margin-left: 0;
-	margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 #network.bwdown {
-	min-width: 65px;
-	padding-left: 0;
-	padding-right: 0;
-	background: #333;
-	margin-left: 0;
-	margin-right: 0;
+    min-width: 65px;
+    padding-left: 0;
+    padding-right: 0;
+    background: #333;
+    margin-left: 0;
+    margin-right: 0;
 }
 #network.bwup {
-	min-width: 65px;
-	padding-left: 0;
-	padding-right: 6px;
-	margin-right: 3px;
-	background: #333;
-	border-radius: 0 6px 6px 0px;
+    min-width: 65px;
+    padding-left: 0;
+    padding-right: 6px;
+    margin-right: 3px;
+    background: #333;
+    border-radius: 0 6px 6px 0px;
 }
 
 #wireplumber {
