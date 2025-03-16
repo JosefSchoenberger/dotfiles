@@ -1,0 +1,55 @@
+* {
+    font-size: 15px;
+    font-family: Cantarell, sans-serif;
+}
+
+#window {
+    background-color: transparent;
+}
+
+#input {
+    background-color: #323232;
+    border: 2px solid #888888;
+    border-radius: 6px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#scroll {
+    border-radius: 6px;
+    background-color: #323232;
+    border: 2px solid #666666;
+    color: white;
+}
+
+#entry:selected {
+    background-color: #269;
+    color: #bcbcbc;
+}
+
+#img {
+    padding-right: 10px;
+}
+
+#entry {
+    padding-left: 16px;
+}
+
+expander {
+    margin-left: -16px;
+}
+
+#expander-box {
+    padding-left: 16px;
+    background-color: #323232;
+}
+
+#entry:nth-child(even) {
+    background-color: #2e2e2e;
+}
+
+
+#entry:nth-child(even):selected {
+    background-color: #269;
+}
+

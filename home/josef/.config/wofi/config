@@ -1,0 +1,5 @@
+allow_images=true
+matching=fuzzy 
+gtk_dark=true
+key_expand=Right,Left
+#prompt=Search Application...
