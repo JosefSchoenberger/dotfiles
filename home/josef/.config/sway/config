@@ -272,6 +272,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Automatically split horizontally on horizonal screen and vertically on vertical screen
+exec autotiling --limit 1
+
 # Start the swtchr daemon.
 exec_always swtchrd
 
