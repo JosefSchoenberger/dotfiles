@@ -372,7 +372,7 @@ bindsym --release Num_Lock exec pkill -SIGRTMIN+10 i3blocks
 #bindsym $mod+y exec --no-startup-id "rofi -show drun -dpi 190 -show-icons -modi drun,run"
 
 # wofi
-bindsym $mod+y exec --no-startup-id "wofi --show drun,run --insensitive --allow-images"
+bindsym $mod+y exec --no-startup-id "wofi --show drun,run --insensitive --allow-images --prompt='Search Applications...'"
 
 # lock:
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
