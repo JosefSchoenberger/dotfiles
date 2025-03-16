@@ -6,6 +6,12 @@ border-radius=5
 [summary="Connection Established" app-name="NetworkManager Applet"]
 default-timeout=5000
 
+[summary="Disconnected" app-name="NetworkManager Applet"]
+default-timeout=5000
+
+[summary="Wi-Fi Networks Available" app-name="NetworkManager Applet"]
+default-timeout=5000
+
 [summary="VPN Login Message" app-name="NetworkManager Applet"]
 default-timeout=5000
 
