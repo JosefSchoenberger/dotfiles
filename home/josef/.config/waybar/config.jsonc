@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     //"modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "network#ip", "network#ip6", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "pulseaudio", "pulseaudio#mic", "custom/clock", "tray"],
+    "modules-right": ["idle_inhibitor", "network#ip", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "pulseaudio", "pulseaudio#mic", "custom/clock", "tray"],
     // Modules configuration
      "sway/workspaces": {
          //"disable-scroll": true,
