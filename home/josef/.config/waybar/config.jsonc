@@ -131,6 +131,7 @@
     "network#ip": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "format-wifi": "{ipaddr}",
+        "family": "ipv4",
         /*"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",*/
         "format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format-wifi": "{ifname}:\r{essid}\r{ipaddr}/{cidr} via {gwaddr}\r{frequency} GHz, {signaldBm} dBm ({signalStrength}%)",
