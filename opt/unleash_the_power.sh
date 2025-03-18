@@ -9,7 +9,7 @@ rmdir /sys/fs/cgroup/blocker
 cd /sys/devices/system/cpu/
 for f in cpu*; do
 	pushd "$f" >/dev/null \
-		&& echo 1 >online || :
+		&& echo 1 >online 2>/dev/null || :
 	popd >/dev/null
 done
 
@@ -19,7 +19,7 @@ cd /sys/devices/system/cpu/cpufreq/
 
 for f in *; do
 	pushd "$f" >/dev/null \
-		&& cat cpuinfo_max_freq >scaling_max_freq
+		&& (cat cpuinfo_max_freq >scaling_max_freq; echo balance_power >energy_performance_preference)
 	popd >/dev/null
 done
 
