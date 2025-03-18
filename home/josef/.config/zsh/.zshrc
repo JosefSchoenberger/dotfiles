@@ -120,7 +120,7 @@ if [ "$color_prompt" = yes ]; then
 
 	#RPROMPT+='$(DIFF=$(timeout 0.1s git diff --shortstat 2>/dev/null | sed -e '\''s!, ! !g'\'' -e '\''s!\s*[0-9]\+ files\? changed!!'\'' -e '\''s!\s*\([0-9]\+\) insertions\?(+)!\1+!'\'' -e '\''s!\([0-9]\+\) deletions\?(-)!\1-!'\'' -e '\''s!\s\s\+! !g'\'') && { [ -n "$DIFF" ] && echo "%F{52}$DIFF%F{238} " })'
 	RPROMPT+='%1(j.(%j job%2(j.s.)%) .)'
-	RPROMPT+='%D{%a %d.%m, %H:%M:%S Uhr}'
+	RPROMPT+='%D{%d.%m, %H:%M:%S}'
 else
 	PROMPT="%n@%m:%~$git%(?.. (%?%))%# "
 fi
