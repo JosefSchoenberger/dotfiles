@@ -13,11 +13,27 @@
          //"disable-scroll": true,
          "disable-markup" : false,
          //"all-outputs": true,
-         "format": "{name}",
-         //"format":"{icon}",
-         //"format-icons": {
-         //    "focused": "",
-         //    "default": ""
+         "format": "{name}"
+         //"format": "{name}: <span>{windows}</span>",
+         //"window-format": "{name}",
+         //"format-window-separator": "",
+         //"window-rewrite": {
+         //   "class<firefox>": " ",
+         //   "class<firefox-esr>": " ",
+         //   "class<thunderbird>": " ",
+         //   "class<org.kde.okular>": " ",
+         //   "class<Element>": "󰘨 ",
+         //   "title<(SSH .* )?❯ (.*(\\||;|&&|\\|\\|) *)*vim( .*)?>": " ",
+         //   "title<(SSH .* )?❯ (.*(\\||;|&&|\\|\\|) *)*man( .*)?>": " ",
+         //   "title<(SSH .* )?❯ (.*(\\||;|&&|\\|\\|) *)*(h|b)top( .*)?>": "󰓅 ",
+         //   "title<(SSH .* )?❯ (.*(\\||;|&&|\\|\\|) *)*(time )?(entr [^;|&]*)?(pdflatex|make|gcc)( .*)?>": " ",
+         //   "class<gimp-..?.?>": " ",
+         //   "class<mpv>": " ",
+         //   "class<virt-manager>": "󰇅 ",
+         //   "class<org.gnome.Nautilus>": " ",
+         //   "class<com.github.wwmm.easyeffects>": " ",
+         //   "class<com.saivert.pwvucontrol>": "󱎔 ",
+         //   "class<kitty>": " "
          //}
      },
     "sway/mode": {
