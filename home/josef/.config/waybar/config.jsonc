@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     //"modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "network#ip", "network#ip6", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "wireplumber", "custom/clock", "tray"],
+    "modules-right": ["idle_inhibitor", "network#ip", "network#ip6", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "pulseaudio", "pulseaudio#mic", "custom/clock", "tray"],
     // Modules configuration
      "sway/workspaces": {
          //"disable-scroll": true,
@@ -153,25 +153,40 @@
         "interval" : 2,
         "max-width": 50
     },
-    "wireplumber": {
+    "pulseaudio": {
         //"scroll-step": 1,
         "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {desc}",
         "format-muted": "<s>{volume}%</s> {icon}",
         "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
             "phone": "",
             "portable": "",
-            "car": "",
+            "car": " ",
+            "hdmi": "󰍹 ",
             "default": ["", "", " "]
         },
+        "max-volume": 500,
         "states": {
-            "over": 101
+            "normal":100,
+            "over": 99999
         },
         "on-click": "amixer sset Master toggle >/dev/null",
-        "on-click-right": "flatpak run com.saivert.pwvucontrol >/dev/null"
+        "on-click-right": "flatpak run com.saivert.pwvucontrol >/dev/null",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "pulseaudio#mic": {
+        //"scroll-step": 1,
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "max-volume": 500,
+        "on-click": "amixer sset Capture toggle >/dev/null",
+        "on-scroll-up": "amixer sset Capture 3%+",
+        "on-scroll-down": "amixer sset Capture 3%-",
+        "ignored-sinks": ["Easy Effects Sink"]
     },
     //"custom/media": {
     //    "format": "{icon} {}",

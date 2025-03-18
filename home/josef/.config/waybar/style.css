@@ -61,7 +61,7 @@ window#waybar.hidden {
     margin-left: 6px;
 }
 
-#clock, #battery, #custom-cpu, #cpu, #memory, #temperature, #backlight, #network, #wireplumber, #custom-media, #tray, #mode, #idle_inhibitor, #custom-clock, #disk, #mpris {
+#clock, #battery, #custom-cpu, #cpu, #memory, #temperature, #backlight, #network, #wireplumber, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor, #custom-clock, #disk, #mpris {
     font-family: 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
     border-radius: 6px;
     padding: 2.5px 8px 0px 8px;
@@ -250,6 +250,9 @@ window#waybar.hidden {
     border-radius: 0 6px 6px 0px;
 }
 
+
+
+
 #wireplumber {
     /*background: #f1c40f;*/
     color: #fff;
@@ -259,11 +262,44 @@ window#waybar.hidden {
     background: #822;
     color: #fff;
 }
-
 #wireplumber.muted {
     /*background: #90b1b1;*/
     color: #888;
 }
+
+
+
+#pulseaudio {
+    /*background: #f1c40f;*/
+    color: #fff;
+    border-radius: 6px 0px 0px 6px;
+    margin-right: 0px
+}
+#pulseaudio.over {
+    /*background: #f1c40f;*/
+    background: #822;
+    color: #fff;
+}
+#pulseaudio.muted {
+    /*background: #90b1b1;*/
+    color: #888;
+}
+#pulseaudio.source-muted {
+    border-radius: 6px;
+    margin-right: 3px;
+}
+#pulseaudio.mic {
+    margin-left: 0px;
+    margin-right: 3px;
+    border-radius: 0 6px 6px 0px;
+    background: #a44;
+}
+#pulseaudio.mic.muted {
+    color: #fff;
+}
+
+
+
 
 #custom-media {
     background: #66cc99;
