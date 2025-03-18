@@ -83,7 +83,7 @@
     },
     "memory": {
         "format": "  {}% |",
-        "tooltip-format": "RAM: {percentage}% - {used}GiB / {total}GiB ({avail}GiB avail)\rSwap: {swapPercentage}% - {swapUsed}GiB / {swapTotal}GiB ({swapAvail}GiB avail)"
+        "tooltip-format": "RAM: {percentage}% — {used}GiB / {total}GiB ({avail}GiB avail)\rSwap: {swapPercentage}% — {swapUsed}GiB / {swapTotal}GiB ({swapAvail}GiB avail)"
     },
     "temperature": {
         // "thermal-zone": 2,
