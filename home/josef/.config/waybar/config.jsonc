@@ -136,6 +136,7 @@
         "format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format-wifi": "{ifname}:\r{essid}\r{ipaddr}/{cidr} via {gwaddr}\r{frequency} GHz, {signaldBm} dBm ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}:\r{ipaddr}/{cidr} via {gwaddr}",
+        "on-click-right": "foot -- sh -c 'sleep .1 && nmtui'",
         "interval" : 7
     },
     "network": {
@@ -148,6 +149,7 @@
         "format-disabled": "offline",
         "tooltip-format-wifi": "{ifname}:\r{essid}\r{ipaddr}/{cidr} via {gwaddr}\r{frequency} GHz, {signaldBm} dBm ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}:\r{ipaddr}/{cidr} via {gwaddr}",
+        "on-click-right": "foot -- sh -c 'sleep .1 && nmtui'",
         "interval" : 7
     },
     "network#ip6": {
