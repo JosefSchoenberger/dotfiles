@@ -58,7 +58,7 @@
     },
     "cpu": {
         "format": "  <span letter_spacing='-4000' stretch='ultracondensed' >{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{icon20}{icon21}</span>",
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "format-icons": ["▁", "▂", "▃", "▖", "▅", "▆", "▇", "▌"],
         "states": {
             "99": 99,
             "92": 92,
@@ -88,7 +88,8 @@
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
+        "critical-threshold": 83,
+        "warning-threshold": 75,
         // "format-critical": "{temperatureC}°C ",
         "format": "{temperatureC}°C ",
         "interval": 2

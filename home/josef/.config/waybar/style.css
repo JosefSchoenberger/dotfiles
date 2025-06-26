@@ -169,6 +169,9 @@ window#waybar.hidden {
     color: #fff;
     border-radius: 0 6px 6px 0px;
 }
+#temperature.warning {
+    background: #c62;
+}
 #temperature.critical {
     background: #eb4d4b;
 }
@@ -315,8 +318,9 @@ window#waybar.hidden {
 }
 
 #tray {
-    padding: 0 3px;
+    padding: 0 2px;
     background: none;
+    margin-bottom: -3px;
     /*background-color: #2980b9;*/
 }
 
