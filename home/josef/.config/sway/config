@@ -29,8 +29,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+o exec firefox
 bindsym $mod+Shift+o exec firefox -private-window
 bindsym $mod+i exec thunderbird
-bindsym $mod+u exec element-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
-bindsym $mod+z exec signal-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto
+bindsym $mod+u exec element-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto --password-store="gnome-libsecret"
+bindsym $mod+z exec signal-desktop --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto --password-store="gnome-libsecret"
 bindsym $mod+t exec okular
 bindsym $mod+n exec nautilus --new-window
 bindsym $mod+Shift+n exec dolphin --new-window
