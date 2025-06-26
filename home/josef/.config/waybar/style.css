@@ -10,7 +10,7 @@
 
 window#waybar {
     background: rgba(0,0,0,1);
-    border-bottom: 3px solid rgba(50, 57, 62, 1);
+    /*border-bottom: 3px solid rgba(50, 57, 62, 1);*/
     color: #ffffff;
 }
 
@@ -19,10 +19,10 @@ window#waybar.hidden {
 }
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
-    color: #ffffff;
+    /*color: #ffffff;*/
     font-family: 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
     /* transition: padding 50ms linear; */
-    padding: 0 5px;
+    padding: 0 4.5px;
     background: #222;
     color: #888;
     border: 1px solid;
@@ -65,7 +65,7 @@ window#waybar.hidden {
     font-family: 'CaskaydiaCove NF', Helvetica, Arial, sans-serif;
     border-radius: 6px;
     padding: 2.5px 8px 0px 8px;
-    margin: 0px 3px 3px 3px;
+    margin: 0px 3px 0px 3px;
     border-bottom: 3px solid rgba(50, 57, 62, 0);
     background-color: #333;
 }
