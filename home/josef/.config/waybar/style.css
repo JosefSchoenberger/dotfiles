@@ -323,15 +323,21 @@ window#waybar.hidden {
 #idle_inhibitor {
     background-color: #000;
     color: #444;
+    margin-right: 6px;
 }
 
 #idle_inhibitor.activated {
     background-color: #33a;
     padding: 2.9px 13px 0px 7px;
     color: #fff;
+    margin-left: 8px;
     /*color: #2d3436;*/
 }
 
 #mpris {
-    font-family: Helvetica, Arial, sans-serif;
+    /*font-family: Helvetica, Arial, sans-serif;*/
+    background-color: #000;
+    padding-right: 0px;
+    margin-right: 0px;
+    color: #444;
 }
