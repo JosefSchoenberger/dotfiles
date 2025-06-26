@@ -68,7 +68,7 @@ class StackLayout(gdb.Command):
         end = list_of_values[-1][1] + list_of_values[-1][2]
 
         stackframe = gdb.selected_inferior().read_memory(start, end - start).tobytes()
-        offset_in_line = 0
+        offset_in_line = start & 0xf
         last_color = ''
         last_color_index = 0
         colors = ['31', '32', '33', '36', '35', '34']
@@ -79,7 +79,10 @@ class StackLayout(gdb.Command):
                 print('\x1b[24m', end='') # reset underline
                 stop_underline_offset = -1
 
-            if offset_in_line == 0:
+
+            if address == start and offset_in_line > 0: # stack is not 16-byte aligned
+                print(f'{address&~0xf:12x}:', '   ' * offset_in_line + (' ' * (offset_in_line//8)), end='')
+            elif offset_in_line == 0:
                 print(f'{address:12x}: ', end = '')
             elif offset_in_line == 8:
                 print(' ', end='')
