@@ -176,7 +176,7 @@
     "pulseaudio": {
         //"scroll-step": 1,
         "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} {desc}",
+        "format-bluetooth": "{volume}% {icon}   {desc}",
         "format-muted": "<s>{volume}%</s> {icon}",
         "format-icons": {
             "headphone": " ",
@@ -194,6 +194,7 @@
             "over": 99999
         },
         "on-click": "amixer sset Master toggle >/dev/null",
+        "on-click-middle": "amixer sset Capture toggle >/dev/null",
         "on-click-right": "flatpak run com.saivert.pwvucontrol >/dev/null",
         "ignored-sinks": ["Easy Effects Sink"]
     },
@@ -204,6 +205,8 @@
         "format-source-muted": "",
         "max-volume": 500,
         "on-click": "amixer sset Capture toggle >/dev/null",
+        "on-click-middle": "amixer sset Capture toggle >/dev/null",
+        "on-click-right": "flatpak run com.saivert.pwvucontrol >/dev/null",
         "on-scroll-up": "amixer sset Capture 3%+",
         "on-scroll-down": "amixer sset Capture 3%-",
         "ignored-sinks": ["Easy Effects Sink"]
