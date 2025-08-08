@@ -123,7 +123,7 @@
         "tooltip-format": "{capacity}%\r{timeTo}\r{power} W\r{cycles} charge cycles\rhealth: {health}%",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": [" ", " ", " ", " ", " "],
+        "format-icons": [" ", " ", " ", " ", " ", " "],
         "interval": 5
     },
     "battery#bat2": {
