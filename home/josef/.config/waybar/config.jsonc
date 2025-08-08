@@ -91,7 +91,7 @@
         "critical-threshold": 83,
         "warning-threshold": 75,
         // "format-critical": "{temperatureC}°C ",
-        "format": "{temperatureC}°C ",
+        "format": " {temperatureC}°C",
         "interval": 2
     },
     "disk": {
@@ -117,7 +117,7 @@
             "verylow": 13,
             "critical": 8
         },
-        "format": "{capacity}% {icon}",
+        "format": "{icon} {capacity}%",
         "format-discharging": "{capacity}% {icon} {power}W",
         "format-charging": "{capacity}% {icon} {time}",
         "tooltip-format": "{capacity}%\r{timeTo}\r{power} W\r{cycles} charge cycles\rhealth: {health}%",
@@ -175,9 +175,9 @@
     },
     "pulseaudio": {
         //"scroll-step": 1,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}   {desc}",
-        "format-muted": "<s>{volume}%</s> {icon}",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%   {desc}",
+        "format-muted": "{icon} <s>{volume}%</s>",
         "format-icons": {
             "headphone": " ",
             "hands-free": " ",
