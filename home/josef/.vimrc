@@ -215,7 +215,7 @@ set showbreak=↪
 set breakindent
 set breakindentopt=shift:2
 set smoothscroll
-set colorcolumn=121
+set colorcolumn=121,+1
 
 set formatoptions+=j
 autocmd BufNewFile,BufRead *.md set formatoptions+=n # indent following a enumeration with '1.'
