@@ -25,3 +25,35 @@
 [diff "pdf"]
 	binary = true
 	textconv = bash -c 'pdftotext $0 -'
+
+
+
+# Delta diff
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	map-styles = bold purple => syntax 53, bold cyan => syntax 23
+	#whitespace-error-style = 46 reverse
+	whitespace-error-style = 196 reverse
+	file-style = bold yellow ul reverse
+	file-decoration-style = none
+	hunk-header-decoration-style = blue
+	hunk-label = "─────────┬─" #┐"
+	blame-code-style = syntax
+	hyperlinks = true
+	#default-language = tex
+
+#[delta "side-by-side"]
+#	hunk-label = "────┬─" #┐"
+
+#[merge]
+#	conflictstyle = zdiff3
+
+[diff]
+	colormoved = default
