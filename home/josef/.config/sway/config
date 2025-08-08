@@ -377,7 +377,7 @@ bindsym $mod+y exec --no-startup-id "wofi --show drun,run --insensitive --allow-
 # lock:
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
-set $lockcmd "swaylock -klfeFi '~/Pictures/Wallpapers/Stagetec_Hintergrund.jpg' --indicator-radius 70"
+set $lockcmd "swaylock -klfeFi '~/Pictures/Wallpapers/Joaquin-sorolla-y-bastida-the-carob-tree.jpg' --indicator-radius 70"
 exec swayidle -w \
 	before-sleep $lockcmd \
 	lock $lockcmd \
