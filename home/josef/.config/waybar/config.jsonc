@@ -176,7 +176,7 @@
     "pulseaudio": {
         //"scroll-step": 1,
         "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%   {desc}",
+        "format-bluetooth": "{icon} {volume}%   <span size='small' stretch='extracondensed'>{desc}</span>",
         "format-muted": "{icon} <s>{volume}%</s>",
         "format-icons": {
             "headphone": " ",
