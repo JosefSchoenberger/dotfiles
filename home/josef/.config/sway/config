@@ -148,7 +148,7 @@ set $ws20 "20:F10"
 set $ws21 "21:F11"
 set $ws22 "22:F12"
 set $ws25 "25:󰎇"
-set $ws26 "26:"
+set $ws26 "26: "
 set $ws27 "27:"
 
 # switch to workspace
