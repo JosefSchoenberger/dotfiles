@@ -85,7 +85,7 @@ endif
 nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
 
 g:ycm_autoclose_preview_window_after_completion = 1
-g:ycm_key_list_select_completion = ['<Down>']
+g:ycm_key_list_select_completion = ['<Down>'] # remove tab as it conflicts with UltiSnips
 g:ycm_key_list_previous_completion = ['<Up>']
 g:ycm_echo_current_diagnostic = 'virtual-text'
 g:ycm_language_server = [
