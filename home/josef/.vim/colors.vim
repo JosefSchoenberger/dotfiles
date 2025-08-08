@@ -73,6 +73,8 @@ if &t_Co == "256" || has("gui_running")
 	hi YcmWarningSign ctermfg=0 ctermbg=75
 	hi YcmErrorPopup ctermbg=16 ctermfg=203
 	nnoremap <F12> :call UpdateYCM()<CR>
+	hi YcmErrorText ctermfg=red
+	hi YcmWarningText ctermfg=75
 
 	# Diff colors:
 	# Added lines -> brighter & bold over darkest green available
