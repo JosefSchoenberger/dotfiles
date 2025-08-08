@@ -216,18 +216,18 @@ workspace $ws7 output eDP-1
 workspace $ws8 output eDP-1
 workspace $ws9 output eDP-1
 workspace $ws10 output eDP-1
-workspace $ws11 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws12 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws13 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws14 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws15 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws16 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws17 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws18 output DP-3 DP-1 DP-4 HDMI-A-1 DP-5 DP-6
-workspace $ws19 output HDMI-A-1 DP-4 DP-1 DP-3 DP-6 DP-5
-workspace $ws20 output HDMI-A-1 DP-4 DP-1 DP-3 DP-6 DP-5
-workspace $ws21 output HDMI-A-1 DP-4 DP-1 DP-3 DP-6 DP-5
-workspace $ws22 output HDMI-A-1 DP-4 DP-1 DP-3 DP-6 DP-5
+workspace $ws11 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws12 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws13 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws14 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws15 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws16 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws17 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws18 output DP-3 DP-1 DP-4 HDMI-A-1 DP-6 DP-5 DP-7 DP-8 DP-9 DP-10
+workspace $ws19 output HDMI-A-1 DP-4 DP-1 DP-3 DP-10 DP-9 DP-8 DP-7 DP-5 DP-6
+workspace $ws20 output HDMI-A-1 DP-4 DP-1 DP-3 DP-10 DP-9 DP-8 DP-7 DP-5 DP-6
+workspace $ws21 output HDMI-A-1 DP-4 DP-1 DP-3 DP-10 DP-9 DP-8 DP-7 DP-5 DP-6
+workspace $ws22 output HDMI-A-1 DP-4 DP-1 DP-3 DP-10 DP-9 DP-8 DP-7 DP-5 DP-6
 
 bindsym $mod+period scratchpad show
 bindsym $mod+minus move scratchpad
