@@ -441,6 +441,8 @@ bindsym $mod+Ctrl+F12 exec /home/josef/.config/sway/toggle_paprofile && $refresh
 bindcode Shift+164 exec /home/josef/.config/sway/refresh_mako
 bindsym $mod+Ctrl+Shift+F12 exec /home/josef/.config/sway/refresh_mako
 
+bindsym $mod+Ctrl+Shift+F10 exec /home/josef/.config/sway/toggle_rotate
+
 # better notifications (essentially dunst for Wayland)
 exec mako
 # TODO (use systemd --user for mako, playerctl and/or gammastep?)

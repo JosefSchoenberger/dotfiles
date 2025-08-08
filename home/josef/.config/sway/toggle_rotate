@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. /home/josef/.config/sway/notification_status.sh
+
+MONITOR="Fujitsu Siemens Computers GmbH P27-8 TS Pro YVAQ607198"
+
+TRANSFORM="$(swaymsg -t get_outputs | jq '.[] | select((.make + " " + .model + " " + .serial)  == "'"$MONITOR"'") | .transform' -r)"
+
+if [ "$TRANSFORM" = 90 ]; then
+	TRANSFORM=0
+else
+	TRANSFORM=90
+fi
+
+swaymsg output "'$MONITOR'" transform $TRANSFORM
+#notify-send "$TARGET Hz" -t 1500
+show_notification_status monitor_rotate "Screen rotation: $TRANSFORM°"
