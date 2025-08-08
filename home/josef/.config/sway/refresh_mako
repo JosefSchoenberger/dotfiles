@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. ~/.config/sway/notification_status.sh
+
+makoctl mode -r silent
+show_notification_status refreshrate "Mako refreshed."
