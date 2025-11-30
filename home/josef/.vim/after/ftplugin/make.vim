@@ -1,1 +1,1 @@
-silent! /# \?\(©\|(C)\)/;/\n[^#]/fold
+silent! keeppatterns /# \?\(©\|(C)\)/;/\n[^#]/fold
