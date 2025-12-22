@@ -122,7 +122,7 @@ window#waybar.hidden {
     color: #fff;
     margin-right: 0;
     border-radius: 6px 0 0 6px;
-    padding-right: 0;
+    padding-right: 1.0px;
 }
 #cpu {
     /* background: #2ecc71; */
@@ -130,8 +130,12 @@ window#waybar.hidden {
     margin-right: 0;
     border-radius: 0;
     color: #fff;
+    padding-left: 2px;
     padding-right: 0;
-    padding-right: 0;
+}
+#cpu.label {
+    padding-left: 7px;
+    padding-right: 5px;
 }
 #cpu.99 {
     background-color: #eb4d4b;

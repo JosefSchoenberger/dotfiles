@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     //"modules-center": ["sway/window"],
-    "modules-right": ["mpris", "idle_inhibitor", "network#ip", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu", "custom/cpu", "temperature", "battery", "pulseaudio", "pulseaudio#mic", "custom/clock", "tray"],
+    "modules-right": ["mpris", "idle_inhibitor", "network#ip", "network", "network#bwdown", "network#bwup", "disk", "memory", "cpu#label", "cpu", "custom/cpu", "temperature", "battery", "pulseaudio", "pulseaudio#mic", "custom/clock", "tray"],
     // Modules configuration
      "sway/workspaces": {
          //"disable-scroll": true,
@@ -56,15 +56,22 @@
         "tooltip-format": "{:%d.%m.%Y | %H:%M}",
         "format-alt": "{:%a, %d. %m. %Y %T}"
     },
-    "cpu": {
-        "format": "  <span letter_spacing='-4000' stretch='ultracondensed' >{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{icon20}{icon21}</span>",
-        "format-icons": ["▁", "▂", "▃", "▖", "▅", "▆", "▇", "▌"],
+    "cpu#label": {
+        "format": " ",
         "states": {
             "99": 99,
             "92": 92,
             "75": 75,
             "50": 50
         },
+        "on-click": "pkill -USR1 cpu_usage-way",
+        "on-click-right": "pkill -USR2 cpu_usage-way",
+        "interval": 2
+    },
+    "cpu": {
+        "format": "<span stretch='ultracondensed' ><span letter_spacing='0'>{icon0}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon1}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon2}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon3}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon4}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon5}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon6}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon7}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon8}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon9}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon10}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon11}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon12}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon13}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon14}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon15}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon16}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon17}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon18}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon19}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon20}</span><span color='#333' letter_spacing='-8200'>█  </span><span letter_spacing='0'>{icon21}</span><span color='#333' letter_spacing='-8200'>█  </span></span>",
+        //"format-icons": ["▁", "▂", "▃", "▖", "▅", "▆", "▇", "▌"],
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
         "on-click": "pkill -USR1 cpu_usage-way",
         "on-click-right": "pkill -USR2 cpu_usage-way",
         "interval": 2
