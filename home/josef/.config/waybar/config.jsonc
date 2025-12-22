@@ -193,6 +193,8 @@
             "portable": "",
             "car": " ",
             "hdmi": "󰍹 ",
+            "speaker": "<span color='red'>󰓃</span>",
+            "speaker-muted": "󰓃",
             "default": ["", "", " "]
         },
         "max-volume": 500,
