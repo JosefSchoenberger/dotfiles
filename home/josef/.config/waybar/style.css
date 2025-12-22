@@ -349,3 +349,10 @@ window#waybar.hidden {
     margin-right: 0px;
     color: #444;
 }
+
+#mpris.firefox {
+    color: #9c2722;
+}
+#mpris.mpv {
+    color: #943da6;
+}

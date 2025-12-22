@@ -239,7 +239,7 @@
     "mpris": {
         "format": "",
         "format-playing": "{status_icon}",
-        "format-paused": "{status_icon}",
+        "format-paused": "<span color=\"#444\">{status_icon}</span>",
         //"format": "{player_icon} {status_icon} {title} – {artist}",
         //"format-paused": "{status_icon} <i>{title} – {artist}</i>",
         "player-icons": {
