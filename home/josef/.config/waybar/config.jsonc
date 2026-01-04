@@ -138,7 +138,8 @@
     },
     "network#ip": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "{ipaddr}",
+        "format-wifi": "{ipaddr}/{cidr}",
+        "format-linked": "no IPv4",
         "family": "ipv4",
         /*"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",*/
         "format-ethernet": "{ipaddr}/{cidr}",
@@ -169,6 +170,7 @@
     "network#bwdown": {
         "format-wifi": "{bandwidthDownBytes}",
         "format-ethernet": "{bandwidthDownBytes}",
+        "format-linked": "{bandwidthDownBytes}",
         "align": 1,
         "interval" : 2,
         "max-width": 50
@@ -176,6 +178,7 @@
     "network#bwup": {
         "format-wifi": "{bandwidthUpBytes}",
         "format-ethernet": "{bandwidthUpBytes}",
+        "format-linked": "{bandwidthUpBytes}",
         "align": 1,
         "interval" : 2,
         "max-width": 50

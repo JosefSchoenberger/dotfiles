@@ -228,6 +228,9 @@ window#waybar.hidden {
     margin-right: 0;
     border-radius: 6px 0 0 6px;
 }
+#network.ip.linked {
+    background: #422;
+}
 
 #network.disconnected {
     background: #522;
