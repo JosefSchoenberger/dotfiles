@@ -316,6 +316,8 @@ if [ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
 	fi
 	export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 	export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=top,30%,wrap"
+	bindkey -M emacs '^[OQ' fzf-file-widget # bind F1 as an alias to Ctrl+T
+	bindkey -M emacs -s '^[OP' 'vim ^[OQ' # F2 = "vim " + F1, i.e., prepare a command to open a file
 	unset ansi
 fi
 
