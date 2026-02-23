@@ -190,7 +190,8 @@ analyze_latex_log() {
 
 alias sudopriv="sudo -E setpriv --reuid $(id -u) --regid $(id -g) --groups $(id -g),$(groups | tr ' ' ',') --inh-caps=+all --ambient-caps=+all $SHELL"
 alias gh='git hist --color=always --all | head -n20'
-alias ghl='git hist --color=always --all | less'
+alias ghl='git hist --color=always --all'
+alias ghd='git hist --color=always --all --date-order'
 #gs = ghostscript
 #alias gs='git status'
 alias gst='git status'
@@ -201,6 +202,9 @@ alias gdws='git diff --color-words --staged'
 alias gsh='git show'
 alias gshw='git show --color-words'
 alias ga='git add'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gp-set-upstream-origin='git push --set-upstream origin $(git branch --show-current)'
 alias gsw='git switch'
 
 cdtmp() {
