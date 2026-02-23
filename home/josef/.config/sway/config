@@ -10,14 +10,14 @@ font pango:DejaVu Sans 9
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+exec nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status pkill -SIGRTMIN+11 i3blocks
-bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
-bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
-bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym --locked XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -48,7 +48,7 @@ bindsym $mod+d exec wmenu-run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec i3-dmenu-desktop
 
 # change focus
 #bindsym $mod+j focus left
@@ -344,10 +344,10 @@ output * bg '/home/josef/Pictures/Wallpapers/daniel-olah-6KQETG8J-zI-unsplash.jp
 include ~/.config/sway/output-configs
 
 # Map backlight keys
-bindsym --locked XF86MonBrightnessUp exec --no-startup-id /home/josef/.config/sway/brightness --inc 10%
-bindsym --locked XF86MonBrightnessDown exec --no-startup-id /home/josef/.config/sway/brightness --dec 10%
-bindsym --locked $mod+XF86MonBrightnessUp exec --no-startup-id /home/josef/.config/sway/brightness --set 100%
-bindsym $mod+XF86MonBrightnessDown exec --no-startup-id /home/josef/.config/sway/brightness_wofi
+bindsym --locked XF86MonBrightnessUp exec /home/josef/.config/sway/brightness --inc 10%
+bindsym --locked XF86MonBrightnessDown exec /home/josef/.config/sway/brightness --dec 10%
+bindsym --locked $mod+XF86MonBrightnessUp exec /home/josef/.config/sway/brightness --set 100%
+bindsym $mod+XF86MonBrightnessDown exec /home/josef/.config/sway/brightness_wofi
 
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioPrev exec playerctl previous
@@ -367,12 +367,12 @@ bindsym --release Num_Lock exec pkill -SIGRTMIN+10 i3blocks
 # bindsym --release XF86AudioMute exec pkill -SIGRTMIN+11 i3blocks
 
 ## rofi
-#bindsym $mod+c exec --no-startup-id "rofi -show run -dpi 190 -show-icons -modi drun,run"
-#bindsym $mod+x exec --no-startup-id "rofi -show window -dpi 190 -show-icons -modi window,windowcd"
-#bindsym $mod+y exec --no-startup-id "rofi -show drun -dpi 190 -show-icons -modi drun,run"
+#bindsym $mod+c exec "rofi -show run -dpi 190 -show-icons -modi drun,run"
+#bindsym $mod+x exec "rofi -show window -dpi 190 -show-icons -modi window,windowcd"
+#bindsym $mod+y exec "rofi -show drun -dpi 190 -show-icons -modi drun,run"
 
 # wofi
-bindsym $mod+y exec --no-startup-id "wofi --show drun,run --insensitive --allow-images --prompt='Search Applications...'"
+bindsym $mod+y exec "wofi --show drun,run --insensitive --allow-images --prompt='Search Applications...'"
 
 # lock:
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
@@ -383,10 +383,10 @@ exec swayidle -w \
 	lock $lockcmd \
 	timeout 300 $lockcmd \
 	timeout 310 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
-bindsym $mod+Ctrl+l exec --no-startup-id loginctl lock-session
+bindsym $mod+Ctrl+l exec loginctl lock-session
 # mod+Shift is the Copilot key, directly below the period key.
-bindsym $mod+Shift+Period exec --no-startup-id loginctl lock-session
-bindsym $mod+Ctrl+Alt+l exec --no-startup-id systemctl hibernate
+bindsym $mod+Shift+Period exec loginctl lock-session
+bindsym $mod+Ctrl+Alt+l exec systemctl hibernate
 
 # note: lid:on == switch is active == laptop is closed
 bindswitch --locked --reload lid:on output eDP-1 disable
@@ -395,12 +395,12 @@ bindswitch --locked --reload lid:off output eDP-1 enable
 #exec swayidle -w
 
 # GPaste
-# bindsym $mod+Shift+v exec --no-startup-id "/usr/libexec/gpaste/gpaste-ui"
+# bindsym $mod+Shift+v exec "/usr/libexec/gpaste/gpaste-ui"
 # TODO execute 'wl-paste --watch cliphist store &' and configure cliphist
-exec --no-startup-id wl-paste --watch cliphist store
-bindsym $mod+Shift+v exec --no-startup-id sh -c 'cliphist list | wofi -S dmenu | cliphist decode | wl-copy'
+exec wl-paste --watch cliphist store
+bindsym $mod+Shift+v exec sh -c 'cliphist list | wofi -S dmenu | cliphist decode | wl-copy'
 
-#bindsym $mod+Shift+s exec --no-startup-id "/usr/bin/spectacle"
+#bindsym $mod+Shift+s exec "/usr/bin/spectacle"
 bindsym $mod+Shift+s exec grimshot copy anything
 bindsym $mod+Ctrl+Shift+s exec grimshot savecopy anything
 
@@ -415,9 +415,9 @@ titlebar_padding 4 2
 #gaps inner 5
 #gaps outer -5
 
-#exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
-#exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
-#exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Accel Speed" .4
+#exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
+#exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
+#exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Accel Speed" .4
 
 # Mod+Mouse middle click to close a window
 bindsym --whole-window $mod+button2 kill
