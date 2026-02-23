@@ -299,6 +299,10 @@ function g:Denglisch() # use both German and English
 	setlocal spell spelllang=de,en
 endfunction
 
+if file_readable($HOME .. '/.vim/en-thesaurus.txt')
+	&thesaurus = $HOME .. '/.vim/en-thesaurus.txt'
+endif
+
 # Cursor shape
 # 0 & 1 -> Block blinking (1 -> default)
 # 2 -> Block
