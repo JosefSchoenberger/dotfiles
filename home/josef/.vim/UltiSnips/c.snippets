@@ -30,7 +30,7 @@ endsnippet
 
 snippet errxif "if(...) err(EXIT_FAILURE, ...);" b
 if (${1:${VISUAL:error}})
-	err(${2:EXIT_FAILURE}, "$3");
+	errx(${2:EXIT_FAILURE}, "$3");
 
 endsnippet
 
