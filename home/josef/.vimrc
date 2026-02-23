@@ -59,8 +59,7 @@ Plugin 'iamcco/markdown-preview.nvim' # for instant Markdown Preview in browser
 Plugin 'cespare/vim-toml' # for TOML-files syntax (i.e. Cargo.toml for Rust)
 
 Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/fzf' # Testing it out, looks cool, will require configuration;
-					  # requires fzf?
+Plugin 'junegunn/fzf'
 
 Plugin 'airblade/vim-gitgutter' # git status on the left
 
