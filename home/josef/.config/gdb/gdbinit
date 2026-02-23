@@ -8,6 +8,7 @@ set print asm-demangle on
 set detach-on-fork off
 set history size 65536
 set history filename ~/.config/gdb/.gdb_history
+set history save on
 
 #define hook-quit
 #	set confirm off
