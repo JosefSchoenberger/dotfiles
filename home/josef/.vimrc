@@ -87,6 +87,7 @@ g:ycm_autoclose_preview_window_after_completion = 1
 g:ycm_key_list_select_completion = ['<Down>'] # remove tab as it conflicts with UltiSnips
 g:ycm_key_list_previous_completion = ['<Up>']
 g:ycm_echo_current_diagnostic = 'virtual-text'
+g:ycm_auto_hover = ''
 g:ycm_language_server = [
 	{
 		'name': 'bash',
@@ -370,7 +371,6 @@ nnoremap <S-F6> :YcmCompleter FixIt<CR>
 # For more advanced refactoring commands
 nnoremap <C-F6> :YcmCompleter Refactor
 nnoremap <M-F6> :YcmCompleter Format<CR>
-g:ycm_auto_hover = ''
 nnoremap <F7> <plug>(YCMHover)
 inoremap <F7> <Esc><plug>(YCMHover)a
 nnoremap <S-F7> :YcmCompleter GetDoc<CR>
