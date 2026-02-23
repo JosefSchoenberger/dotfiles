@@ -385,6 +385,7 @@ exec swayidle -w \
 bindsym $mod+Ctrl+l exec loginctl lock-session
 # mod+Shift is the Copilot key, directly below the period key.
 bindsym $mod+Shift+Period exec loginctl lock-session
+bindsym Mod1+Mod4+y exec loginctl lock-session
 bindsym $mod+Ctrl+Alt+l exec systemctl hibernate
 
 # note: lid:on == switch is active == laptop is closed
