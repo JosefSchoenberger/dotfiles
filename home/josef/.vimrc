@@ -89,11 +89,11 @@ g:ycm_key_list_previous_completion = ['<Up>']
 g:ycm_echo_current_diagnostic = 'virtual-text'
 g:ycm_auto_hover = ''
 g:ycm_language_server = [
-	{
-		'name': 'bash',
-		'cmdline': [ '/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start' ],
-		'filetypes': [ 'sh' ],
-	},
+	# {
+	#	'name': 'bash',
+	#	'cmdline': [ '/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start' ],
+	#	'filetypes': [ 'sh' ],
+	#},
 	{
 		'name': 'html',
 		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-html-language-server', '--stdio' ],
@@ -125,6 +125,10 @@ g:ycm_language_server = [
 		'filetypes': [ 'latex', 'tex' ],
 	},
 ]
+function g:EnableBashLSP()
+	let g:ycm_language_server += [{'name': 'bash', 'cmdline': ['/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start'], 'filetypes': ['sh']}]
+	YcmRestartServer
+endfunction
 
 augroup YcmSetHoverSyntax
 	autocmd!
