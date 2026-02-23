@@ -3,7 +3,7 @@
 . /home/josef/.config/sway/notification_status.sh
 
 CARDS="$(pactl list short cards)"
-CARD="$(echo "$CARDS" | cut -f2 | head -n1)"
+CARD="$(echo "$CARDS" | grep -v 'Dock_USB\|bluez' | cut -f2 | head -n1)"
 
 DEFAULT_SINK="$(pactl get-default-sink)"
 if [[ "$DEFAULT_SINK" =~ "Thunderbolt" ]]; then
