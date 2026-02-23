@@ -102,7 +102,7 @@ g:ycm_language_server = [
 	{
 		'name': 'css',
 		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-css-language-server', '--stdio' ],
-		'filetypes': [ 'css' ],
+		'filetypes': [ 'css', 'sass' ],
 	},
 	{
 		'name': 'json',
