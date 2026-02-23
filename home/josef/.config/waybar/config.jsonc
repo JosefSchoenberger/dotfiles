@@ -247,8 +247,8 @@
         //"format-paused": "{status_icon} <i>{title} – {artist}</i>",
         "player-icons": {
             "default": "🎵",
-            "firefox": "",
-            "mpv": " "
+            "firefox": "<span color=\"#ff423b\"> </span>",
+            "mpv": "<span color=\"#943da6\"> </span>"
         },
         "status-icons": {
             "default": "",
