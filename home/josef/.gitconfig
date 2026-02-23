@@ -9,7 +9,7 @@
 
 # This is an nice alias for a compact overview over all commits. Append this to your own .gitconfig file
 [alias]
-	hist = log --pretty=format:'%C(yellow)%h %Cblue%G?%Cgreen %ad %Creset | %Cred%s%C(auto)%d%Creset [%Cblue%an%Creset] %N' --graph --date=format:'%d.%m.%Y %H:%M'
+	hist = log --pretty=format:'%C(yellow)%h %Cblue%G?%Cgreen %ad%Creset | %Cred%s%C(auto)%d%Creset [%Cblue%an%Creset] %N' --graph --date=format:'%d.%m.%Y %H:%M'
 
 [core]
 	pager = "less -RF" # use pager only when necessary
