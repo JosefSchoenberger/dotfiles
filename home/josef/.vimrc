@@ -116,7 +116,7 @@ g:ycm_language_server = [
 	},
 	{
 		'name': 'verilog',
-		'cmdline': [ '/opt/veridian/target/release/veridian' ],
+		'cmdline': [ '/opt/veridian-bin' ],
 		'filetypes': [ 'systemverilog', 'verilog' ],
 	},
 	{
