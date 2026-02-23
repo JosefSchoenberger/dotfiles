@@ -341,7 +341,7 @@ const c_space_errors = 1 # highlight trailing spaces/tabs and spaces before tabs
 # let g:load_doxygen_syntax=1 # enably doxygen highlighting for C, C++, C# and IDL
 
 
-g:markdown_fenced_languages = ['c', 'cpp', 'python', 'bash', 'sh', 'java', 'rust', 'go']
+#g:markdown_fenced_languages = ['c', 'cpp', 'python', 'bash', 'sh', 'java', 'rust', 'go']
 
 # only fold from the 10th level on initially
 set foldlevel=10
