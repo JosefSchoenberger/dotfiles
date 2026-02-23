@@ -13,11 +13,10 @@ font pango:DejaVu Sans 9
 exec nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status pkill -SIGRTMIN+11 i3blocks
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
-bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +4%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -4%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -435,8 +434,8 @@ bindsym $mod+Ctrl+F11 exec /home/josef/.config/sway/toggle_wifirf
 bindcode Shift+248 exec /home/josef/.config/sway/toggle_power.sh
 bindsym $mod+Ctrl+Shift+F11 exec /home/josef/.config/sway/toggle_power.sh
 #
-bindcode 164 exec /home/josef/.config/sway/toggle_paprofile && $refresh_i3status
-bindsym $mod+Ctrl+F12 exec /home/josef/.config/sway/toggle_paprofile && $refresh_i3status
+bindcode 164 exec /home/josef/.config/sway/toggle_paprofile
+bindsym $mod+Ctrl+F12 exec /home/josef/.config/sway/toggle_paprofile
 #
 bindcode Shift+164 exec /home/josef/.config/sway/refresh_mako
 bindsym $mod+Ctrl+Shift+F12 exec /home/josef/.config/sway/refresh_mako
