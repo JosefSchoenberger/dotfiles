@@ -193,6 +193,8 @@ autocmd FileType c,cpp,java,rust,go,html,bash,python,typescript,javascript setlo
 autocmd FileType rust setlocal colorcolumn=101
 autocmd FileType vim setlocal foldmethod=manual
 
+g:tex_flavor = "latex"
+
 autocmd BufNewFile,BufRead kea-*.conf set ft=json
 autocmd BufNewFile,BufRead kea-*.conf syntax match Comment +#.\+$+
 
