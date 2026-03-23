@@ -240,6 +240,7 @@ else
 	echo "Please create ~/.vim/colors.vim"
 endif
 
+set history=2000
 set ttimeoutlen=10 # ESC basically immediately
 set mouse=a # enable mouse
 set ttymouse=sgr # with support for more than 220 columns in Windows Terminal
