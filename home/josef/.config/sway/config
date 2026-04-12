@@ -37,6 +37,8 @@ bindsym $mod+Shift+n exec dolphin --new-window
 for_window [title="^Login to account .*" app_id="thunderbird"] floating enable
 for_window [title="^An error has occurred" app_id="thunderbird"] floating enable
 for_window [title="^Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox" app_id="firefox-esr"] floating enable
+for_window [title="error starting darktable" app_id="darktable"] floating enable
+for_window [title="darktable starting" app_id="darktable"] floating enable
 
 # kill focused window
 bindsym $mod+Shift+q kill
