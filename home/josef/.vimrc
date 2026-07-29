@@ -2,6 +2,15 @@ vim9script
 set nocompatible
 filetype off  # required for Vundle
 
+# Quick setup:
+# $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# $ apt install vim-nox python3 vim-snippets vim-ultisnips vim-youcompleteme curl
+# $ vim # Run :PluginInstall
+# $ apt install clangd clang-format gopls golang rustup node-typescript && rustup toolchain add stable && rustup component add rust-analyzer
+# $ bash ~/.vim/pull-jdtls.bash
+# $ wget -P ~/.vim/spell/ http://ftp.vim.org/vim/runtime/spell/de.utf-8.spl
+# $ wget -P ~/.vim/spell/ http://ftp.vim.org/vim/runtime/spell/de.utf-8.sug
+
 # to install Vundle, run:
 # $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # Once in vim, enter: `:PluginInstall'
@@ -57,24 +66,24 @@ endif
 # install it manually into /opt if I want to use it. Use this to install it:
 # $ ~/.vim/pull-jdtls.bash
 
-Plugin 'SirVer/ultisnips' # for some nice snippets
-Plugin 'honza/vim-snippets'
+silent! packadd! ultisnips # for some nice snippets
+silent! packadd! snippets
 
 Plugin 'fatih/vim-go' # for Go
 
-Plugin 'rhysd/vim-clang-format' # for :ClangFormat
+#Plugin 'rhysd/vim-clang-format' # for :ClangFormat
 # Well, you better have clang-format installed here... :-P
 
-Plugin 'iamcco/markdown-preview.nvim' # for instant Markdown Preview in browser
+#Plugin 'iamcco/markdown-preview.nvim' # for instant Markdown Preview in browser
 # to install, run in vim: `:call mkdp#util#install()'
 # To use, run `:MarkdownPreview'
 
-Plugin 'cespare/vim-toml' # for TOML-files syntax (i.e. Cargo.toml for Rust)
+#Plugin 'cespare/vim-toml' # for TOML-files syntax (i.e. Cargo.toml for Rust)
 
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 
-Plugin 'airblade/vim-gitgutter' # git status on the left
+silent! packadd gitgutter # git status on the left
 
 Plugin 'markonm/traces.vim' # preview substitutes
 
@@ -263,9 +272,12 @@ set listchars=tab:-->,space:␣,leadmultispace:···⍿,multispace:·,nbsp:━,
 nmap <F1> :Files<CR>
 nnoremap <F3> :set spell!<CR>
 nnoremap <F2> :set relativenumber!<CR>
-autocmd VimEnter * GitGutterDisable
-nnoremap <S-F2> :GitGutterToggle<CR>
 nnoremap <F4> :set list!<CR>
+
+if exists('g:gitgutter_signs')
+	autocmd VimEnter * GitGutterDisable
+	nnoremap <S-F2> :GitGutterToggle<CR>
+endif
 
 set cursorline
 set cursorlineopt=number
@@ -311,11 +323,12 @@ function g:English()
 	setlocal spell spelllang=en
 endfunction
 
-function g:Denglisch() # use both German and English
+# use both German and English
+function g:Denglisch()
 	setlocal spell spelllang=de,en
 endfunction
 
-if file_readable($HOME .. '/.vim/en-thesaurus.txt')
+if filereadable($HOME .. '/.vim/en-thesaurus.txt')
 	&thesaurus = $HOME .. '/.vim/en-thesaurus.txt'
 endif
 
@@ -423,10 +436,12 @@ if exists('g:ycm_auto_hover')
 	endif
 endif
 
-if filereadable($HOME .. "/.vim/tagstack.vim")
-	nnoremap <F10> :call tagstack#push()<CR>viw"ny:Rg <c-r>n<CR>
-else
-	nnoremap <F10> viw"ny:Rg <c-r>n<CR>
+if !empty(exepath('rg'))
+	if filereadable($HOME .. "/.vim/tagstack.vim")
+		nnoremap <F10> :call tagstack#push()<CR>viw"ny:Rg <c-r>n<CR>
+	else
+		nnoremap <F10> viw"ny:Rg <c-r>n<CR>
+	endif
 endif
 
 nnoremap gö :tabe<CR>
