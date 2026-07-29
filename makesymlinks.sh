@@ -108,6 +108,7 @@ link_home Pictures/Wallpapers
 link_home .config/waybar
 link_home .config/mako
 link_home .config/i3blocks
+link_home .config/zsh/.zshrc
 link_home .config/zsh/fzf-preview.sh
 link_home .config/zsh/git-prompt.zsh
 link_home .config/zsh/wsl-open-with-firefox.bash
