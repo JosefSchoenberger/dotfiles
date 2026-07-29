@@ -8,8 +8,6 @@ filetype off  # required for Vundle
 # $ vim # Run :PluginInstall
 # $ apt install clangd clang-format gopls golang rustup node-typescript && rustup toolchain add stable && rustup component add rust-analyzer
 # $ bash ~/.vim/pull-jdtls.bash
-# $ wget -P ~/.vim/spell/ http://ftp.vim.org/vim/runtime/spell/de.utf-8.spl
-# $ wget -P ~/.vim/spell/ http://ftp.vim.org/vim/runtime/spell/de.utf-8.sug
 
 # to install Vundle, run:
 # $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -66,7 +64,11 @@ endif
 # install it manually into /opt if I want to use it. Use this to install it:
 # $ ~/.vim/pull-jdtls.bash
 
-silent! packadd! ultisnips # for some nice snippets
+try
+	packadd ultisnips # for some nice snippets
+catch /^Vim\%((\a\+)\)\=:E919:/
+	Plugin 'SirVer/ultisnips'
+endtry
 silent! packadd! snippets
 
 Plugin 'fatih/vim-go' # for Go
@@ -84,6 +86,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 
 silent! packadd gitgutter # git status on the left
+
+silent! packadd spellfile
 
 Plugin 'markonm/traces.vim' # preview substitutes
 
