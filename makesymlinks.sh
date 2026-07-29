@@ -154,3 +154,5 @@ link_root /opt/dpkg-zfs-depend-compatible-version.bash
 link_root /etc/apt/apt.conf.d/60zfs-depend-kernel
 link_root /etc/zsh/zshenv
 link_root /etc/systemd/user/sway-session.target
+
+[ -d ~/".vim/bundle/Vundle.vim/" ] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
