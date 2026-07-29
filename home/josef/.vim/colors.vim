@@ -8,7 +8,9 @@ endif
 
 if &t_Co == "256" || has("gui_running")
 	hi Visual cterm=bold ctermfg=None ctermbg=240 gui=bold guifg=NONE guibg=grey30
-	hi Search cterm=reverse ctermbg=Black guibg=Black
+	hi Search cterm=reverse ctermbg=232 guibg=Black
+	hi CurSearch cterm=reverse,underline ctermbg=232 guibg=White
+	hi IncSearch cterm=reverse,underline ctermbg=232 guibg=White
 	hi Folded ctermbg=236 ctermfg=NONE
 	hi MatchParen ctermbg=39
 
