@@ -11,7 +11,7 @@ if [ "$1" != "save" ] && [ "$1" != "normal" ] && [ "$1" != "performance" ] && [ 
 fi
 
 if [ "$(id -u)" != 0 ]; then
-	echo "Error: Not privilged.\nPlease run as root" >&2
+	echo -e "Error: Not privilged.\nPlease run as root" >&2
 	exit 1
 fi
 
