@@ -100,6 +100,7 @@ swayimg.viewer.on_key("Plus", function() zoom(10) end)
 swayimg.viewer.on_key("Minus", function() zoom(-11) end)
 swayimg.viewer.on_key("z", function() swayimg.viewer.set_fix_scale("fit") end)
 swayimg.viewer.on_key("Shift+z", function() swayimg.viewer.set_fix_scale("fill") end)
+swayimg.viewer.on_key("Ctrl+z", function() swayimg.viewer.set_fix_scale("real") end)
 swayimg.viewer.on_mouse("MouseMiddle", function() swayimg.viewer.set_fix_scale("fit") end)
 
 swayimg.viewer.on_key("Left", function() swayimg.viewer.switch_image("prev") end)
@@ -228,15 +229,15 @@ swayimg.viewer.on_image_change(function()
 		if a then
 			local x, y = tonumber(a), tonumber(b)
 			local n = x / y
-			if math.floor(n) == n then
+			if math.floor(n) == n and n >= 1 then
 				if n < 10 then
 					val = string.format('%.1f', n)
 				else
 					val = n
 				end
-			elseif math.floor(n * 10) == n * 10 then
+			elseif math.floor(n * 10) == n * 10 and n >= 1 then
 				val = string.format('%.1f', n)
-			elseif b:match '^10*$' then
+			elseif b:match '^10*$' and n >= 1 then
 				val = string.format('%.2f', n)
 			elseif a:match '^10*$' then
 				val = string.format('1/%d', y / x)
