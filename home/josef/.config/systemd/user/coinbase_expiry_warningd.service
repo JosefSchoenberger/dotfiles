@@ -1,0 +1,13 @@
+[Unit]
+Description=Warning of pos allocation expiry
+After=graphical-session.target
+BindsTo=graphical-session.target
+PartOf=graphical-session.target
+Requisite=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+ExecStart=%h/.config/systemd/user/coinbase_expiry_warningd.sh
+
+#[Install]
+#WantedBy=graphical-session.target

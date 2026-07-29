@@ -1,0 +1,20 @@
+[Unit]
+Description=Timer for expiring pos allocation tester
+After=graphical-sesion.target
+BindsTo=graphical-session.target
+PartOf=graphical-session.target
+Requisite=graphical-session.target
+
+
+[Timer]
+OnCalendar=*:*
+Unit=coinbase_expiry_warningd.service
+
+# Don't wait too long for the warning -- the default accuracy of 1min is too low for a timer that runs every minute...
+AccuracySec=2s
+
+# Test upon resume
+Persistent=true
+
+[Install]
+WantedBy=graphical-session.target
