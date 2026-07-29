@@ -451,7 +451,7 @@ bindsym $mod+Ctrl+Shift+F12 exec /home/josef/.config/sway/refresh_mako
 bindsym $mod+Ctrl+Shift+F10 exec /home/josef/.config/sway/toggle_rotate
 
 # better notifications (essentially dunst for Wayland)
-exec mako
+#exec mako
 # TODO (use systemd --user for mako, playerctl and/or gammastep?)
 
 exec playerctld
@@ -467,6 +467,13 @@ include /etc/sway/config.d/*-systemd-user.conf
 # exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
 # exec hash dbus-update-activation-environment 2>/dev/null && \
 #         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+
+
+# Start graphical-session.target. See https://github.com/swaywm/sway/wiki/Systemd-integration#managing-user-applications-with-systemd.
+
+# Make sure environment vars are imported first, even if duplicate from `include /etc/sway/config.d/*-systemd-user.conf` above.
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop graphical-session.target
 
 seat seat0 xcursor_theme Adwaita 22
 
