@@ -4,7 +4,7 @@ filetype off  # required for Vundle
 
 # Quick setup:
 # $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-# $ apt install vim-nox python3 vim-snippets vim-ultisnips vim-youcompleteme curl
+# $ apt install vim-nox python3 vim-snippets vim-ultisnips vim-youcompleteme vim-gitgutter curl
 # $ vim # Run :PluginInstall
 # $ apt install clangd clang-format gopls golang rustup node-typescript && rustup toolchain add stable && rustup component add rust-analyzer
 # $ bash ~/.vim/pull-jdtls.bash
@@ -19,10 +19,17 @@ Plugin 'VundleVim/Vundle.vim' # necessary: Vundle itself for updates
 
 Plugin 'itchyny/lightline.vim' # for the beautiful line, my favourite
 
+var youcompleteme_loaded = 0
 if get(g:, "no_ycm", 0) == 0
 #	Plugin 'ycm-core/YouCompleteMe' # for semantic completion; _not_ lightweight!
 	if has('python3') || has('python')
-		silent! packadd youcompleteme
+		try
+			set encoding=utf-8
+			packadd youcompleteme
+			youcompleteme_loaded = 1
+		catch /^Vim\%((\a\+)\)\=:E919:/
+			youcompleteme_loaded = 0
+		endtry
 	endif
 endif
 # Before installing, make sure you actually want this. It can sometimes be 
@@ -85,7 +92,14 @@ Plugin 'fatih/vim-go' # for Go
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 
-silent! packadd gitgutter # git status on the left
+var gitgutter_loaded = 0
+try
+	packadd gitgutter # git status on the left
+	gitgutter_loaded = 1
+catch /^Vim\%((\a\+)\)\=:E919:/
+	gitgutter_loaded = 0
+endtry
+
 
 silent! packadd spellfile
 
@@ -96,7 +110,7 @@ call vundle#end()
 filetype plugin indent on
 
 # YCM
-if exists('g:ycm_auto_hover')
+if youcompleteme_loaded
 	g:ycm_clangd_binary_path = exepath('clangd')
 	g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 	g:ycm_clangd_args = ['--background-index', '--all-scopes-completion', '--clang-tidy']
@@ -189,20 +203,36 @@ g:mkdp_open_ip = system('var=$(ip -f inet addr show eth0 2>/dev/null | grep -oE 
 set laststatus=2 # start in NORMAL
 set noshowmode # Hide unnecessary '--INSERT--'
 set showcmd # ...but show keys pressed on the bottom right
-g:lightline = {
-	'colorscheme': 'wombat',
-	'active': {
-		'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified'], ['cmd']],
-		'right': [['lineinfo'], ['percent'], ['YCM', 'fileformat', 'fileencoding', 'filetype']]
-	},
-	'component': {
-		'filename': '%{%mode()=="t"?"%f":"%t"%}',
-		'cmd': '%S',
-		'YCM': get(g:, "no_ycm", 0) ? '' : '%{%youcompleteme#GetErrorCount() ? youcompleteme#GetErrorCount() .. " Errors, " .. youcompleteme#GetWarningCount() .. " Warnings" : youcompleteme#GetWarningCount() ? youcompleteme#GetWarningCount() .. " Warnings" : ""%}',
-		'readonly': '%(%H-%)%R',
-		'fileformat': '%<%{&ff}',
-	},
-}
+if youcompleteme_loaded
+	g:lightline = {
+		'colorscheme': 'wombat',
+		'active': {
+			'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified'], ['cmd']],
+			'right': [['lineinfo'], ['percent'], ['YCM', 'fileformat', 'fileencoding', 'filetype']]
+		},
+		'component': {
+			'filename': '%{%mode()=="t"?"%f":"%t"%}',
+			'cmd': '%S',
+			'YCM': get(g:, "no_ycm", 0) ? '' : '%{%youcompleteme#GetErrorCount() ? youcompleteme#GetErrorCount() .. " Errors, " .. youcompleteme#GetWarningCount() .. " Warnings" : youcompleteme#GetWarningCount() ? youcompleteme#GetWarningCount() .. " Warnings" : ""%}',
+			'readonly': '%(%H-%)%R',
+			'fileformat': '%<%{&ff}',
+		},
+	}
+else
+	g:lightline = {
+		'colorscheme': 'wombat',
+		'active': {
+			'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified'], ['cmd']],
+			'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']]
+		},
+		'component': {
+			'filename': '%{%mode()=="t"?"%f":"%t"%}',
+			'cmd': '%S',
+			'readonly': '%(%H-%)%R',
+			'fileformat': '%<%{&ff}',
+		},
+	}
+endif
 set showcmdloc=statusline
 set wildmenu # show suggestions in line
 set wildmode=longest:full,full
@@ -278,7 +308,7 @@ nnoremap <F3> :set spell!<CR>
 nnoremap <F2> :set relativenumber!<CR>
 nnoremap <F4> :set list!<CR>
 
-if exists('g:gitgutter_signs')
+if gitgutter_loaded
 	autocmd VimEnter * GitGutterDisable
 	nnoremap <S-F2> :GitGutterToggle<CR>
 endif
@@ -405,7 +435,7 @@ nnoremap _) <C-W>k
 nnoremap _- <C-W>l
 
 
-if exists('g:ycm_auto_hover')
+if youcompleteme_loaded
 	nnoremap <silent> <F5> <Plug>(YCMToggleInlayHints)
 	nnoremap <S-F5> :YcmCompleter GetType<CR>
 	nnoremap <silent> <C-F5> :YcmShowDetailedDiagnostic popup<CR>
