@@ -13,7 +13,10 @@ Plugin 'VundleVim/Vundle.vim' # necessary: Vundle itself for updates
 Plugin 'itchyny/lightline.vim' # for the beautiful line, my favourite
 
 if get(g:, "no_ycm", 0) == 0
-	Plugin 'ycm-core/YouCompleteMe' # for semantic completion; _not_ lightweight!
+#	Plugin 'ycm-core/YouCompleteMe' # for semantic completion; _not_ lightweight!
+	if has('python3') || has('python')
+		silent! packadd youcompleteme
+	endif
 endif
 # Before installing, make sure you actually want this. It can sometimes be 
 # slow. Next, decide which language you want to be supported and install the
@@ -41,8 +44,18 @@ endif
 # will be available. That's normal, because you dont need libclang, however,
 # semantic analysis will still be available using clangd...
 #
-# My personal command by the way:
-# python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer --go-completer --java-completer --ts-completer --rust-completer
+# My personal command used to be:
+# $ python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer --go-completer --java-completer --ts-completer --rust-completer
+#
+# Nowadays, I just install YouCompleteMe from my distro:
+# $ apt install vim-youcompleteme.
+# Then, I just install clangd, gopls, rust-analyzer, and tsserver
+# (node-typescript) myself using apt and rustup, which, when using the config
+# below, works just as well.
+# $ apt install clangd clang-format gopls golang rustup node-typescript && rustup toolchain add stable && rustup component add rust-analyzer
+# For Java completion, eclipse.jdt.ls unfortunately has no package. I have to
+# install it manually into /opt if I want to use it. Use this to install it:
+# $ ~/.vim/pull-jdtls.bash
 
 Plugin 'SirVer/ultisnips' # for some nice snippets
 Plugin 'honza/vim-snippets'
@@ -70,84 +83,86 @@ call vundle#end()
 filetype plugin indent on
 
 # YCM
-g:ycm_clangd_binary_path = "/usr/bin/clangd"
-g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-g:ycm_clangd_args = ['--background-index', '--all-scopes-completion', '--clang-tidy']
-g:ycm_confirm_extra_conf = 0
-# g:ycm_log_level='debug'
-if file_readable($HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer")
-	g:ycm_rust_toolchain_root = $HOME .. "/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/"
-elseif file_readable($HOME .. "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer")
-	g:ycm_rust_toolchain_root = $HOME .. "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/"
+if exists('g:ycm_auto_hover')
+	g:ycm_clangd_binary_path = exepath('clangd')
+	g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+	g:ycm_clangd_args = ['--background-index', '--all-scopes-completion', '--clang-tidy']
+	g:ycm_confirm_extra_conf = 0
+	# g:ycm_log_level='debug'
+	var rust_analyzer_path = exepath('rust-analyzer')
+	if !empty(rust_analyzer_path)
+		g:ycm_rust_toolchain_root = substitute(rust_analyzer_path, '/bin/rust-analyzer$', '', '')
+	endif
+	# g:ycm_gopls_binary_path='gopls'
+	nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
+
+	if isdirectory('/opt/jdtls/jdtls-current/')
+		g:ycm_java_jdtls_repository_path = '/opt/jdtls/jdtls-current/'
+		g:ycm_java_jdtls_workspace_root_path = '/var/tmp/jdtls-workspace'
+	endif
+
+	g:ycm_autoclose_preview_window_after_completion = 1
+	g:ycm_key_list_select_completion = ['<Down>'] # remove tab as it conflicts with UltiSnips
+	g:ycm_key_list_previous_completion = ['<Up>']
+	g:ycm_echo_current_diagnostic = 'virtual-text'
+	g:ycm_auto_hover = ''
+	g:ycm_language_server = [
+		# {
+		#	'name': 'bash',
+		#	'cmdline': [ '/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start' ],
+		#	'filetypes': [ 'sh' ],
+		#},
+		{
+			'name': 'html',
+			'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-html-language-server', '--stdio' ],
+			'filetypes': [ 'html' ],
+		},
+		{
+			'name': 'css',
+			'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-css-language-server', '--stdio' ],
+			'filetypes': [ 'css', 'sass' ],
+		},
+		{
+			'name': 'markdown',
+			'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-markdown-language-server', '--stdio' ],
+			'filetypes': [ 'markdown' ],
+		},
+		{
+			'name': 'verilog',
+			'cmdline': [ '/opt/veridian-bin' ],
+			'filetypes': [ 'systemverilog', 'verilog' ],
+		},
+		{
+			'name': 'tex',
+			#'cmdline': [ '/opt/texlab-bin' ],
+			'cmdline': [ 'texlab' ],
+			'filetypes': [ 'latex', 'tex' ],
+		},
+	]
+	function g:EnableBashLSP()
+		let g:ycm_language_server += [{'name': 'bash', 'cmdline': ['/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start'], 'filetypes': ['sh']}]
+		YcmRestartServer
+	endfunction
+
+	augroup YcmSetHoverSyntax
+		autocmd!
+		autocmd FileType * b:ycm_hover = {
+					\   'command': 'GetDoc',
+					\   'syntax': &filetype,
+					\   'popup_params': {
+					\     'dragall': 1,
+					\     'resize': 1,
+					\     'maxwidth': 96,
+					\     'wrap': 1,
+					\     'border': [],
+					\     'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
+					\     'highlight': 'HoverBox',
+					\     'borderhighlight': ['HoverBoxBorder'],
+					\     'title': '─┤  Info  ├',
+					\   },
+					\ }
+	augroup END
 endif
-# g:ycm_gopls_binary_path='gopls'
-nnoremap <S-F12> :YcmForceCompileAndDiagnostics<CR>
-
-g:ycm_autoclose_preview_window_after_completion = 1
-g:ycm_key_list_select_completion = ['<Down>'] # remove tab as it conflicts with UltiSnips
-g:ycm_key_list_previous_completion = ['<Up>']
-g:ycm_echo_current_diagnostic = 'virtual-text'
-g:ycm_auto_hover = ''
-g:ycm_language_server = [
-	# {
-	#	'name': 'bash',
-	#	'cmdline': [ '/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start' ],
-	#	'filetypes': [ 'sh' ],
-	#},
-	{
-		'name': 'html',
-		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-html-language-server', '--stdio' ],
-		'filetypes': [ 'html' ],
-	},
-	{
-		'name': 'css',
-		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-css-language-server', '--stdio' ],
-		'filetypes': [ 'css', 'sass' ],
-	},
-	{
-		'name': 'json',
-		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-json-language-server', '--stdio' ],
-		'filetypes': [ 'json' ],
-	},
-	{
-		'name': 'markdown',
-		'cmdline': [ '/opt/vscode-langservers-extracted/bin/vscode-markdown-language-server', '--stdio' ],
-		'filetypes': [ 'markdown' ],
-	},
-	{
-		'name': 'verilog',
-		'cmdline': [ '/opt/veridian-bin' ],
-		'filetypes': [ 'systemverilog', 'verilog' ],
-	},
-	{
-		'name': 'tex',
-		'cmdline': [ '/opt/texlab-bin' ],
-		'filetypes': [ 'latex', 'tex' ],
-	},
-]
-function g:EnableBashLSP()
-	let g:ycm_language_server += [{'name': 'bash', 'cmdline': ['/opt/bash-language-server/vscode-client/node_modules/.bin/bash-language-server', 'start'], 'filetypes': ['sh']}]
-	YcmRestartServer
-endfunction
-
-augroup YcmSetHoverSyntax
-	autocmd!
-	autocmd FileType * b:ycm_hover = {
-				\   'command': 'GetDoc',
-				\   'syntax': &filetype,
-				\   'popup_params': {
-				\     'dragall': 1,
-				\     'resize': 1,
-				\     'maxwidth': 96,
-				\     'wrap': 1,
-				\     'border': [],
-				\     'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
-				\     'highlight': 'HoverBox',
-				\     'borderhighlight': ['HoverBoxBorder'],
-				\     'title': '─┤  Info  ├',
-				\   },
-				\ }
-augroup END
 
 # UltiSnips
 g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -373,38 +388,44 @@ nnoremap _) <C-W>k
 nnoremap _- <C-W>l
 
 
-nnoremap <silent> <F5> <Plug>(YCMToggleInlayHints)
-nnoremap <S-F5> :YcmCompleter GetType<CR>
-nnoremap <silent> <C-F5> :YcmShowDetailedDiagnostic popup<CR>
-# nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
-nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
-nnoremap <S-F6> :YcmCompleter FixIt<CR>
-# For more advanced refactoring commands
-nnoremap <C-F6> :YcmCompleter Refactor
-nnoremap <M-F6> :YcmCompleter Format<CR>
-nnoremap <F7> <plug>(YCMHover)
-inoremap <F7> <Esc><plug>(YCMHover)a
-nnoremap <S-F7> :YcmCompleter GetDoc<CR>
-if file_readable($HOME .. "/.vim/tagstack.vim")
-	source $HOME/.vim/tagstack.vim
-	nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoTo<CR>
-	nnoremap <S-F8> :call tagstack#push()<CR>:YcmCompleter GoToImplementation<CR>
-	nnoremap <C-F8> :call tagstack#push()<CR>:YcmCompleter GoToDeclaration<CR>
-	nnoremap <M-F8> :call tagstack#push()<CR>:YcmCompleter GoToCallers<CR>
-	nnoremap <M-S-F8> :call tagstack#push()<CR>:YcmCompleter GoToReferences<CR>
-	nnoremap <F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInWorkspace)
-	nnoremap <S-F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInDocument)
-	nnoremap <C-F9> :call tagstack#push()<CR>:YcmCompleter GoToDocumentOutline<CR>
+if exists('g:ycm_auto_hover')
+	nnoremap <silent> <F5> <Plug>(YCMToggleInlayHints)
+	nnoremap <S-F5> :YcmCompleter GetType<CR>
+	nnoremap <silent> <C-F5> :YcmShowDetailedDiagnostic popup<CR>
+	# nnoremap <F6> gewve"ny:YcmCompleter RefactorRename <c-r>n
+	nnoremap <F6> viw"ny:YcmCompleter RefactorRename <c-r>n
+	nnoremap <S-F6> :YcmCompleter FixIt<CR>
+	# For more advanced refactoring commands
+	nnoremap <C-F6> :YcmCompleter Refactor
+	nnoremap <M-F6> :YcmCompleter Format<CR>
+	nnoremap <F7> <plug>(YCMHover)
+	inoremap <F7> <Esc><plug>(YCMHover)a
+	nnoremap <S-F7> :YcmCompleter GetDoc<CR>
+	if filereadable($HOME .. "/.vim/tagstack.vim")
+		source $HOME/.vim/tagstack.vim
+		nnoremap <F8> :call tagstack#push()<CR>:YcmCompleter GoTo<CR>
+		nnoremap <S-F8> :call tagstack#push()<CR>:YcmCompleter GoToImplementation<CR>
+		nnoremap <C-F8> :call tagstack#push()<CR>:YcmCompleter GoToDeclaration<CR>
+		nnoremap <M-F8> :call tagstack#push()<CR>:YcmCompleter GoToCallers<CR>
+		nnoremap <M-S-F8> :call tagstack#push()<CR>:YcmCompleter GoToReferences<CR>
+		nnoremap <F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInWorkspace)
+		nnoremap <S-F9> :call tagstack#push()<CR><Plug>(YCMFindSymbolInDocument)
+		nnoremap <C-F9> :call tagstack#push()<CR>:YcmCompleter GoToDocumentOutline<CR>
+	else
+		nnoremap <F8> :YcmCompleter GoTo<CR>
+		nnoremap <S-F8> :YcmCompleter GoToImplementation<CR>
+		nnoremap <C-F8> :YcmCompleter GoToDeclaration<CR>
+		nnoremap <M-F8> :YcmCompleter GoToCallers<CR>
+		nnoremap <M-S-F8> :YcmCompleter GoToReferences<CR>
+		nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
+		nnoremap <S-F9> <Plug>(YCMFindSymbolInDocument)
+		nnoremap <C-F9> :YcmCompleter GoToDocumentOutline<CR>
+	endif
+endif
+
+if filereadable($HOME .. "/.vim/tagstack.vim")
 	nnoremap <F10> :call tagstack#push()<CR>viw"ny:Rg <c-r>n<CR>
 else
-	nnoremap <F8> :YcmCompleter GoTo<CR>
-	nnoremap <S-F8> :YcmCompleter GoToImplementation<CR>
-	nnoremap <C-F8> :YcmCompleter GoToDeclaration<CR>
-	nnoremap <M-F8> :YcmCompleter GoToCallers<CR>
-	nnoremap <M-S-F8> :YcmCompleter GoToReferences<CR>
-	nnoremap <F9> <Plug>(YCMFindSymbolInWorkspace)
-	nnoremap <S-F9> <Plug>(YCMFindSymbolInDocument)
-	nnoremap <C-F9> :YcmCompleter GoToDocumentOutline<CR>
 	nnoremap <F10> viw"ny:Rg <c-r>n<CR>
 endif
 

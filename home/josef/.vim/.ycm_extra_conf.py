@@ -85,6 +85,10 @@ def IsHeaderFile( filename ):
   extension = os.path.splitext( filename )[ 1 ]
   return extension in [ '.h', '.hxx', '.hpp', '.hh' ]
 
+def IsCppFile( filename ):
+  extension = os.path.splitext( filename )[ 1 ]
+  return extension in [ '.hxx', '.hpp', '.hh', '.cpp', '.cxx', '.cc' ]
+
 def FindCorrespondingSourceFile( filename ):
   if IsHeaderFile( filename ):
     basename = os.path.splitext( filename )[ 0 ]
@@ -98,7 +102,12 @@ def FindCorrespondingSourceFile( filename ):
 # return al necessary compilation flags
 def Settings( **kwargs ):
   if kwargs[ 'language' ] == 'cfamily':
-    filename = FindCorrespondingSourceFile( kwargs[ 'filename' ] )
+    global flags
+    filename = kwargs['filename']
+    filename = FindCorrespondingSourceFile(filename)
+
+    if IsCppFile(filename) and not '-x' in flags:
+      flags += ['-x', 'c++']
 
     result = {
             'flags': flags,
