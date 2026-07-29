@@ -1,0 +1,1 @@
+DPkg::Pre-Install-Pkgs {"/opt/dpkg-zfs-depend-compatible-version.bash";};
