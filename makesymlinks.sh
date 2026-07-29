@@ -3,6 +3,9 @@
 should_print_verbose=0
 [ "$1" = "-v" ] && should_print_verbose=1
 
+is_root=0
+[ "$UID" = 0 ] && [ "$EUID" = 0 ] && is_root=1
+
 fail() {
 	echo $'\e[31mError:\e[39m' "$1. Exiting." >&2
 	exit 1
@@ -17,7 +20,7 @@ ensure_installed() {
 }
 
 ensure_installed git
-ensure_installed sudo
+[ "$is_root" = 1 ] || ensure_installed sudo
 
 DOTFILES_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd ) || fail "Could not determine the path of this script: $SCRIPT_DIR."
 
@@ -43,10 +46,15 @@ link_home() {
 
 warned_about_sudo=0
 mysudo() {
+	if [ "$is_root" = 1 ]; then
+		"$@"
+		return
+	fi
 	if [ "$warned_about_sudo" != 1 ]; then
 		warn "Using sudo to install system-wide files."
 		warned_about_sudo=1
 	fi
+	echo "Running: sudo $@"
 	sudo "$@"
 }
 
