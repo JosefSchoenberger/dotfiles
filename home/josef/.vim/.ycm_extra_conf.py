@@ -127,5 +127,11 @@ def Settings( **kwargs ):
           },
           }
         }
+  elif kwargs[ 'language'] == 'java':
+    return {
+        'ls': {
+          'java.settings.url': os.path.expanduser('~') + '/.vim/jdtls-settings.pref'
+          }
+        }
   return {}
 # vim: et ts=2 sts=2 sw=2
