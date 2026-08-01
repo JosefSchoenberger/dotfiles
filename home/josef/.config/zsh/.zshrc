@@ -76,6 +76,7 @@ if [ "$color_prompt" = yes ]; then
 		color_user="%(!.%F{3}.%F{2})"
 	fi
 	[ -n "$SSH_TTY" ] && color_host="%B%F{3}" || color_host="%F{2}"
+	[ -r /proc/cmdline ] && grep -q '\<POS=' /proc/cmdline && color_host="%B%F{6}"
 	
 	#ZSH_THEME_GIT_PROMPT_MODIFIED_COLOR="%F{1}"
 	#ZSH_THEME_GIT_PROMPT_STAGED_COLOR="%F{3}"
