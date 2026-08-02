@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! compgen -G "/tmp/allocation-expiry-notification-id-*" >/dev/null; then
+	# if there are no allocations right now, only check every ten minutes.
+	[ "$(($(date +'6%M%%10')))" == 0 ] || exit 0
+fi
+
 allocations_json="$(ssh coinbase -- 'pos calendar list -j')" || ( echo "Error: Could not receive JSON from coinbase" >&2; exit 1 )
 
 my_allocations_json="$(jq '[.[] | select(.owner == "schoenbj")]' <<<"$allocations_json")" || ( echo "Error: Could not parse JSON from coinbase" >&2; exit 2 )
@@ -22,8 +27,9 @@ expiring_ids=""
 
 while IFS=$'\t' read -r id endstr end nodes json; do
 	[ -z "$id" ] && break
+
+	filename="/tmp/allocation-expiry-notification-id-$id"
 	if [[ "$((end - 1800))" -lt "$now" ]] && [ "$end" -gt "$((now - 10))" ]; then
-		filename="/tmp/allocation-expiry-notification-id-$id"
 
 		replace_id=""
 		if [ -r "$filename" ]; then
@@ -40,7 +46,11 @@ while IFS=$'\t' read -r id endstr end nodes json; do
 		echo "$json" | jq ". + {replace_id: $notification_id}" >"$filename"
 
 		expiring_ids="$expiring_ids,$id"
+	else
+		echo "$json" | jq "." >"$filename"
 	fi
+
+	expiring_ids="$expiring_ids,$id"
 done <<<"$expiry_infos"
 
 find /tmp -maxdepth 1 -name 'allocation-expiry-notification-id-*' -printf "%f\0" | while read -r -d $'\0' file; do
@@ -58,6 +68,10 @@ find /tmp -maxdepth 1 -name 'allocation-expiry-notification-id-*' -printf "%f\0"
 
 	IFS=$'\t' read -r jid endstr end nodes replace_id <<<"$expiry_infos"
 	[ "$jid" != "$id" ] && continue
+
+	if [ -z "$replace_id" ] || [ "$replace_id" = "null" ]; then
+		continue
+	fi
 
 	if [ "$end" -lt "$((now + 300))" ]; then
 		notification_id=$(notify-send -p -i gtk-dialog-warning "Allocation of $nodes exired" "Allocation $id expired at $endstr." -r "$replace_id")
