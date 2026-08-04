@@ -30,4 +30,6 @@ if [ -e "/sbin" ] ; then
     export PATH="$PATH:/sbin"
 fi
 
-. "$HOME/.cargo/env"
+if [ -r "$HOME/.cargo/env" ] ; then
+	. "$HOME/.cargo/env"
+fi
