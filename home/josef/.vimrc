@@ -247,6 +247,11 @@ if file_readable($HOME .. "/.vim/syntax/cyp.vim")
 	autocmd BufNewFile,BufRead *.cprf,*cthy setfiletype cyp
 endif
 
+# Intel SGX Enclave Description Language (EDL)
+if file_readable($HOME .. "/.vim/syntax/edl.vim")
+	autocmd BufNewFile,BufRead *.edl setfiletype edl
+endif
+
 autocmd FileType c,cpp,java,rust,go,html,bash,python,typescript,javascript setlocal foldmethod=syntax
 autocmd FileType rust setlocal colorcolumn=101
 autocmd FileType vim setlocal foldmethod=manual
