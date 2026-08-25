@@ -124,6 +124,7 @@ link_home .config/swayimg/init.lua
 link_home .config/mpv/mpv.conf
 link_home .config/mpv/input.conf
 link_home .config/kitty/kitty.conf
+link_home .config/gammastep/config.ini
 
 link_home .config/sway/brightness
 link_home .config/sway/brightness_wofi
