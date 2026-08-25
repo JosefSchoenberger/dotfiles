@@ -292,7 +292,7 @@ mode swtchr {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
-#    status_command /home/josef/Documents/i3blocks/i3blocks
+#    status_command ~/Documents/i3blocks/i3blocks
 #	font DejaVuSansM Nerd Font Mono 9
 #	#font CaskaydiaCove Nerd Font Mono 9
 #	#font Armino Nerd Font Mono 9
@@ -332,23 +332,23 @@ bindgesture --exact swipe:3:up exec wtype -p XF86AudioNext -P XF86AudioNext
 bindgesture --exact swipe:3:down exec wtype -p XF86AudioPrev -P XF86AudioPrev
 
 # set background image
-#output * bg /home/josef/Pictures/Wallpapers/Stagetec_Hintergrund.jpg fit #000000
+#output * bg '~/Pictures/Wallpapers/Stagetec_Hintergrund.jpg' fit #000000
 ## desert dune at night
-output * bg '/home/josef/Pictures/Wallpapers/daniel-olah-6KQETG8J-zI-unsplash.jpg' fill
+output * bg '~/Pictures/Wallpapers/daniel-olah-6KQETG8J-zI-unsplash.jpg' fill
 ## mountains
-#output * bg '/home/josef/Pictures/Wallpapers/john-towner-JgOeRuGD_Y4-unsplash.jpg' fill
+#output * bg '~/Pictures/Wallpapers/john-towner-JgOeRuGD_Y4-unsplash.jpg' fill
 ## forest
-#output * bg '/home/josef/Pictures/Wallpapers/emmanuel-phaeton-I0DT3QlPEoE-unsplash.jpg' fill
+#output * bg '~/Pictures/Wallpapers/emmanuel-phaeton-I0DT3QlPEoE-unsplash.jpg' fill
 ## stars
-#output * bg '/home/josef/Pictures/Wallpapers/slava-auchynnikau-4gKn7yFDSt8-unsplash.jpg' fill
+#output * bg '~/Pictures/Wallpapers/slava-auchynnikau-4gKn7yFDSt8-unsplash.jpg' fill
 
 include ~/.config/sway/output-configs
 
 # Map backlight keys
-bindsym --locked XF86MonBrightnessUp exec /home/josef/.config/sway/brightness --inc 10%
-bindsym --locked XF86MonBrightnessDown exec /home/josef/.config/sway/brightness --dec 10%
-bindsym --locked $mod+XF86MonBrightnessUp exec /home/josef/.config/sway/brightness --set 100%
-bindsym $mod+XF86MonBrightnessDown exec /home/josef/.config/sway/brightness_wofi
+bindsym --locked XF86MonBrightnessUp exec ~/.config/sway/brightness --inc 10%
+bindsym --locked XF86MonBrightnessDown exec ~/.config/sway/brightness --dec 10%
+bindsym --locked $mod+XF86MonBrightnessUp exec ~/.config/sway/brightness --set 100%
+bindsym $mod+XF86MonBrightnessDown exec ~/.config/sway/brightness_wofi
 
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioPrev exec playerctl previous
@@ -424,11 +424,11 @@ titlebar_padding 4 2
 # Mod+Mouse middle click to close a window
 bindsym --whole-window $mod+button2 kill
 
-bindsym $mod+m exec /home/josef/.config/sway/i3-input -F 'mark %s' -P 'Mark: '
-bindsym $mod+g exec /home/josef/.config/sway/i3-input -F '[con_mark="%s"] focus' -P 'Goto: '
+bindsym $mod+m exec ~/.config/sway/i3-input -F 'mark %s' -P 'Mark: '
+bindsym $mod+g exec ~/.config/sway/i3-input -F '[con_mark="%s"] focus' -P 'Goto: '
 bindsym $mod+p sticky toggle
 
-bindsym XF86Display exec /home/josef/.config/sway/toggle_refreshrate
+bindsym XF86Display exec ~/.config/sway/toggle_refreshrate
 #bindsym $mod+Ctrl+...
 #
 bindsym $mod+Ctrl+F1 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -439,19 +439,19 @@ bindsym $mod+Ctrl+F4 exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym --no-repeat --no-repeat Scroll_Lock exec pactl set-source-mute @DEFAULT_SOURCE@ false
 bindsym --no-repeat --no-repeat --release Scroll_Lock exec pactl set-source-mute @DEFAULT_SOURCE@ true
 
-bindcode 248 exec /home/josef/.config/sway/toggle_wifirf
-bindsym $mod+Ctrl+F11 exec /home/josef/.config/sway/toggle_wifirf
+bindcode 248 exec ~/.config/sway/toggle_wifirf
+bindsym $mod+Ctrl+F11 exec ~/.config/sway/toggle_wifirf
 #
-bindcode Shift+248 exec /home/josef/.config/sway/toggle_power.sh
-bindsym $mod+Ctrl+Shift+F11 exec /home/josef/.config/sway/toggle_power.sh
+bindcode Shift+248 exec ~/.config/sway/toggle_power.sh
+bindsym $mod+Ctrl+Shift+F11 exec ~/.config/sway/toggle_power.sh
 #
-bindcode 164 exec /home/josef/.config/sway/toggle_paprofile
-bindsym $mod+Ctrl+F12 exec /home/josef/.config/sway/toggle_paprofile
+bindcode 164 exec ~/.config/sway/toggle_paprofile
+bindsym $mod+Ctrl+F12 exec ~/.config/sway/toggle_paprofile
 #
-bindcode Shift+164 exec /home/josef/.config/sway/refresh_mako
-bindsym $mod+Ctrl+Shift+F12 exec /home/josef/.config/sway/refresh_mako
+bindcode Shift+164 exec ~/.config/sway/refresh_mako
+bindsym $mod+Ctrl+Shift+F12 exec ~/.config/sway/refresh_mako
 
-bindsym $mod+Ctrl+Shift+F10 exec /home/josef/.config/sway/toggle_rotate
+bindsym $mod+Ctrl+Shift+F10 exec ~/.config/sway/toggle_rotate
 
 # better notifications (essentially dunst for Wayland)
 #exec mako

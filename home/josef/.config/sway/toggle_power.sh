@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /home/josef/.config/sway/notification_status.sh
+. ~/.config/sway/notification_status.sh
 
 show_notification_status powerprofile "Power-Profile: ..."
 

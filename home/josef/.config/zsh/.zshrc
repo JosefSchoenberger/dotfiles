@@ -7,7 +7,7 @@ SAVEHIST=200000
 unsetopt beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/josef/.config/zsh/.zshrc'
+zstyle :compinstall filename "$HOME"'/.config/zsh/.zshrc'
 
 if command -v rustup 2>&1 >/dev/null; then
 	# Must be before compinit

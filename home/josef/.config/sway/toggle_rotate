@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /home/josef/.config/sway/notification_status.sh
+. ~/.config/sway/notification_status.sh
 
 MONITOR="Fujitsu Siemens Computers GmbH P27-8 TS Pro YVAQ607198"
 
