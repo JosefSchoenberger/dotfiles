@@ -271,6 +271,10 @@ function man() {
 	env LESS_TERMCAP_md=$(tput bold; tput setaf 6) LESS_TERMCAP_us=$(tput setaf 219; tput smul) LESS_TERMCAP_ue=$(tput sgr0; tput rmul) GROFF_NO_SGR=1 man "$@"
 }
 
+if [ -z "$KITTY_INSTALLATION_DIR" ] && [ -d "$HOME/.local/share/kitty-ssh-kitten/" ]; then
+	KITTY_INSTALLATION_DIR="$HOME/.local/share/kitty-ssh-kitten"
+fi
+
 if [ -n "$KITTY_INSTALLATION_DIR" ]; then
 	KITTY_SHELL_INTEGRATION="${KITTY_SHELL_INTEGRATION//no-rc( |)}"
 	autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
