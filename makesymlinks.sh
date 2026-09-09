@@ -89,7 +89,10 @@ link_home .vim/after
 link_home .vim/clang-format-style.vim
 link_home .vim/colors
 link_home .vim/colors.vim
+link_home .vim/ftdetect
+link_home .vim/ftplugin
 link_home .vim/indent
+link_home .vim/jdtls-settings.pref
 link_home .vim/pull-jdtls.bash
 link_home .vim/syntax
 link_home .vim/tagstack.vim
