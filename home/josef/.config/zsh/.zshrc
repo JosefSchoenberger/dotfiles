@@ -167,15 +167,17 @@ command -v vim >/dev/null && alias vi='vim --cmd "let g:no_ycm=1"'
 
 command -v gdb >/dev/null && alias gdb='gdb -q' # I've seen the copyright statement.
 command -v rust-gdb >/dev/null && alias rust-gdb='rust-gdb -q'
-alias ffmpeg='ffmpeg -hide_banner'
-alias ffplay='ffplay -hide_banner'
-alias ffprobe='ffprobe -hide_banner'
-alias kitty-mpv="mpv --vo=kitty --vo-kitty-use-shm=yes"
+command -v ffmpeg >/dev/null && alias ffmpeg='ffmpeg -hide_banner'
+command -v ffplay >/dev/null && alias ffplay='ffplay -hide_banner'
+command -v ffprobe >/dev/null && alias ffprobe='ffprobe -hide_banner'
+command -v mpv >/dev/null && command -v kitty >/dev/null && alias kitty-mpv="mpv --vo=kitty --vo-kitty-use-shm=yes"
+
+command -v batcat >/dev/null && ! command -v bat >/dev/null && alias bat=batcat
 
 alias make='make -j$(nproc)'
 
 #alias docker-image-dependencies="docker inspect --format='{{.Size}} {{truncate .Id 16}} {{if .Parent}}-> {{truncate .Parent 16}}{{else}}   ---------{{end}} {{.RepoTags}}' \$(docker images --all -q) | sed 's/sha256://g' | sort -k2 | numfmt --field=1 --to=iec-i --pad=6 --suffix=B"
-alias docker-image-dependencies='docker inspect --format='\''{{.Size}} {{truncate .Id 16}} {{if .Parent}} {{truncate .Parent 16}}{{else}} ---------{{end}} {{.RepoTags}}'\'' $(docker images --all -q) | sort -h | numfmt --field=1 --to=iec-i --pad=6 --suffix=B | sed "s/sha256://g" | column --tree-id=2 --tree-parent=3 --tree 4 -H 3 -o " "'
+command -v docker >/dev/null && alias docker-image-dependencies='docker inspect --format='\''{{.Size}} {{truncate .Id 16}} {{if .Parent}} {{truncate .Parent 16}}{{else}} ---------{{end}} {{.RepoTags}}'\'' $(docker images --all -q) | sort -h | numfmt --field=1 --to=iec-i --pad=6 --suffix=B | sed "s/sha256://g" | column --tree-id=2 --tree-parent=3 --tree 4 -H 3 -o " "'
 
 alias help='run-help'
 
