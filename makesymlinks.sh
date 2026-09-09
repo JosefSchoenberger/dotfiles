@@ -1,18 +1,45 @@
 #!/usr/bin/env bash
 
-should_print_verbose=0
-[ "$1" = "-v" ] && should_print_verbose=1
+SHOULD_PRINT_VERBOSE=false
+WITH_GUI=false
+
+usage() {
+	printf "Usage: %s [-g] [-v]\n\nOptions:\n -g   also include everything relevant for GUIs\n -v   be verbose -- print every operation\n -h   print this help and exit\n" "$0";
+}
+while getopts 'gvh' option; do
+	case "$option" in
+		g)
+			WITH_GUI=true
+			;;
+		v)
+			SHOULD_PRINT_VERBOSE=true
+			;;
+		h)
+			usage
+			exit 0
+			;;
+		*)
+			usage
+			exit 1
+			;;
+	esac
+done
 
 is_root=0
 [ "$UID" = 0 ] && [ "$EUID" = 0 ] && is_root=1
 
 fail() {
-	echo $'\e[31mError:\e[39m' "$1. Exiting." >&2
+	echo $'\e[31mError:\e[39m' "$*. Exiting." >&2
 	exit 1
 }
 
 warn() {
-	echo $'\e[33mWarning:\e[39m' "$1" >&2
+	echo $'\e[33mWarning:\e[39m' "$@" >&2
+}
+
+verbose() {
+	[ "$SHOULD_PRINT_VERBOSE" == true ] && echo "$@"
+	return 0
 }
 
 ensure_installed() {
@@ -31,7 +58,8 @@ git submodule update --init --recursive || fail "Could not update git subdir"
 cd home/josef || fail "Could not cd into $DOTFILES_DIR/home/josef"
 
 link_home() {
-	[ -L ~/"$1" ] && return
+	# shellcheck disable=SC2088
+	[ -L ~/"$1" ] && { verbose "~/$1 is already a symlink" ; return; }
 	if [ -f ~/"$1" ]; then
 		warn "File ~/$1 already exists as regular file. Skipping..."
 		return
@@ -40,6 +68,7 @@ link_home() {
 		warn "File ~/$1 already exists as regular directory. Skipping..."
 		return
 	fi
+	verbose "creating symlink from $DOTFILES_DIR/home/josef/$1 to ~/$1"
 	mkdir -p "$(dirname -- ~/"$1")"
 	ln -s "$DOTFILES_DIR/home/josef/$1" ~/"$1" || fail "Could not create symlink to ~/$1"
 }
@@ -54,19 +83,18 @@ mysudo() {
 		warn "Using sudo to install system-wide files."
 		warned_about_sudo=1
 	fi
-	echo "Running: sudo $@"
+	echo "Running: sudo $*"
 	sudo "$@"
 }
 
 link_root() {
-	[ -L /"$1" ] && return
+	[ -L /"$1" ] && { verbose "$1 is already a symlink" ; return; }
 	if [ -f /"$1" ]; then
 		SHA_IS=$(sha256sum /"$1") || fail "Could not compute sha256sum of /${1#/}"
 		SHA_SHOULD=$(sha256sum "$DOTFILES_DIR/$1") || fail "Could not compute sha256sum of $DOTFILES_DIR/${1#/}"
 
 		if [ "$(cut -f1 -d' ' <<<"$SHA_IS")" == "$(cut -f1 -d' ' <<<"$SHA_SHOULD")" ]; then
-			mysudo rm /"$1"
-			if [ "$?" != 0 ]; then
+			if ! mysudo rm /"$1"; then
 				warn "Could not replace /${1#/} with symlink, even though file matches. Skipping..."
 				return
 			fi
@@ -80,6 +108,7 @@ link_root() {
 		return
 	fi
 
+	verbose "creating symlink from $DOTFILES_DIR/$1 to $1"
 	mysudo mkdir -p "$(dirname -- /"$1")"
 	mysudo ln -s "$DOTFILES_DIR/$1" /"$1" || fail "Could not create symlink to /$1"
 }
@@ -105,46 +134,52 @@ link_home .profile
 link_home .tmux.conf
 link_home .zprofile
 
-link_home keep_new_screens_empty.sh
-link_home Pictures/Wallpapers
+if [ "$WITH_GUI" == true ]; then
+	link_home keep_new_screens_empty.sh
+	link_home Pictures/Wallpapers
+fi
 
-link_home .config/waybar
-link_home .config/mako
-link_home .config/i3blocks
 link_home .config/zsh/.zshrc
 link_home .config/zsh/fzf-preview.sh
 link_home .config/zsh/git-prompt.zsh
 link_home .config/zsh/wsl-open-with-firefox.bash
 link_home .config/zsh/zsh-autosuggestions
 link_home .config/zsh/zsh-syntax-highlighting
-link_home .config/wofi/config
-link_home .config/wofi/style.css
-link_home .config/xdg-desktop-portal/portals.conf
-link_home .config/systemd/user/coinbase_expiry_warningd.sh
-link_home .config/systemd/user/coinbase_expiry_warningd.service
-link_home .config/systemd/user/coinbase_expiry_warningd.timer
-link_home .config/swayimg/init.lua
 link_home .config/mpv/mpv.conf
 link_home .config/mpv/input.conf
 link_home .config/kitty/kitty.conf
 link_home .config/kitty/ssh.conf
-link_home .config/gammastep/config.ini
 
-link_home .config/sway/brightness
-link_home .config/sway/brightness_wofi
-link_home .config/sway/config
-link_home .config/sway/disable_all_displays.sh
-link_home .config/sway/enable_all_displays.sh
-link_home .config/sway/i3-input
-link_home .config/sway/notification_status.sh
-link_home .config/sway/output-configs
-link_home .config/sway/refresh_mako
-link_home .config/sway/secrets
-link_home .config/sway/toggle_paprofile
-link_home .config/sway/toggle_power.sh
-link_home .config/sway/toggle_refreshrate
-link_home .config/sway/toggle_rotate
-link_home .config/sway/toggle_wifirf
+if [ "$WITH_GUI" == true ]; then
+	link_home .config/waybar
+	link_home .config/mako
+	link_home .config/i3blocks
+	link_home .config/wofi/config
+	link_home .config/wofi/style.css
+	link_home .config/xdg-desktop-portal/portals.conf
+	link_home .config/systemd/user/coinbase_expiry_warningd.sh
+	link_home .config/systemd/user/coinbase_expiry_warningd.service
+	link_home .config/systemd/user/coinbase_expiry_warningd.timer
+	link_home .config/swayimg/init.lua
+	link_home .config/gammastep/config.ini
+
+	link_home .config/sway/brightness
+	link_home .config/sway/brightness_wofi
+	link_home .config/sway/config
+	link_home .config/sway/disable_all_displays.sh
+	link_home .config/sway/enable_all_displays.sh
+	link_home .config/sway/i3-input
+	link_home .config/sway/notification_status.sh
+	link_home .config/sway/output-configs
+	link_home .config/sway/refresh_mako
+	link_home .config/sway/secrets
+	link_home .config/sway/toggle_paprofile
+	link_home .config/sway/toggle_power.sh
+	link_home .config/sway/toggle_refreshrate
+	link_home .config/sway/toggle_rotate
+	link_home .config/sway/toggle_wifirf
+fi
+
 
 link_home .config/gdb/dashboard.gdb
 link_home .config/gdb/dashboard_additions.gdb
@@ -153,12 +188,14 @@ link_home .config/gdb/gdbinit
 link_home .config/gdb/skip_interrupt.gdb
 link_home .config/gdb/stack_layout.gdb
 
-link_root /opt/save_power.sh
-link_root /opt/set_power_profile.sh
-link_root /opt/unleash_the_power.sh
+if [ "$WITH_GUI" == true ]; then
+	link_root /opt/save_power.sh
+	link_root /opt/set_power_profile.sh
+	link_root /opt/unleash_the_power.sh
+	link_root /etc/systemd/user/sway-session.target
+fi
 link_root /opt/dpkg-zfs-depend-compatible-version.bash
 link_root /etc/apt/apt.conf.d/60zfs-depend-kernel
 link_root /etc/zsh/zshenv
-link_root /etc/systemd/user/sway-session.target
 
 [ -d ~/".vim/bundle/Vundle.vim/" ] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
