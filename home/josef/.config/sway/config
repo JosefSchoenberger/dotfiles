@@ -459,7 +459,7 @@ bindsym $mod+Ctrl+Shift+F10 exec ~/.config/sway/toggle_rotate
 
 exec playerctld
 
-exec gammastep
+#exec gammastep
 
 workspace_auto_back_and_forth yes
 
@@ -475,8 +475,8 @@ include /etc/sway/config.d/*-systemd-user.conf
 # Start graphical-session.target. See https://github.com/swaywm/sway/wiki/Systemd-integration#managing-user-applications-with-systemd.
 
 # Make sure environment vars are imported first, even if duplicate from `include /etc/sway/config.d/*-systemd-user.conf` above.
-exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
-exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop graphical-session.target
+exec "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec sh -c 'swaymsg -t subscribe '\''["shutdown"]'\''; systemctl --user stop graphical-session.target'
 
 seat seat0 xcursor_theme Adwaita 22
 

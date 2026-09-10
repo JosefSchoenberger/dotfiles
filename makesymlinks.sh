@@ -193,6 +193,8 @@ if [ "$WITH_GUI" == true ]; then
 	link_root /opt/set_power_profile.sh
 	link_root /opt/unleash_the_power.sh
 	link_root /etc/systemd/user/sway-session.target
+	link_root /etc/systemd/user/darkman.service.d
+	link_root /etc/systemd/user/gammastep.service
 fi
 link_root /opt/dpkg-zfs-depend-compatible-version.bash
 link_root /etc/apt/apt.conf.d/60zfs-depend-kernel

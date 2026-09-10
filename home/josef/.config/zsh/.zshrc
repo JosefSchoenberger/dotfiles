@@ -368,11 +368,11 @@ if [ -z "$SSH_TTY" ]; then
 			return
 		fi
 		makoctl mode -a silent >/dev/null || return
-		pkill gammastep
+		systemctl --user stop gammastep.service || pkill gammastep
 		systemd-inhibit --what=idle sleep "$1"
 		makoctl mode -r silent >/dev/null
-		(
-		gammastep >/dev/null 2>&1 &
+		systemctl --user start gammastep.service || (
+			gammastep >/dev/null 2>&1 &
 		)
 	}
 fi

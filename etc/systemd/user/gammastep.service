@@ -1,0 +1,12 @@
+[Unit]
+Description=Adjustment of display hue to outside lighting conditions
+Documentation=man:gammastep(1)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/gammastep
+
+[Install]
+WantedBy=graphical-session.target
