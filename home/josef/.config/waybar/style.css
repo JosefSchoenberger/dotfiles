@@ -359,3 +359,6 @@ window#waybar.hidden {
 #mpris.mpv {
     color: #943da6;
 }
+#mpris.JellyfinDesktop {
+    color: #66bbff;
+}
