@@ -283,7 +283,32 @@ if [ -n "$KITTY_INSTALLATION_DIR" ]; then
     kitty-integration
     unfunction kitty-integration
 
-	alias kssh='kitten ssh'
+	alias ssh='kitten ssh'
+fi
+
+# Kitty's new_os_window_with_cwd uses the real path of $PWD in the new terminal.
+#
+# If this path is below the home dir but the home dir itself is a symlink, use the home dir symlink
+# instead of the home's real path.
+if [ -h ~ ]; then
+	myhome="$(readlink ~)"
+	if [[ "$PWD/" == "$myhome/"* ]]; then
+		cd ~"/${PWD#$myhome}"
+	fi
+	unset myhome
+fi
+# Similarly, I often use symlinks in my home dir as shortcuts for directories that I use frequently.
+# Scan those and prefer those if possible.
+if [[ "$(realpath "$PWD")" == "$(realpath "$HOME")/"* ]]; then
+	pwd_real="$(realpath "$PWD")"
+	for link in ~/*(@); do
+		link_real="$(realpath "$link")"
+		if [[ "$pwd_real" == "$link_real"/* ]] || [[ "$pwd_real" == "$link_real" ]]; then
+			relative_path="${pwd_real#${link_real}}"
+			cd "$link/$relative_path"
+			break;
+		fi
+	done
 fi
 
 zstyle ':completion:*' menu select
