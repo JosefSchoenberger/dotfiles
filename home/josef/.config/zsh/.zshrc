@@ -249,14 +249,14 @@ mvcd() {
 DISABLE_AUTO_TITLE="true"
 if [ -n "$SSH_TTY" ]; then
 	function set_terminal_title_precmd() {
-		echo -En $'\e]2;SSH' "$HOST: ${PWD/\/home\/$USER/~}"$'\a'
+		echo -En $'\e]2;SSH' "$HOST: ${PWD/$HOME/~}"$'\a'
 	}
 	function set_terminal_title_preexec() {
 		echo -En $'\e]2;SSH' "$HOST ❯ ${1//$'\x1b'/\\e}"$'\a'
 	}
 else
 	function set_terminal_title_precmd() {
-		echo -En $'\e]2;ZSH:' "${PWD/\/home\/$USER/~}"$'\a'
+		echo -En $'\e]2;ZSH:' "${PWD/$HOME/~}"$'\a'
 	}
 	function set_terminal_title_preexec() {
 		echo -En $'\e]2;❯' "${1//$'\x1b'/\\e}"$'\a'
