@@ -301,7 +301,7 @@ fi
 # Scan those and prefer those if possible.
 if [[ "$(realpath "$PWD")" == "$(realpath "$HOME")/"* ]]; then
 	pwd_real="$(realpath "$PWD")"
-	for link in ~/*(@); do
+	for link in ~/*(@N); do
 		link_real="$(realpath "$link")"
 		if [[ "$pwd_real" == "$link_real"/* ]] || [[ "$pwd_real" == "$link_real" ]]; then
 			relative_path="${pwd_real#${link_real}}"
