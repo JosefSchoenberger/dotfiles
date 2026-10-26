@@ -1,4 +1,5 @@
-PATH_TO_THIS_FILE="$ZDOTDIR"
+#PATH_TO_THIS_FILE="$ZDOTDIR"
+PATH_TO_THIS_FILE="$(dirname "${(%):-%N}")"
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.config/zsh/.histfile
