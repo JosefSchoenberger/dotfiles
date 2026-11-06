@@ -50,27 +50,28 @@ swayimg.viewer.limit_history = 10                  -- number of the history cach
 --swayimg.viewer.mark_color = 0xff808080        -- mark icon color
 --swayimg.viewer.pinch_factor = 1.0             -- pinch gesture factor
 
-swayimg.viewer.set_text("topleft", {             -- top left text block scheme
-  "File: {name}",
-  --"Format: {format}",
-  "File size: {sizehr}",
-  "Size: {frame.width}x{frame.height}",
-  --"File time: {time}",
-  "DateTime: {meta.DateTime}",
-  --"EXIF camera: {meta.Exif.Image.Model}"
-  "Shutter: {meta.Shutter}",
-  "Aperture: {meta.Aperture}",
-  "ISO: {meta.ISO}",
-  "Focal Length: {meta.FocalLength}",
-})
-
-swayimg.viewer.set_text("topright", {            -- top right text block scheme
-  "Image: {list.index} of {list.total}",
-  "Frame: {frame.index} of {frame.total}"
-})
-swayimg.viewer.set_text("bottomleft", {          -- bottom left text block scheme
-  "Scale: {scale}"
-})
+swayimg.viewer.text  = {
+	topleft = {             -- top left text block scheme
+		"File: {name}",
+		--"Format: {format}",
+		"File size: {sizehr}",
+		"Size: {frame.width}x{frame.height}",
+		--"File time: {time}",
+		"DateTime: {meta.DateTime}",
+		--"EXIF camera: {meta.Exif.Image.Model}"
+		"Shutter: {meta.Shutter}",
+		"Aperture: {meta.Aperture}",
+		"ISO: {meta.ISO}",
+		"Focal Length: {meta.FocalLength}",
+	},
+	topright = {            -- top right text block scheme
+		"Image: {list.index} of {list.total}",
+		"Frame: {frame.index} of {frame.total}"
+	},
+	bottomleft = {          -- bottom left text block scheme
+		"Scale: {scale}"
+	},
+}
 
 -- Key and mouse bindings in viewer mode (example only, not all):
 
@@ -94,8 +95,15 @@ function zoom(divisor)
   scale = scale + scale / divisor
   swayimg.viewer.set_abs_scale(scale, pos.x, pos.y);
 end
-swayimg.viewer.on_mouse("ScrollUp", function() zoom(10) end)
-swayimg.viewer.on_mouse("ScrollDown", function() zoom(-11) end)
+
+swayimg.viewer.on_scroll(function(kmods, horizontal, vertical)
+	print(vertical)
+	if vertical ~= 0 then
+		zoom(vertical*-10)
+	end
+end)
+-- swayimg.viewer.on_mouse("ScrollUp", function() zoom(10) end)
+-- swayimg.viewer.on_mouse("ScrollDown", function() zoom(-11) end)
 swayimg.viewer.on_key("Plus", function() zoom(10) end)
 swayimg.viewer.on_key("Minus", function() zoom(-11) end)
 swayimg.viewer.on_key("z", function() swayimg.viewer.set_fix_scale("fit") end)
@@ -120,7 +128,7 @@ swayimg.viewer.on_key("ISO_Level5_Shift", function() end)
 --swayimg.slideshow.default_scale = "fit"          -- default image scale
 --swayimg.slideshow.window_background = "auto"     -- window background mode
 --swayimg.slideshow.limit_history(0)                  -- number of the history cache
---swayimg.slideshow.set_text("topleft", { "{name}" }) -- top left text block scheme
+--swayimg.slideshow.text.topleft = { "{name}" }) -- top left text block scheme
 
 
 -- Gallery mode
@@ -137,10 +145,10 @@ swayimg.gallery.thumb_size = 192                 -- thumbnail size in pixels
 --swayimg.gallery.limit_cache(100)                    -- number of thumbnails stored in memory
 --swayimg.gallery.preload = false               -- preloading invisible thumbnails
 --swayimg.gallery.pstore = false                -- enable persistent storage for thumbnails
---swayimg.gallery.set_text("topleft", {               -- top left text block scheme
+--swayimg.gallery.text.topleft = {               -- top left text block scheme
 --  "File: {name}"
 --})
---swayimg.gallery.set_text("topright", {              -- top right text block scheme
+--swayimg.gallery.text.topright = {              -- top right text block scheme
 --  "{list.index} of {list.total}"
 --})
 
